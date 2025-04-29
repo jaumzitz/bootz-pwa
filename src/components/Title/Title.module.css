@@ -1,0 +1,8 @@
+h1 {
+  font-size: 1.6rem;
+  font-family: var(--default-title-font);
+  color: #333;
+  text-align: center;
+  margin: 20px 0;
+  text-align: left;
+}
