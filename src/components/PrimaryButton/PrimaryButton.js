@@ -8,6 +8,10 @@ const ButtonStyled = styled.button`
     color: white;
     border-radius: 60px;
     border: none;
+    &:hover {
+        cursor: pointer;
+        
+    }
 `
 
 export function PrimaryButton({ children, onClick }) {
