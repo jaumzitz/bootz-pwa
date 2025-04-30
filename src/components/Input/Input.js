@@ -20,7 +20,11 @@ margin-bottom: 8px;
 `
 
 
-export function Input({ type, id, name, required, label }) {
+export function Input({ type, id, name, required, label, onChangeValue }) {
+    const handleChange = (event) => {
+        const { value } = event.target;
+        onChangeValue(value);
+    };
 
 
     return (
@@ -31,6 +35,7 @@ export function Input({ type, id, name, required, label }) {
                 id={id}
                 name={name}
                 required={required}
+                onChange={handleChange}
             />
         </div>
     );

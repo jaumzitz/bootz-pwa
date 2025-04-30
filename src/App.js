@@ -1,12 +1,15 @@
-import { Login } from "./pages/Login/Login.js";
+import React from "react";
 import { AppRoutes } from "./routes.js";
+import { signInWithEmail } from "./services/authService.js";
+
 
 function App() {
+
+    
   return (
-    <>
-      <AppRoutes></AppRoutes>
-    </>
-  );
+    <AppRoutes />
+  )
 }
+
 
 export default App;
