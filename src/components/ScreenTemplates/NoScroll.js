@@ -15,6 +15,7 @@ const HorizontalScrollDiv = styled.div`
     gap: 18px;
     width: 100vw;
     overflow-x: auto;
+    overflow-y: hidden;
     &::-webkit-scrollbar {
         height: 6px; /* Altura da barra de rolagem */
     }
