@@ -1,13 +1,16 @@
 import styled from "styled-components";
 import { Chip } from "../../components/Chip/Chip";
 import { RecommendedSection } from "../../components/RecommendedSection/RecommendedSection";
+import { NoScroll } from "../../components/ScreenTemplates/NoScroll";
+import { TabBar } from "../../components/TabBar/TabBar";
 
 
 const HeaderStyled = styled.header`
         
     flex-direction: column;
-    background-color: #F8F9FB;
     width: 100%;
+    
+    
 
 `
 
@@ -21,7 +24,8 @@ const SearchInput = styled.input`
     border-radius: 50px;
     background: var(--gray-color);
     border: none;
-    font-family: var(--default-title-font);
+    font-family: var(--default-label-font);
+    font-size: var(--default-font-size);
     margin-bottom: 16px;
 `
 
@@ -32,6 +36,7 @@ const ChipSelector = styled.div`
     overflow-x: auto; /* Adiciona rolagem horizontal */
     white-space: nowrap; /* Impede quebra de linha */
     padding-bottom: 8px; /* Espaço extra para evitar corte na rolagem */
+    left: 8vw;
 
     &::-webkit-scrollbar {
         height: 6px; /* Altura da barra de rolagem */
@@ -52,26 +57,108 @@ export function Home() {
 
 
     const chipOptions = [
-        'Praia',
-        'Montanha',
-        'Camping',
+        '🏖️ Praia',
+        '⛰️ Montanha',
+        '🏕️ Camping',
         'Cachoeira'
+    ]
+
+    const trailsForYou = [
+        {
+            id: 1,
+            name: 'Trilha da Praia Vermelha',
+            location: 'Penha - SC',
+            distance: 1.3,
+            enviroment: 'Praia',
+            difficulty: 'Fácil',
+            imageUrl: '/praia-vermelha-penha.jpg'
+        },
+        {
+            id: 2,
+            name: 'Pico da Pedra',
+            location: 'Camboriú - SC',
+            distance: 3.3,
+            enviroment: 'Montanha',
+            difficulty: 'Médio',
+            imageUrl: '/pico-da-pedra-camboriu.png'
+        },
+        {
+            id: 3,
+            name: 'Piscinas Naturais da Barra da Lagoa',
+            location: 'Florianópolis - SC',
+            distance: 1.3,
+            enviroment: 'Praia',
+            difficulty: 'Fácil',
+            imageUrl: '/piscinas-naturais-floripa.png'
+        }
+    ]
+
+    const trailsTrendingNearby = [
+        {
+            id: 4,
+            name: 'Cachoeira Seca',
+            location: 'Balneário Camboriú - SC',
+            distance: 1.3,
+            enviroment: 'Cachoeira',
+            difficulty: 'Fácil',
+            imageUrl: '/cachoeira-seca.jpg'
+        },
+        {
+            id: 5,
+            name: 'Parque do Atalaia',
+            location: 'Itajaí - SC',
+            distance: 3.3,
+            enviroment: 'Montanha',
+            difficulty: 'Médio',
+            imageUrl: '/parque-atalaia.jpg'
+        },
+        {
+            id: 6,
+            name: 'Trilha da Praia da Solidão',
+            location: 'Itajaí - SC',
+            distance: 1.3,
+            enviroment: 'Praia',
+            difficulty: 'Fácil',
+            imageUrl: '/praia-solidao.jpg'
+        }
     ]
 
 
 
     return (
         <>
-            <HeaderStyled>
-                <SearchInput type="search" placeholder="Busque por uma localização" />
-                <ChipSelector>
-                    {chipOptions.map((option) => { return <Chip key={option} id={option} label={option}></Chip> })}
-                </ChipSelector>
+        <NoScroll>
 
-            </HeaderStyled>
-            <RecommendedSection id="for-you" label="Para você"></RecommendedSection>
-            
 
+
+                <HeaderStyled>
+
+
+
+                    <SearchInput type="search" placeholder="Busque por uma localização" />
+
+
+
+                    <ChipSelector>
+                        {chipOptions.map((option) => { return <Chip key={option} id={option} label={option}></Chip> })}
+                    </ChipSelector>
+
+                </HeaderStyled>
+
+        </NoScroll>
+
+
+            <RecommendedSection id="for-you" label="Para você" trails={trailsForYou}></RecommendedSection>
+            <RecommendedSection id="trending-nearby" label="Em alta nas proximidades" trails={trailsTrendingNearby}></RecommendedSection>
+        <TabBar></TabBar>
         </>
+
+
+
+
+
+
+
+
     );
 }
