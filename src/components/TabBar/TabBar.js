@@ -15,7 +15,7 @@ const TabBarContainer = styled.div`
     bottom: 0;
     position: fixed;
     width: 100%;
-    height: 8vh;
+    height: 10vh;
 `
 
 const TabBarItem = styled.li`
