@@ -4,10 +4,10 @@ import { Input } from "../../components/Input/Input";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
 import { Title } from "../../components/Title/Title";
-import style from "./Login.module.css";
 import { signInWithEmail } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { NoScroll } from "../../components/ScreenTemplates/NoScroll.js";
 
 
 
@@ -45,7 +45,7 @@ export function Login() {
     }
 
     return (
-        <div>
+        <NoScroll>
             <Title>Boas vindas ao Bootz!</Title>
 
             <SectionForm className="loginForm">
@@ -58,6 +58,6 @@ export function Login() {
                     <span>Não tem uma conta?</span><LinkButton alignment="left" onClick={() => { }}>Cadastre-se</LinkButton>
                 </RegisterLink>
             </SectionForm>
-        </div>
+        </NoScroll>
     );
 }

@@ -22,3 +22,7 @@
 	--gray-color: rgba(217, 217, 217, 0.50);
 }
 
+
+html, body {
+	overflow-x: hidden;
+}

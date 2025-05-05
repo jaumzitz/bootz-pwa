@@ -4,12 +4,14 @@ import { Span } from "../Span/Span"
 
 const CardContainer = styled.div`
     margin-top: 16px;
+    padding-right: 16px;
 `
 
 const ImageCard = styled.img`
-    width: 100%;
-    height: 100%;
+    max-height: 180px;
+    max-width: 400px;
     border-radius: 16px;
+    box-shadow: 0px 4px 10px 0px rgba(52, 52, 52, 0.30);
     `
 
 const CardInfo = styled.div`
