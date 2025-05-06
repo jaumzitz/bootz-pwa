@@ -135,11 +135,9 @@ export function Home() {
                 <HeaderStyled>
 
                     <SearchInput type="search" placeholder="Busque por uma localização" />
-                    <ChipNavigator>
-                        
 
-                        
-                    </ChipNavigator>
+                    <ChipNavigator/>
+
                     
 
                 </HeaderStyled>

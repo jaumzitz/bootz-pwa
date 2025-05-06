@@ -63,8 +63,8 @@ const chipOptions = [
 
 export function ChipNavigator() {
     return (
-        <>
+        <ChipNavigatorStyled>
             {chipOptions.map((option) => { return <Chip chip={option}></Chip> })}
-        </>
+        </ChipNavigatorStyled>
     )
 }

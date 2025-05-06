@@ -8,13 +8,14 @@ appearance: none;
 `
 
 const ChipLabel = styled.label`
-display: inline-block;
-padding: 8px 24px;
+display: flex;
+padding: 4px 18px;
 border-radius: 60px;
 background-color: var(--gray-color);
 color: var(--default-font-color);
 font-family: var(--default-label-font);
 font-size: var(--default-font-size);
+align-items: center;
 
 
 `
