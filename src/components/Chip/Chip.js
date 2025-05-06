@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components"
 
 const ChipInput = styled.input`
@@ -8,7 +9,7 @@ appearance: none;
 
 const ChipLabel = styled.label`
 display: inline-block;
-padding: 4px 16px;
+padding: 8px 24px;
 border-radius: 60px;
 background-color: var(--gray-color);
 color: var(--default-font-color);
@@ -19,14 +20,35 @@ font-size: var(--default-font-size);
 `
 
 
-export function Chip(props) {
+
+export function Chip({ chip }) {
+
+    const platform = window.navigator.userAgent.includes("iPhone") ? "iPhone" : "Android";
 
 
 
     return (
         <>
-            <ChipLabel htmlFor={props.id}>{props.label}</ChipLabel>
-            <ChipInput type="checkbox" id={props.id} name={props.label} value={props.id}/>
+            <ChipLabel htmlFor={chip.id}>
+
+                {
+                 (!chip.emoji && platform === "iPhone") &&
+                    <img src={chip.customiOSEmoji} alt={chip.label} width="24px" max-height="24px" style={{ marginRight: "8px" }} />
+                }
+
+                {
+                    (!chip.emoji && platform !== "iPhone") &&
+                    <img src={chip.customAndroidEmoji} alt={chip.label} width="24px" max-height="24px" style={{ marginRight: "8px" }} />
+                }
+
+                {chip.emoji && <span style={{ marginRight: "8px" }}>{chip.emoji}</span>}
+
+       
+
+
+                {chip.label}
+            </ChipLabel>
+            <ChipInput type="checkbox" id={chip.id} name={chip.label} value={chip.id} />
         </>
     )
 }

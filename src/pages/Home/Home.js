@@ -3,6 +3,8 @@ import { Chip } from "../../components/Chip/Chip";
 import { RecommendedSection } from "../../components/RecommendedSection/RecommendedSection";
 import { NoScroll } from "../../components/ScreenTemplates/NoScroll";
 import { TabBar } from "../../components/TabBar/TabBar";
+import Spacer from "../../components/Spacer/Spacer";
+import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator";
 
 
 const HeaderStyled = styled.header`
@@ -29,39 +31,40 @@ const SearchInput = styled.input`
     margin-bottom: 16px;
 `
 
-const ChipSelector = styled.div`
-    display: flex;
-    flex-wrap: nowrap; /* Impede quebra de linha */
-    margin-bottom: 16px;
-    overflow-x: auto; /* Adiciona rolagem horizontal */
-    white-space: nowrap; /* Impede quebra de linha */
-    padding-bottom: 8px; /* Espaço extra para evitar corte na rolagem */
-    left: 8vw;
+// const ChipSelector = styled.div`
+//     display: flex;
+//     flex-wrap: nowrap; /* Impede quebra de linha */
+//     margin-bottom: 16px;
+//     overflow-x: auto; /* Adiciona rolagem horizontal */
+//     white-space: nowrap; /* Impede quebra de linha */
+//     padding-bottom: 8px; /* Espaço extra para evitar corte na rolagem */
+//     left: 8vw;
 
-    &::-webkit-scrollbar {
-        height: 6px; /* Altura da barra de rolagem */
-    }
+//     &::-webkit-scrollbar {
+//         height: 6px; /* Altura da barra de rolagem */
+//     }
 
-    &::-webkit-scrollbar-thumb {
-        background: transparent
-    }
+//     &::-webkit-scrollbar-thumb {
+//         background: transparent
+//     }
 
-    &::-webkit-scrollbar-track {
-        background: transparent; /* Fundo da barra de rolagem */
-    }
-`
+//     &::-webkit-scrollbar-track {
+//         background: transparent; /* Fundo da barra de rolagem */
+//     }
+// `
+
 
 
 
 export function Home() {
 
 
-    const chipOptions = [
-        '🏖️ Praia',
-        '⛰️ Montanha',
-        '🏕️ Camping',
-        'Cachoeira'
-    ]
+    // const chipOptions = [
+    //     '🏖️ Praia',
+    //     '⛰️ Montanha',
+    //     '🏕️ Camping',
+    //     'Cachoeira'
+    // ]
 
     const trailsForYou = [
         {
@@ -129,19 +132,15 @@ export function Home() {
         <>
         <NoScroll>
 
-
-
                 <HeaderStyled>
 
-
-
                     <SearchInput type="search" placeholder="Busque por uma localização" />
+                    <ChipNavigator>
+                        
 
-
-
-                    <ChipSelector>
-                        {chipOptions.map((option) => { return <Chip key={option} id={option} label={option}></Chip> })}
-                    </ChipSelector>
+                        
+                    </ChipNavigator>
+                    
 
                 </HeaderStyled>
 
@@ -151,6 +150,7 @@ export function Home() {
             <RecommendedSection id="for-you" label="Para você" trails={trailsForYou}></RecommendedSection>
             <RecommendedSection id="trending-nearby" label="Em alta nas proximidades" trails={trailsTrendingNearby}></RecommendedSection>
         <TabBar></TabBar>
+        <Spacer height={'12vh'} width={0}></Spacer>
         </>
 
 
