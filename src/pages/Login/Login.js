@@ -8,7 +8,8 @@ import { signInWithEmail } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { NoScroll } from "../../components/ScreenTemplates/NoScroll.js";
-
+import { Span } from "../../components/Span/Span.js";
+import Spacer from "../../components/Spacer/Spacer.js";
 
 
 const SectionForm = styled.section`
@@ -46,16 +47,33 @@ export function Login() {
 
     return (
         <NoScroll>
+            <Spacer height={'10vh'} />
+            <img src="/icon-192.png" alt="Logo" width="80px" height="80px" />
+            <Spacer height={'4vh'} />
+
             <Title>Boas vindas ao Bootz!</Title>
+            <Spacer height={'8vh'} />
 
             <SectionForm className="loginForm">
-                
+
                 <Input onChangeValue={setEmail} type={"email"} id={"email"} name={"email"} required={true} label={"E-mail"} />
+                <Spacer height={'2vh'} />
+
                 <Input onChangeValue={setPassword} type={"password"} id={"password"} name={"password"} required={true} label={"Senha"} />
+                <Spacer height={'2vh'} />
+
                 <LinkButton alignment="right" type="submit" onClick={() => { }}>Esqueci minha senha</LinkButton>
+
+                <Spacer height={'28vh'} />
+
+
                 <PrimaryButton type="submit" onClick={handleLogin}>Entrar</PrimaryButton>
+
+
+                <Spacer height={'2vh'} />
+
                 <RegisterLink>
-                    <span>Não tem uma conta?</span><LinkButton alignment="left" onClick={() => { }}>Cadastre-se</LinkButton>
+                    <Span>Não tem uma conta?</Span><LinkButton alignment="left" onClick={() => { }}>Cadastre-se</LinkButton>
                 </RegisterLink>
             </SectionForm>
         </NoScroll>
