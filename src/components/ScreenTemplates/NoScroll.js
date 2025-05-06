@@ -3,6 +3,7 @@ import styled from "styled-components"
 const NoScrollDiv = styled.div`
     max-height: 100vh;
     margin: 2vh 4vw;
+    
 `
 
 const VerticalScrollDiv = styled.div`
