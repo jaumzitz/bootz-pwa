@@ -40,7 +40,7 @@ const chipOptions = [
     },
     {
         id: 'camping',
-        label: 'Praia',
+        label: 'Camping',
         emoji: '🏕️',
         to: '/camping',
         

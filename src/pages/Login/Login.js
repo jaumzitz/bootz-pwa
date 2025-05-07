@@ -12,7 +12,7 @@ import { Span } from "../../components/Span/Span.js";
 import Spacer from "../../components/Spacer/Spacer.js";
 
 
-const SectionForm = styled.section`
+export const FormStyled = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,7 +54,7 @@ export function Login() {
             <Title>Boas vindas ao Bootz!</Title>
             <Spacer height={'8vh'} />
 
-            <SectionForm className="loginForm">
+            <FormStyled>
 
                 <Input onChangeValue={setEmail} type={"email"} id={"email"} name={"email"} required={true} label={"E-mail"} />
                 <Spacer height={'2vh'} />
@@ -62,7 +62,7 @@ export function Login() {
                 <Input onChangeValue={setPassword} type={"password"} id={"password"} name={"password"} required={true} label={"Senha"} />
                 <Spacer height={'2vh'} />
 
-                <LinkButton alignment="right" type="submit" onClick={() => { }}>Esqueci minha senha</LinkButton>
+                <LinkButton alignment="right" type="submit">Esqueci minha senha</LinkButton>
 
                 <Spacer height={'28vh'} />
 
@@ -73,9 +73,10 @@ export function Login() {
                 <Spacer height={'2vh'} />
 
                 <RegisterLink>
-                    <Span>Não tem uma conta?</Span><LinkButton alignment="left" onClick={() => { }}>Cadastre-se</LinkButton>
+                    <Span>Não tem uma conta?</Span><LinkButton alignment="left" to='/register'>Cadastre-se</LinkButton>
                 </RegisterLink>
-            </SectionForm>
+
+            </FormStyled>
         </NoScroll>
     );
 }

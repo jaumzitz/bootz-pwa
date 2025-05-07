@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Chip } from "../../components/Chip/Chip";
 import { RecommendedSection } from "../../components/RecommendedSection/RecommendedSection";
 import { NoScroll } from "../../components/ScreenTemplates/NoScroll";
 import { TabBar } from "../../components/TabBar/TabBar";
@@ -11,9 +10,6 @@ const HeaderStyled = styled.header`
         
     flex-direction: column;
     width: 100%;
-    
-    
-
 `
 
 const SearchInput = styled.input`
@@ -31,40 +27,7 @@ const SearchInput = styled.input`
     margin-bottom: 16px;
 `
 
-// const ChipSelector = styled.div`
-//     display: flex;
-//     flex-wrap: nowrap; /* Impede quebra de linha */
-//     margin-bottom: 16px;
-//     overflow-x: auto; /* Adiciona rolagem horizontal */
-//     white-space: nowrap; /* Impede quebra de linha */
-//     padding-bottom: 8px; /* Espaço extra para evitar corte na rolagem */
-//     left: 8vw;
-
-//     &::-webkit-scrollbar {
-//         height: 6px; /* Altura da barra de rolagem */
-//     }
-
-//     &::-webkit-scrollbar-thumb {
-//         background: transparent
-//     }
-
-//     &::-webkit-scrollbar-track {
-//         background: transparent; /* Fundo da barra de rolagem */
-//     }
-// `
-
-
-
-
 export function Home() {
-
-
-    // const chipOptions = [
-    //     '🏖️ Praia',
-    //     '⛰️ Montanha',
-    //     '🏕️ Camping',
-    //     'Cachoeira'
-    // ]
 
     const trailsForYou = [
         {
@@ -131,17 +94,12 @@ export function Home() {
     return (
         <>
         <NoScroll>
-
                 <HeaderStyled>
 
                     <SearchInput type="search" placeholder="Busque por uma localização" />
-
                     <ChipNavigator/>
 
-                    
-
                 </HeaderStyled>
-
         </NoScroll>
 
 
