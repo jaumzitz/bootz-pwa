@@ -52,6 +52,8 @@ export function Login() {
             <Spacer height={'4vh'} />
 
             <Title>Boas vindas ao Bootz!</Title>
+            
+
             <Spacer height={'8vh'} />
 
             <FormStyled>

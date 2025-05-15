@@ -20,48 +20,78 @@ const LoginLink = styled.div`
 `
 
 const FormFooter = styled.div`
-    position: absolute;
-    bottom: 6vh;
-    display: flex;
-    flex-direction: column;
+ position: fixed;
+    bottom: 4vh;
+    width: 100%;
+    left: 0; 
+    right: 0; 
+    display: flex; /* Adicionado para centralizar */
+    flex-direction: column; /* Mantém os elementos empilhados */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    text-align: center;
 `
 
 export function Register() {
 
     const navigate = useNavigate();
+
+
+    const handleRegister = async (event) => {
+        event.preventDefault(); // Previne o comportamento padrão do formulário
+
+        const formData = new FormData(event.target); // Obtém os dados do formulário
+        const data = Object.fromEntries(formData.entries()); // Converte os dados para um objeto
+
+        console.log('Dados do formulário:', data); // Exibe os dados no console (pode ser removido depois)
+
+        // Aqui você pode adicionar a lógica para enviar os dados para o servidor ou fazer o que precisar com eles
+    }
     return (
         <NoScroll>
 
+            <div>
 
-            <IconButton icon='/arrow-back.svg' onClick={() => navigate(-1)}></IconButton>
-            <Spacer height={'4vh'} />
+                <IconButton icon='/arrow-back.svg' onClick={() => navigate(-1)}></IconButton>
+                <Spacer height={'4vh'} />
 
-            <Title>Cadastre-se</Title>
-            <Span>Crie uma conta grátis e comece a explorar lugares.</Span>
-            <Spacer height={'8vh'} />
-            <FormStyled>
+                <Title>Cadastre-se</Title>
+                <Span>Crie uma conta grátis e comece a explorar lugares.</Span>
+                <Spacer height={'8vh'} />
+            </div>
+            <FormStyled onSubmit={handleRegister}>
 
                 <Input label="Seu nome" type="text" id="fullName" name="fullName" required />
 
 
-                <Input label="Seu e-mail:" type="email" id="email" name="email" required />
+                <Input label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
 
 
                 <Input label="Cadastre sua senha:" type="password" id="password" name="password" required />
 
 
-            </FormStyled>
+                <Spacer height={'32vh'} />
 
-            <FormFooter>
+            
 
-                <PrimaryButton type="submit">Cadastre-se grátis</PrimaryButton>
+                <PrimaryButton type="submit" >Cadastre-se grátis</PrimaryButton>
 
                 <LoginLink>
                     <Span>Já tem uma conta?</Span><LinkButton alignment="left" to='/login'>Fazer login</LinkButton>
                 </LoginLink>
-            </FormFooter>
+            
+            </FormStyled>
 
 
         </NoScroll>
     );
+}
+
+
+function verifyEmail(email) {
+    // Verifica se o email é válido
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const status = re.test(String(email).toLowerCase());
+    console.log('Email status:', status);
+    return re.test(String(email).toLowerCase());
 }

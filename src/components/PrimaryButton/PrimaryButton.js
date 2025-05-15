@@ -6,6 +6,7 @@ const ButtonStyled = styled.button`
     font-family: var(--default-label-font);
     font-size: var(--default-font-size);
     padding: 1rem 1rem;
+    
     color: white;
     border-radius: 60px;
     border: none;
