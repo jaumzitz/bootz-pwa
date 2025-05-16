@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Span } from "../Span/Span";
+import { useState } from "react";
 
 const InputStyled = styled.input`
 font-family: var(--default-title-font);
@@ -20,11 +22,26 @@ margin-bottom: 8px;
 `
 
 
-export function Input({ type, id, name, required, label, onChangeValue }) {
+export function Input({ type, id, name, required, label, onChangeValue, validator }) {
+
+
+    const [isFieldValid, setIsFieldValid] = useState(true);
+
     const handleChange = (event) => {
-        const { value } = event.target;
-        onChangeValue(value);
+
+        if (onChangeValue) {
+
+            const { value } = event.target;
+            onChangeValue(value);
+        }
     };
+
+    const handleBlur = (event) => {
+        if (validator) {
+            const { value } = event.target;
+            setIsFieldValid(validator(value));
+        }
+    }
 
 
     return (
@@ -36,7 +53,10 @@ export function Input({ type, id, name, required, label, onChangeValue }) {
                 name={name}
                 required={required}
                 onChange={handleChange}
+                onBlur={handleBlur}
+
             />
+            {!isFieldValid && <Span>E-mail inválido.</Span>}
         </div>
     );
 }

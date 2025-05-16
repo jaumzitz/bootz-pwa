@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkButtonStyle = styled.button`
@@ -5,20 +6,23 @@ const LinkButtonStyle = styled.button`
     border: none;
     color: var(--primary-color);
     font-family: var(--default-label-font);
+    font-size: var(--default-font-size);
     &:hover {
         cursor: pointer;
         text-decoration: underline;
     }
 `
 
-export function LinkButton({ children, onClick, alignment }) {
+export function LinkButton({ children, alignment, to }) {
     return (
-        <LinkButtonStyle style={{ textAlign: alignment }} // Use the alignment prop to set text alignment
-            type="button"
-            onClick={onClick}
-            className="linkButton"
-        >
-            {children}
-        </LinkButtonStyle>
+        <Link to={to}>
+            <LinkButtonStyle style={{ textAlign: alignment }} // Use the alignment prop to set text alignment
+                type="button"
+                className="linkButton"
+                
+            >
+                {children}
+            </LinkButtonStyle>
+        </Link>
     );
 }
