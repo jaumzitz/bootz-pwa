@@ -36,7 +36,7 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
         }
     };
 
-    const handleBlur = (event) => {
+    const validateInput = (event) => {
         if (validator) {
             const { value } = event.target;
             setIsFieldValid(validator(value));
@@ -53,10 +53,10 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
                 name={name}
                 required={required}
                 onChange={handleChange}
-                onBlur={handleBlur}
+                onBlur={validateInput}
 
             />
-            {!isFieldValid && <Span>E-mail inválido.</Span>}
+            {!isFieldValid && <Span color={`var(--alert-color)`}>E-mail inválido.</Span>}
         </div>
     );
 }

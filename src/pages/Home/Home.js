@@ -9,13 +9,15 @@ import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator";
 const HeaderStyled = styled.header`
         
     flex-direction: column;
-    width: 100%;
+    
+    
+    padding: 4vw;
 `
 
 const SearchInput = styled.input`
     display: flex;
     width: 100%;
-    padding: 10px;
+    padding: 18px 18px;
     justify-content: center;
     align-items: center;
     gap: 20px;
@@ -24,7 +26,6 @@ const SearchInput = styled.input`
     border: none;
     font-family: var(--default-label-font);
     font-size: var(--default-font-size);
-    margin-bottom: 16px;
 `
 
 export function Home() {
@@ -93,20 +94,22 @@ export function Home() {
 
     return (
         <>
-        <NoScroll>
-                <HeaderStyled>
 
-                    <SearchInput type="search" placeholder="Busque por uma localização" />
-                    <ChipNavigator/>
+            <HeaderStyled>
 
-                </HeaderStyled>
-        </NoScroll>
+                <SearchInput type="search" placeholder="Busque por uma localização" />
+            </HeaderStyled>
 
+            <ChipNavigator />
+            <Spacer height={'2vh'} width={0}></Spacer>
 
             <RecommendedSection id="for-you" label="Para você" trails={trailsForYou}></RecommendedSection>
             <RecommendedSection id="trending-nearby" label="Em alta nas proximidades" trails={trailsTrendingNearby}></RecommendedSection>
-        <TabBar></TabBar>
-        <Spacer height={'12vh'} width={0}></Spacer>
+
+            <TabBar></TabBar>
+            <Spacer height={'12vh'} width={0}></Spacer>
+
+
         </>
 
 

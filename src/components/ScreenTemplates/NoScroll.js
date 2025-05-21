@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const NoScrollDiv = styled.div`
-height: 100vh;
+    height: 100vh;
     max-height: 100vh;
     margin: 2vh 4vw;
     
@@ -14,8 +14,9 @@ const VerticalScrollDiv = styled.div`
 const HorizontalScrollDiv = styled.div`
     display: flex;
     flex-direction: row;
-    gap: 18px;
-    width: 100vw;
+    gap: 4px;
+    padding-left: 4vw;
+    padding-right: 4vw;
     overflow-x: auto;
     overflow-y: hidden;
     &::-webkit-scrollbar {
@@ -47,7 +48,7 @@ export function VerticalScroll({ children }) {
     )
 }
 
-export function HorizontalScroll( {children} ) {
+export function HorizontalScroll({ children }) {
     return (
         <HorizontalScrollDiv>{children}</HorizontalScrollDiv>
     )

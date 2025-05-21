@@ -9,7 +9,7 @@ appearance: none;
 
 const ChipLabel = styled.label`
 display: flex;
-padding: 4px 18px;
+padding: 12px 18px;
 border-radius: 60px;
 background-color: var(--gray-color);
 color: var(--default-font-color);

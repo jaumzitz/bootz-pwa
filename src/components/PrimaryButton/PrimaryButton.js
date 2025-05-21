@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 
+
 const ButtonStyled = styled.button`
     background-color: var(--primary-color);
     font-family: var(--default-label-font);
@@ -16,12 +17,12 @@ const ButtonStyled = styled.button`
     }
 `
 
-export function PrimaryButton({ children, onClick }) {
+export function PrimaryButton({ children, onClick, isLoading }) {
 
 
     return (
         <ButtonStyled type="button" onClick={onClick}>
-            {children}
+            { !isLoading ? children : <img src='/spinner.svg' alt="Loading..." style={{ width: '20px', height: '20px' }} /> }
         </ButtonStyled>
     );
 }
