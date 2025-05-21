@@ -1,15 +1,8 @@
 import styled from "styled-components";
 import { Chip } from "../Chip/Chip";
+import { HorizontalScroll } from "../ScreenTemplates/NoScroll";
 
 const ChipNavigatorStyled = styled.nav`
-    display: flex;
-    flex-wrap: nowrap; /* Impede quebra de linha */
-    margin-bottom: 16px;
-    overflow-x: auto; /* Adiciona rolagem horizontal */
-    white-space: nowrap; /* Impede quebra de linha */
-    padding-bottom: 8px; /* Espaço extra para evitar corte na rolagem */
-    left: 8vw;
-
     &::-webkit-scrollbar {
         height: 6px; /* Altura da barra de rolagem */
     }
@@ -29,21 +22,21 @@ const chipOptions = [
         label: 'Praia',
         emoji: '🏖️',
         to: '/beach',
-        
+
     },
     {
         id: 'mountain',
         label: 'Montanha',
         emoji: '⛰️',
         to: '/mountain',
-        
+
     },
     {
         id: 'camping',
         label: 'Camping',
         emoji: '🏕️',
         to: '/camping',
-        
+
     },
     {
         id: 'waterfall',
@@ -51,7 +44,7 @@ const chipOptions = [
         customAndroidEmoji: '/genmoji-cachoeira.png',
         customiOSEmoji: '/emoji-cachoeira-android.png',
         to: '/waterfall',
-        
+
     },
     {
         id: 'hiking',
@@ -63,8 +56,13 @@ const chipOptions = [
 
 export function ChipNavigator() {
     return (
+
+
         <ChipNavigatorStyled>
-            {chipOptions.map((option) => { return <Chip chip={option}></Chip> })}
+            <HorizontalScroll>
+                {chipOptions.map((option) => { return <Chip key={option.id} chip={option}></Chip> })}
+            </HorizontalScroll>
         </ChipNavigatorStyled>
+
     )
 }

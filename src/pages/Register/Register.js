@@ -8,6 +8,8 @@ import { Span } from "../../components/Span/Span";
 import { Title } from "../../components/Title/Title";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { signUpWithEmail } from "../../services/authService";
 
 const FormStyled = styled.form`
     display: flex;
@@ -36,17 +38,32 @@ export function Register() {
 
     const navigate = useNavigate();
 
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [isLoading, setIsLoading] = useState(false);
+
+
 
     const handleRegister = async (event) => {
         event.preventDefault(); // Previne o comportamento padrão do formulário
+        setIsLoading(true)
 
-        const formData = new FormData(event.target); // Obtém os dados do formulário
-        const data = Object.fromEntries(formData.entries()); // Converte os dados para um objeto
+        signUpWithEmail(email, password)
+        .then((response) => {
+            console.log('Usuário registrado com sucesso:', response);
+            alert('Usuário registrado com sucesso!');
+            navigate('/home');
+        }).catch((error) => {
+            setIsLoading(false)
+            console.error('Erro ao registrar usuário:', error);
+            alert('Erro ao registrar usuário. Verifique suas credenciais.');
+        }
+       
+    )}
 
-        console.log('Dados do formulário:', data); // Exibe os dados no console (pode ser removido depois)
-
-        // Aqui você pode adicionar a lógica para enviar os dados para o servidor ou fazer o que precisar com eles
-    }
     return (
         <NoScroll>
 
@@ -61,25 +78,26 @@ export function Register() {
             </div>
             <FormStyled onSubmit={handleRegister}>
 
-                <Input label="Seu nome" type="text" id="fullName" name="fullName" required />
+                <Input onChangeValue={setFullName} label="Seu nome" type="text" id="fullName" name="fullName" required />
 
 
-                <Input label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
+                <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
 
 
-                <Input label="Cadastre sua senha:" type="password" id="password" name="password" required />
+                <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
+                <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required />
 
 
-                <Spacer height={'32vh'} />
+                <Spacer height={'20vh'} />
 
-            
 
-                <PrimaryButton type="submit" >Cadastre-se grátis</PrimaryButton>
+
+                <PrimaryButton type="submit" onClick={handleRegister} isLoading={isLoading}>Cadastre-se grátis</PrimaryButton>
 
                 <LoginLink>
                     <Span>Já tem uma conta?</Span><LinkButton alignment="left" to='/login'>Fazer login</LinkButton>
                 </LoginLink>
-            
+
             </FormStyled>
 
 
