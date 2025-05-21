@@ -41,8 +41,8 @@ const chipOptions = [
     {
         id: 'waterfall',
         label: 'Cachoeira',
-        customAndroidEmoji: '/genmoji-cachoeira.png',
-        customiOSEmoji: '/emoji-cachoeira-android.png',
+        customAndroidEmoji: '/emoji-cachoeira-android.png',
+        customiOSEmoji: '/genmoji-cachoeira.png',
         to: '/waterfall',
 
     },
