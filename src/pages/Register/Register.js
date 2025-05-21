@@ -1,16 +1,13 @@
 import styled from "styled-components";
-import IconButton from "../../components/IconButton/IconButton";
 import { Input } from "../../components/Input/Input";
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
-import { NoScroll } from "../../components/Scrolls/Scroll";
-import Spacer from "../../components/Spacer/Spacer";
 import { Span } from "../../components/Span/Span";
-import { Title } from "../../components/Title/Title";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUpWithEmail } from "../../services/authService";
 import { Layout } from "../../layouts/Layout/Layout";
+import FixedFooter from "../../layouts/Layout/FixedFooter";
 
 const FormStyled = styled.form`
     display: flex;
@@ -35,14 +32,34 @@ const FormFooter = styled.div`
     text-align: center;
 `
 
+const FooterContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    margin-bottom: 2vh;
+    
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #FFFFFF;
+`
+
+const Line = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color: #E0E0E0;
+    margin-bottom: 2vh;
+
+`
 export function Register() {
 
     const navigate = useNavigate();
 
-    const [fullName, setFullName] = useState('');
+    // const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    // const [confirmPassword, setConfirmPassword] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -67,30 +84,31 @@ export function Register() {
     }
 
     return (
-        <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
-
-      
-            <FormStyled onSubmit={handleRegister}>
-
-                <Input onChangeValue={setFullName} label="Nome completo" type="text" id="fullName" name="fullName" required />
-                <Input onChangeValue={setFullName} label="Nome de usuário" type="text" id="username" name="username" required />
-                <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
-                <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
-                <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required />
+        <>
+            <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
 
 
-                <Spacer height={'8vh'} />
+                <FormStyled onSubmit={handleRegister}>
 
+                    {/* <Input onChangeValue={setFullName} label="Nome completo" type="text" id="fullName" name="fullName" required /> */}
+                    <Input label="Nome de usuário" type="text" id="username" name="username" required />
+                    <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
+                    <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
+                    {/* <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required /> */}
 
+                </FormStyled>
 
-                <PrimaryButton type="submit" onClick={handleRegister} isLoading={isLoading}>Cadastre-se grátis</PrimaryButton>
+            </Layout>
+            <FixedFooter primaryButton={{ text: 'Cadastre-se grátis', onClick: handleRegister, isLoading: isLoading, width: '90%' }}>
+                <div>
 
-                <LoginLink>
-                    <Span>Já tem uma conta?</Span><LinkButton alignment="left" to='/login'>Fazer login</LinkButton>
-                </LoginLink>
+                    <Span>Já tem uma conta?</Span>
+                    <LinkButton to='/login'>Fazer login</LinkButton>
+                </div>
 
-            </FormStyled>
-        </Layout>
+            </FixedFooter>
+
+        </>
 
 
     );

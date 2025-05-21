@@ -8,13 +8,12 @@ import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator";
 
 const HeaderStyled = styled.header`
         
-    flex-direction: column;
-    
-    
-    padding: 4vw;
+    flex-direction: column;   
+    padding: 0 4vw 4vw 4vw;
 `
 
 const SearchInput = styled.input`
+    margin-top: 4vh;
     display: flex;
     width: 100%;
     padding: 18px 18px;
@@ -106,8 +105,8 @@ export function Home() {
             <RecommendedSection id="for-you" label="Para você" trails={trailsForYou}></RecommendedSection>
             <RecommendedSection id="trending-nearby" label="Em alta nas proximidades" trails={trailsTrendingNearby}></RecommendedSection>
 
-            <TabBar></TabBar>
             <Spacer height={'12vh'} width={0}></Spacer>
+            <TabBar></TabBar>
 
 
         </>
