@@ -2,7 +2,7 @@ import styled from "styled-components";
 import IconButton from "../../components/IconButton/IconButton";
 import { Input } from "../../components/Input/Input";
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
-import { NoScroll } from "../../components/ScreenTemplates/NoScroll";
+import { NoScroll } from "../../components/Scrolls/Scroll";
 import Spacer from "../../components/Spacer/Spacer";
 import { Span } from "../../components/Span/Span";
 import { Title } from "../../components/Title/Title";
@@ -10,6 +10,7 @@ import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUpWithEmail } from "../../services/authService";
+import { Layout } from "../../layouts/Layout/Layout";
 
 const FormStyled = styled.form`
     display: flex;
@@ -52,43 +53,33 @@ export function Register() {
         setIsLoading(true)
 
         signUpWithEmail(email, password)
-        .then((response) => {
-            console.log('Usuário registrado com sucesso:', response);
-            alert('Usuário registrado com sucesso!');
-            navigate('/home');
-        }).catch((error) => {
-            setIsLoading(false)
-            console.error('Erro ao registrar usuário:', error);
-            alert('Erro ao registrar usuário. Verifique suas credenciais.');
-        }
-       
-    )}
+            .then((response) => {
+                console.log('Usuário registrado com sucesso:', response);
+                alert('Usuário registrado com sucesso!');
+                navigate('/home');
+            }).catch((error) => {
+                setIsLoading(false)
+                console.error('Erro ao registrar usuário:', error);
+                alert('Erro ao registrar usuário. Verifique suas credenciais.');
+            }
+
+            )
+    }
 
     return (
-        <NoScroll>
+        <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
 
-            <div>
-
-                <IconButton icon='/arrow-back.svg' onClick={() => navigate(-1)}></IconButton>
-                <Spacer height={'4vh'} />
-
-                <Title>Cadastre-se</Title>
-                <Span>Crie uma conta grátis e comece a explorar lugares.</Span>
-                <Spacer height={'8vh'} />
-            </div>
+      
             <FormStyled onSubmit={handleRegister}>
 
-                <Input onChangeValue={setFullName} label="Seu nome" type="text" id="fullName" name="fullName" required />
-
-
+                <Input onChangeValue={setFullName} label="Nome completo" type="text" id="fullName" name="fullName" required />
+                <Input onChangeValue={setFullName} label="Nome de usuário" type="text" id="username" name="username" required />
                 <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
-
-
                 <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
                 <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required />
 
 
-                <Spacer height={'20vh'} />
+                <Spacer height={'8vh'} />
 
 
 
@@ -99,9 +90,9 @@ export function Register() {
                 </LoginLink>
 
             </FormStyled>
+        </Layout>
 
 
-        </NoScroll>
     );
 }
 

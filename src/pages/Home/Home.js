@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { RecommendedSection } from "../../components/RecommendedSection/RecommendedSection";
-import { NoScroll } from "../../components/ScreenTemplates/NoScroll";
+
 import { TabBar } from "../../components/TabBar/TabBar";
 import Spacer from "../../components/Spacer/Spacer";
 import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator";

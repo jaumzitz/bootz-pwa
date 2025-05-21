@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Chip } from "../Chip/Chip";
-import { HorizontalScroll } from "../ScreenTemplates/NoScroll";
+import { HorizontalScroll } from "../Scrolls/Scroll"
 
 const ChipNavigatorStyled = styled.nav`
     &::-webkit-scrollbar {

@@ -5,22 +5,28 @@ import { useState } from "react";
 const InputStyled = styled.input`
 font-family: var(--default-title-font);
 font-size: var(--default-font-size);
-color: var(--default-font-color);
-padding: 0.5rem 1rem;
-border-radius: 0.5rem;
-border: 1px solid #D7DBE0;
-background-color: #F8F9FB;
 width: 100%;
-box-sizing: border-box;
 margin-bottom: 10px;
+padding: 0.5rem 1rem;
+color: var(--default-font-color);
+background-color: #fff;
+border: 1px solid #D7DBE0;
+border-radius: 0.5rem;
+box-sizing: border-box;
+box-shadow: 0px 1px 2px 0px rgba(228, 229, 231, 0.24);
 `
 
 const LabelStyled = styled.label`
 font-family: var(--default-label-font);
 color: #6C7278;
-margin-bottom: 8px;
+padding-bottom: 8px;
 `
 
+const InputContainerStyled = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+`
 
 export function Input({ type, id, name, required, label, onChangeValue, validator }) {
 
@@ -45,7 +51,7 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
 
 
     return (
-        <div>
+        <InputContainerStyled>
             {label && <LabelStyled htmlFor={id}>{label}</LabelStyled>}
             <InputStyled
                 type={type}
@@ -57,6 +63,6 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
 
             />
             {!isFieldValid && <Span color={`var(--alert-color)`}>E-mail inválido.</Span>}
-        </div>
+        </InputContainerStyled>
     );
 }

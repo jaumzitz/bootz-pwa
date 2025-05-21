@@ -7,7 +7,7 @@ import { Title } from "../../components/Title/Title";
 import { signInWithEmail } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { NoScroll } from "../../components/ScreenTemplates/NoScroll.js";
+import { NoScroll } from "../../components/Scrolls/Scroll.js";
 import { Span } from "../../components/Span/Span.js";
 import Spacer from "../../components/Spacer/Spacer.js";
 
@@ -47,7 +47,7 @@ export function Login() {
 
     return (
         <NoScroll>
-            <Spacer height={'10vh'} />
+            <Spacer height={'8vh'} />
             <img src="/icon-192.png" alt="Logo" width="80px" height="80px" />
             <Spacer height={'4vh'} />
 
@@ -66,7 +66,7 @@ export function Login() {
 
                 <LinkButton alignment="right" type="submit">Esqueci minha senha</LinkButton>
 
-                <Spacer height={'28vh'} />
+                <Spacer height={'20vh'} />
 
 
                 <PrimaryButton type="submit" onClick={handleLogin}>Entrar</PrimaryButton>

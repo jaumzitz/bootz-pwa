@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Title } from "../Title/Title"
 import { TrailCard } from "../TrailCard/TrailCard"
-import { HorizontalScroll } from "../ScreenTemplates/NoScroll"
+import { HorizontalScroll } from "../Scrolls/Scroll"
 
 
 
