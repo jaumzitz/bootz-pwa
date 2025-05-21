@@ -19,19 +19,20 @@ const HorizontalScrollDiv = styled.div`
     padding-right: 4vw;
     overflow-x: auto;
     overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    /* Esconde a barra de rolagem no Chrome, Safari e Opera */
     &::-webkit-scrollbar {
-        height: 6px; /* Altura da barra de rolagem */
+        display: none;
+        height: 0;
+        background: transparent;
     }
 
-    &::-webkit-scrollbar-thumb {
-        background: transparent
-    }
+    /* Esconde a barra de rolagem no Firefox */
+    scrollbar-width: none;
 
-    &::-webkit-scrollbar-track {
-        background: transparent; /* Fundo da barra de rolagem */
-    }
-    
-    
+    /* Esconde a barra de rolagem no IE e Edge */
+    -ms-overflow-style: none;
 `
 
 
