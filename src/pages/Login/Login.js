@@ -7,9 +7,11 @@ import { Title } from "../../components/Title/Title";
 import { signInWithEmail } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { NoScroll } from "../../components/ScreenTemplates/NoScroll.js";
+import { NoScroll } from "../../components/Scrolls/Scroll.js";
 import { Span } from "../../components/Span/Span.js";
 import Spacer from "../../components/Spacer/Spacer.js";
+import FixedFooter from "../../layouts/Layout/FixedFooter.js";
+import { Layout } from "../../layouts/Layout/Layout.js";
 
 
 export const FormStyled = styled.form`
@@ -32,6 +34,7 @@ export function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async () => {
         try {
@@ -46,39 +49,39 @@ export function Login() {
     }
 
     return (
-        <NoScroll>
-            <Spacer height={'10vh'} />
-            <img src="/icon-192.png" alt="Logo" width="80px" height="80px" />
-            <Spacer height={'4vh'} />
+        <>
+        
+            <img src="/app-icon.png" alt="Logo" style={{ width: '64px', height: '64px', marginLeft: '4vw', marginTop: '8vh'}} />
+            <Layout /*leftButtonIcon={{img: "/app-icon.png", size: "200px"}}*/  title={"Boas vindas ao Bootz!"} subtitle={"Faça login com sua conta"}>
+                <FormStyled>
 
-            <Title>Boas vindas ao Bootz!</Title>
-            
+                    <Input onChangeValue={setEmail} type={"email"} id={"email"} name={"email"} required={true} label={"E-mail"} />
+                    <Spacer height={'2vh'} />
 
-            <Spacer height={'8vh'} />
+                    <Input onChangeValue={setPassword} type={"password"} id={"password"} name={"password"} required={true} label={"Senha"} />
+                    <Spacer height={'2vh'} />
 
-            <FormStyled>
+                    <LinkButton alignment="right" to="/forgotMyPassword">Esqueci minha senha</LinkButton>
 
-                <Input onChangeValue={setEmail} type={"email"} id={"email"} name={"email"} required={true} label={"E-mail"} />
-                <Spacer height={'2vh'} />
-
-                <Input onChangeValue={setPassword} type={"password"} id={"password"} name={"password"} required={true} label={"Senha"} />
-                <Spacer height={'2vh'} />
-
-                <LinkButton alignment="right" type="submit">Esqueci minha senha</LinkButton>
-
-                <Spacer height={'28vh'} />
+                    <Spacer height={'20vh'} />
 
 
-                <PrimaryButton type="submit" onClick={handleLogin}>Entrar</PrimaryButton>
+                </FormStyled>
+
+            </Layout>
+
+            <FixedFooter primaryButton={{ text: 'Entrar', onClick: handleLogin, isLoading: isLoading, width: '90%' }}>
+                <div>
+
+                    <Span>Não tem uma conta?</Span>
+                    <LinkButton to='/register'>Cadastre-se grátis</LinkButton>
+                </div>
+
+            </FixedFooter>
 
 
-                <Spacer height={'2vh'} />
 
-                <RegisterLink>
-                    <Span>Não tem uma conta?</Span><LinkButton alignment="left" to='/register'>Cadastre-se</LinkButton>
-                </RegisterLink>
 
-            </FormStyled>
-        </NoScroll>
+        </>
     );
 }

@@ -1,15 +1,13 @@
 import styled from "styled-components";
-import IconButton from "../../components/IconButton/IconButton";
 import { Input } from "../../components/Input/Input";
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
-import { NoScroll } from "../../components/ScreenTemplates/NoScroll";
-import Spacer from "../../components/Spacer/Spacer";
 import { Span } from "../../components/Span/Span";
-import { Title } from "../../components/Title/Title";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signUpWithEmail } from "../../services/authService";
+import { Layout } from "../../layouts/Layout/Layout";
+import FixedFooter from "../../layouts/Layout/FixedFooter";
 
 const FormStyled = styled.form`
     display: flex;
@@ -34,14 +32,34 @@ const FormFooter = styled.div`
     text-align: center;
 `
 
+const FooterContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    margin-bottom: 2vh;
+    
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #FFFFFF;
+`
+
+const Line = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color: #E0E0E0;
+    margin-bottom: 2vh;
+
+`
 export function Register() {
 
     const navigate = useNavigate();
 
-    const [fullName, setFullName] = useState('');
+    // const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    // const [confirmPassword, setConfirmPassword] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -52,56 +70,47 @@ export function Register() {
         setIsLoading(true)
 
         signUpWithEmail(email, password)
-        .then((response) => {
-            console.log('Usuário registrado com sucesso:', response);
-            alert('Usuário registrado com sucesso!');
-            navigate('/home');
-        }).catch((error) => {
-            setIsLoading(false)
-            console.error('Erro ao registrar usuário:', error);
-            alert('Erro ao registrar usuário. Verifique suas credenciais.');
-        }
-       
-    )}
+            .then((response) => {
+                console.log('Usuário registrado com sucesso:', response);
+                alert('Usuário registrado com sucesso!');
+                navigate('/home');
+            }).catch((error) => {
+                setIsLoading(false)
+                console.error('Erro ao registrar usuário:', error);
+                alert('Erro ao registrar usuário. Verifique suas credenciais.');
+            }
+
+            )
+    }
 
     return (
-        <NoScroll>
-
-            <div>
-
-                <IconButton icon='/arrow-back.svg' onClick={() => navigate(-1)}></IconButton>
-                <Spacer height={'4vh'} />
-
-                <Title>Cadastre-se</Title>
-                <Span>Crie uma conta grátis e comece a explorar lugares.</Span>
-                <Spacer height={'8vh'} />
-            </div>
-            <FormStyled onSubmit={handleRegister}>
-
-                <Input onChangeValue={setFullName} label="Seu nome" type="text" id="fullName" name="fullName" required />
+        <>
+            <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
 
 
-                <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
+                <FormStyled onSubmit={handleRegister}>
+
+                    {/* <Input onChangeValue={setFullName} label="Nome completo" type="text" id="fullName" name="fullName" required /> */}
+                    <Input label="Nome de usuário" type="text" id="username" name="username" required />
+                    <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
+                    <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
+                    {/* <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required /> */}
+
+                </FormStyled>
+
+            </Layout>
+            <FixedFooter primaryButton={{ text: 'Cadastre-se grátis', onClick: handleRegister, isLoading: isLoading, width: '90%' }}>
+                <div>
+
+                    <Span>Já tem uma conta?</Span>
+                    <LinkButton to='/login'>Fazer login</LinkButton>
+                </div>
+
+            </FixedFooter>
+
+        </>
 
 
-                <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
-                <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required />
-
-
-                <Spacer height={'20vh'} />
-
-
-
-                <PrimaryButton type="submit" onClick={handleRegister} isLoading={isLoading}>Cadastre-se grátis</PrimaryButton>
-
-                <LoginLink>
-                    <Span>Já tem uma conta?</Span><LinkButton alignment="left" to='/login'>Fazer login</LinkButton>
-                </LoginLink>
-
-            </FormStyled>
-
-
-        </NoScroll>
     );
 }
 

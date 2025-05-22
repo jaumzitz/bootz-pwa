@@ -7,7 +7,7 @@ const ButtonStyled = styled.button`
     font-family: var(--default-label-font);
     font-size: var(--default-font-size);
     padding: 1rem 1rem;
-    
+    width: ${({width}) => width || `100%`};
     color: white;
     border-radius: 60px;
     border: none;
@@ -17,11 +17,11 @@ const ButtonStyled = styled.button`
     }
 `
 
-export function PrimaryButton({ children, onClick, isLoading }) {
+export function PrimaryButton({ children, onClick, isLoading, width }) {
 
 
     return (
-        <ButtonStyled type="button" onClick={onClick}>
+        <ButtonStyled type="button" onClick={onClick} width={width}>
             { !isLoading ? children : <img src='/spinner.svg' alt="Loading..." style={{ width: '20px', height: '20px' }} /> }
         </ButtonStyled>
     );

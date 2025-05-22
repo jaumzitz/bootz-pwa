@@ -31,7 +31,7 @@ export function Chip({ chip }) {
     return (
         <>
             <ChipLabel htmlFor={chip.id}>
-
+            
                 {
                  (!chip.emoji && platform === "iPhone") &&
                     <img src={chip.customiOSEmoji} alt={chip.label} width="24px" max-height="24px" style={{ marginRight: "8px" }} />
