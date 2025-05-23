@@ -23,6 +23,8 @@ const HeaderTitle = styled.div`
 
 export function Layout({ leftButtonIcon, leftButtonAction, title, subtitle, children }) {
     return (
+        
+
         <NoScroll>
             <HeaderContainer>
                 {leftButtonIcon && <IconButton icon={leftButtonIcon} onClick={leftButtonAction}></IconButton>}
@@ -37,6 +39,7 @@ export function Layout({ leftButtonIcon, leftButtonAction, title, subtitle, chil
                 {children}
             </main>
         </NoScroll>
+        
     )
 
 }

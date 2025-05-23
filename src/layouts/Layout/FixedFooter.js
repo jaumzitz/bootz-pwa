@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton"
 
-export default function FixedFooter({ primaryButton, children }) {
-    const FooterContainer = styled.div`
+
+const FooterContainer = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -14,13 +14,16 @@ export default function FixedFooter({ primaryButton, children }) {
         bottom: 0;
         background-color: #FFFFFF;
     `
-    const Line = styled.div`
+const Line = styled.div`
         width: 100%;
         height: 1px;
         background-color: #E0E0E0;
         margin-bottom: 2vh;
 
     `
+
+export default function FixedFooter({ primaryButton, children }) {
+
     return (
         <FooterContainer>
             <Line />

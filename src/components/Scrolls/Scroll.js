@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
 const NoScrollDiv = styled.div`
-    height: 100vh;
-    max-height: 100vh;
+    
+    
     margin: 2vh 4vw;
-    overflow-y: hidden;
+    overflow: hidden;
     
 `
 

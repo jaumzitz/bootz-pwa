@@ -1,10 +1,6 @@
 import styled from "styled-components"
 
-const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-]
+
 
 
 const TabBarContainer = styled.div`

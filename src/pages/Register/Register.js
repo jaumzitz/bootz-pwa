@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { Input } from "../../components/Input/Input";
-import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
 import { Span } from "../../components/Span/Span";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { signUpWithEmail } from "../../services/authService";
+import { signUpWithEmail } from "../../services/User";
 import { Layout } from "../../layouts/Layout/Layout";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
 
@@ -14,43 +13,6 @@ const FormStyled = styled.form`
     flex-direction: column;
     gap: 2vh;
     
-`
-const LoginLink = styled.div`   
-    text-align: center;
-`
-
-const FormFooter = styled.div`
- position: fixed;
-    bottom: 4vh;
-    width: 100%;
-    left: 0; 
-    right: 0; 
-    display: flex; /* Adicionado para centralizar */
-    flex-direction: column; /* Mantém os elementos empilhados */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    text-align: center;
-`
-
-const FooterContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2vh;
-    margin-bottom: 2vh;
-    
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    background-color: #FFFFFF;
-`
-
-const Line = styled.div`
-    width: 100%;
-    height: 1px;
-    background-color: #E0E0E0;
-    margin-bottom: 2vh;
-
 `
 export function Register() {
 
@@ -68,7 +30,8 @@ export function Register() {
     const handleRegister = async (event) => {
         event.preventDefault(); // Previne o comportamento padrão do formulário
         setIsLoading(true)
-
+        navigate('/register/uploadProfilePicture')
+        return
         signUpWithEmail(email, password)
             .then((response) => {
                 console.log('Usuário registrado com sucesso:', response);
