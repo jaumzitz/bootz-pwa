@@ -56,7 +56,7 @@ export default function ProfilePicture({ imgUrl }) {
                     <SelectedPhotoPreview src={selectedPhoto} width="200px" height="200px" ></SelectedPhotoPreview>}
             </CirclePlaceholder>
 
-            <input type="file" id="profilePic" hidden onChange={(e) => handleSelectedPhoto(e)}></input>
+            <input type="file" accept="image/*" id="profilePic" hidden onChange={(e) => handleSelectedPhoto(e)}></input>
 
         </UploadFile>
     )

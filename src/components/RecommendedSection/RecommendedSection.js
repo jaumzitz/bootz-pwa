@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Title } from "../Title/Title"
+import { Title } from "../TextContent/Title/Title"
 import { TrailCard } from "../TrailCard/TrailCard"
 import { HorizontalScroll } from "../Scrolls/Scroll"
 

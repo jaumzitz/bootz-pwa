@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Input } from "../../components/Input/Input";
-import { Span } from "../../components/Span/Span";
+import { Span } from "../../components/TextContent/Span/Span";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -78,7 +78,7 @@ export function Register() {
 
                     </FixedFooter>
                 </>
-                
+
                 :
 
                 <>
@@ -86,7 +86,9 @@ export function Register() {
 
                         <ProfilePicture />
 
-                        <Input type="text" label="Nome público"></Input>
+                        <Input type="text" id="fullName" label="Nome público"></Input>
+                        <Input type="date" id="birthday" label="Data de Nascimento"></Input>
+                        <Input type="text" id="phoneNumber" label="Telefone"></Input>
 
 
                     </Layout>

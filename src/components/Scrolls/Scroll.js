@@ -3,7 +3,7 @@ import styled from "styled-components"
 const NoScrollDiv = styled.div`
     
     
-    margin: 2vh 4vw;
+    padding: 2vh 4vw;
     overflow: hidden;
     
 `

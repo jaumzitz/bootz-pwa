@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input/Input";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
-import { Span } from "../../components/Span/Span";
+import { Span } from "../../components/TextContent/Span/Span";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
 import { Layout } from "../../layouts/Layout/Layout";
 
@@ -19,9 +19,9 @@ export function ForgotMyPassword() {
                         <Input label="Seu e-mail"></Input>
                     </form>
             </Layout>
-            <FixedFooter primaryButton={{ text: 'Enviar e-mail', onClick: {}, width: '90%' }}>
+            <FixedFooter primaryButton={{ text: 'Enviar e-mail',  width: '90%' }}>
                 <div>
-                    <Span>Não precisa de uma nova senha?</Span>
+                    
                     <LinkButton to='/login'>Fazer login</LinkButton>
                 </div>
             </FixedFooter>

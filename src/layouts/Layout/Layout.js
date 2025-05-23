@@ -2,8 +2,8 @@ import styled from "styled-components";
 import IconButton from "../../components/IconButton/IconButton";
 import { NoScroll } from "../../components/Scrolls/Scroll";
 import Spacer from "../../components/Spacer/Spacer";
-import { Span } from "../../components/Span/Span";
-import { Title } from "../../components/Title/Title";
+import { Span } from "../../components/TextContent/Span/Span";
+import { Title } from "../../components/TextContent/Title/Title";
 
 
 const HeaderContainer = styled.div` 

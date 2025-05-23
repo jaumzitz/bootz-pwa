@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { Title } from "../Title/Title"
-import { Span } from "../Span/Span"
+import { Title } from "../TextContent/Title/Title"
+import { Span } from "../TextContent/Span/Span"
 
 const CardContainer = styled.div`
     margin-top: 16px;
@@ -12,6 +12,10 @@ const ImageCard = styled.img`
     max-width: 400px;
     border-radius: 16px;
     box-shadow: 0px 4px 10px 0px rgba(52, 52, 52, 0.30);
+
+    &:hover {
+        cursor: pointer;
+    }
     `
 
 const CardInfo = styled.div`

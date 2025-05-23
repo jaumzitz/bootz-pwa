@@ -7,7 +7,7 @@ import { signInWithEmail } from "../../services/Authentication.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { Span } from "../../components/Span/Span.js";
+import { Span } from "../../components/TextContent/Span/Span.js";
 import Spacer from "../../components/Spacer/Spacer.js";
 import FixedFooter from "../../layouts/Layout/FixedFooter.js";
 import { Layout } from "../../layouts/Layout/Layout.js";

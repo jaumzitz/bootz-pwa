@@ -7,10 +7,12 @@ const LinkButtonStyle = styled.button`
     color: var(--primary-color);
     font-family: var(--default-label-font);
     font-size: var(--default-font-size);
+    text-decoration: underline;
     &:hover {
         cursor: pointer;
         text-decoration: underline;
     }
+
 `
 
 export function LinkButton({ children, alignment, to }) {
