@@ -14,7 +14,6 @@ export function AppRoutes() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/forgotMyPassword" element={<ForgotMyPassword />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/register/uploadProfilePicture" element={<UploadProfilePicture />} />
 
             </Routes>
         </BrowserRouter>

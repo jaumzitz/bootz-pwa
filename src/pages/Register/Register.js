@@ -7,6 +7,7 @@ import { useState } from "react";
 import { signUpWithEmail } from "../../services/User";
 import { Layout } from "../../layouts/Layout/Layout";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
+import ProfilePicture from "../../components/Profile/ProfilePicture/ProfilePicutre";
 
 const FormStyled = styled.form`
     display: flex;
@@ -25,13 +26,14 @@ export function Register() {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [step, setStep] = useState(1);
+
 
 
     const handleRegister = async (event) => {
         event.preventDefault(); // Previne o comportamento padrão do formulário
         setIsLoading(true)
-        navigate('/register/uploadProfilePicture')
-        return
+
         signUpWithEmail(email, password)
             .then((response) => {
                 console.log('Usuário registrado com sucesso:', response);
@@ -46,33 +48,57 @@ export function Register() {
             )
     }
 
+
+
     return (
         <>
-            <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
+
+            {step === 1 ?
+                <>
+                    <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
 
 
-                <FormStyled onSubmit={handleRegister}>
+                        <FormStyled onSubmit={handleRegister}>
 
-                    {/* <Input onChangeValue={setFullName} label="Nome completo" type="text" id="fullName" name="fullName" required /> */}
-                    <Input label="Nome de usuário" type="text" id="username" name="username" required />
-                    <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
-                    <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
-                    {/* <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required /> */}
+                            {/* <Input onChangeValue={setFullName} label="Nome completo" type="text" id="fullName" name="fullName" required /> */}
+                            <Input label="Nome de usuário" type="text" id="username" name="username" required />
+                            <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
+                            <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
+                            {/* <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required /> */}
 
-                </FormStyled>
+                        </FormStyled>
 
-            </Layout>
-            <FixedFooter primaryButton={{ text: 'Cadastre-se grátis', onClick: handleRegister, isLoading: isLoading, width: '90%' }}>
-                <div>
+                    </Layout>
+                    <FixedFooter primaryButton={{ text: 'Continuar', onClick: () => setStep(2), isLoading: isLoading, width: '90%' }}>
+                        <div>
 
-                    <Span>Já tem uma conta?</Span>
-                    <LinkButton to='/login'>Fazer login</LinkButton>
-                </div>
+                            <Span>Já tem uma conta?</Span>
+                            <LinkButton to='/login'>Fazer login</LinkButton>
+                        </div>
 
-            </FixedFooter>
+                    </FixedFooter>
+                </>
+                
+                :
+
+                <>
+                    <Layout leftButtonAction={() => setStep(1)} leftButtonIcon="/arrow-back.svg" title="Foto de perfil" subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo.">
+
+                        <ProfilePicture />
+
+                        <Input type="text" label="Nome público"></Input>
+
+
+                    </Layout>
+                    <FixedFooter primaryButton={{ text: 'Concluir', width: '90%', onClick: handleRegister }}>
+                        <Span></Span>
+                    </FixedFooter>
+
+
+                </>
+            }
 
         </>
-
 
     );
 }
