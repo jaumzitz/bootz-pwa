@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 const ImageContainer = styled.main`
     width: 100vw;
     height: 100vh;
-    background-image: url('/assets/images/onboarding.png');
+    background-image: url('/assets/images/onboarding-dsk.png');
     background-size: cover;         // Faz a imagem preencher toda a tela
     background-position: center;    // Centraliza a imagem
     background-repeat: no-repeat;   // Evita repetição
