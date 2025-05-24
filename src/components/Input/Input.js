@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Span } from "../Span/Span";
+import { Span } from "../TextContent/Span/Span";
 import { useState } from "react";
 
 const InputStyled = styled.input`

@@ -2,13 +2,12 @@
 import styled from "styled-components";
 import { Input } from "../../components/Input/Input";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
-import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
-import { Title } from "../../components/Title/Title";
-import { signInWithEmail } from "../../services/authService";
+
+import { signInWithEmail } from "../../services/Authentication.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { NoScroll } from "../../components/Scrolls/Scroll.js";
-import { Span } from "../../components/Span/Span.js";
+
+import { Span } from "../../components/TextContent/Span/Span.js";
 import Spacer from "../../components/Spacer/Spacer.js";
 import FixedFooter from "../../layouts/Layout/FixedFooter.js";
 import { Layout } from "../../layouts/Layout/Layout.js";
@@ -19,10 +18,6 @@ export const FormStyled = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: left;
-`
-
-const RegisterLink = styled.div`
-    text-align: center;
 `
 
 
@@ -51,7 +46,7 @@ export function Login() {
     return (
         <>
         
-            <img src="/app-icon.png" alt="Logo" style={{ width: '64px', height: '64px', marginLeft: '4vw', marginTop: '8vh'}} />
+            <img src="/assets/icons/app-icon.png" alt="Logo" style={{ width: '64px', height: '64px', marginLeft: '4vw', marginTop: '8vh'}} />
             <Layout /*leftButtonIcon={{img: "/app-icon.png", size: "200px"}}*/  title={"Boas vindas ao Bootz!"} subtitle={"Faça login com sua conta"}>
                 <FormStyled>
 

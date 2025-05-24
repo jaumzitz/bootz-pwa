@@ -1,21 +1,22 @@
 @font-face {
 	font-family: 'Inter-Rg';
-	src: url('./assets/Inter_18pt-Regular.ttf');
+	src: url('../public/assets/fonts/Inter_18pt-Regular.ttf');
 }
 
 @font-face {
 	font-family: 'Inter-Sb';
-	src: url('./assets/Inter_18pt-SemiBold.ttf');
+	src: url('../public/assets/fonts/Inter_18pt-SemiBold.ttf');
 }
 @font-face {
 	font-family: 'Inter-Md';
-	src: url('./assets/Inter_18pt-Medium.ttf');
+	src: url('../public/assets/fonts/Inter_18pt-Medium.ttf');
 }
 
 
 :root {
 	--default-title-font: 'Inter-Sb', sans-serif;
 	--default-label-font: 'Inter-Md', sans-serif;
+	--default-text-font: 'Inter-Rg', sans-serif;
 	--default-font-size: 16px;
 	--default-font-color: #333;
 	--primary-color: #9CCD62;
@@ -27,4 +28,6 @@
 html, body {
 	overflow-x: hidden;
 	
+	
 }
+

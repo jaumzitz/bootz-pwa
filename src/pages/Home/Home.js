@@ -37,7 +37,7 @@ export function Home() {
             distance: 1.3,
             enviroment: 'Praia',
             difficulty: 'Fácil',
-            imageUrl: '/praia-vermelha-penha.jpg'
+            imageUrl: '/assets/images/praia-vermelha-penha.jpg'
         },
         {
             id: 2,
@@ -46,7 +46,7 @@ export function Home() {
             distance: 3.3,
             enviroment: 'Montanha',
             difficulty: 'Médio',
-            imageUrl: '/pico-da-pedra-camboriu.png'
+            imageUrl: '/assets/images/pico-da-pedra-camboriu.png'
         },
         {
             id: 3,
@@ -55,7 +55,7 @@ export function Home() {
             distance: 1.3,
             enviroment: 'Praia',
             difficulty: 'Fácil',
-            imageUrl: '/piscinas-naturais-floripa.png'
+            imageUrl: '/assets/images/piscinas-naturais-floripa.png'
         }
     ]
 
@@ -67,7 +67,7 @@ export function Home() {
             distance: 1.3,
             enviroment: 'Cachoeira',
             difficulty: 'Fácil',
-            imageUrl: '/cachoeira-seca.jpg'
+            imageUrl: '/assets/images/cachoeira-seca.jpg'
         },
         {
             id: 5,
@@ -76,7 +76,7 @@ export function Home() {
             distance: 3.3,
             enviroment: 'Montanha',
             difficulty: 'Médio',
-            imageUrl: '/parque-atalaia.jpg'
+            imageUrl: '/assets/images/parque-atalaia.jpg'
         },
         {
             id: 6,
@@ -85,13 +85,15 @@ export function Home() {
             distance: 1.3,
             enviroment: 'Praia',
             difficulty: 'Fácil',
-            imageUrl: '/praia-solidao.jpg'
+            imageUrl: '/assets/images/praia-solidao.jpg'
         }
     ]
 
 
 
     return (
+
+        
         <>
 
             <HeaderStyled>

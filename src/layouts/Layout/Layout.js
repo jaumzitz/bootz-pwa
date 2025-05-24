@@ -2,8 +2,8 @@ import styled from "styled-components";
 import IconButton from "../../components/IconButton/IconButton";
 import { NoScroll } from "../../components/Scrolls/Scroll";
 import Spacer from "../../components/Spacer/Spacer";
-import { Span } from "../../components/Span/Span";
-import { Title } from "../../components/Title/Title";
+import { Span } from "../../components/TextContent/Span/Span";
+import { Title } from "../../components/TextContent/Title/Title";
 
 
 const HeaderContainer = styled.div` 
@@ -18,11 +18,14 @@ const HeaderTitle = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 2vh;
+    
 `
 
 
 export function Layout({ leftButtonIcon, leftButtonAction, title, subtitle, children }) {
     return (
+        
+
         <NoScroll>
             <HeaderContainer>
                 {leftButtonIcon && <IconButton icon={leftButtonIcon} onClick={leftButtonAction}></IconButton>}
@@ -37,6 +40,7 @@ export function Layout({ leftButtonIcon, leftButtonAction, title, subtitle, chil
                 {children}
             </main>
         </NoScroll>
+        
     )
 
 }
