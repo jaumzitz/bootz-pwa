@@ -1,15 +1,15 @@
 @font-face {
 	font-family: 'Inter-Rg';
-	src: url('./assets/Inter_18pt-Regular.ttf');
+	src: url('../public/assets/fonts/Inter_18pt-Regular.ttf');
 }
 
 @font-face {
 	font-family: 'Inter-Sb';
-	src: url('./assets/Inter_18pt-SemiBold.ttf');
+	src: url('../public/assets/fonts/Inter_18pt-SemiBold.ttf');
 }
 @font-face {
 	font-family: 'Inter-Md';
-	src: url('./assets/Inter_18pt-Medium.ttf');
+	src: url('../public/assets/fonts/Inter_18pt-Medium.ttf');
 }
 
 
@@ -26,7 +26,7 @@
 
 
 html, body {
-	overflow-y: hidden;
+	overflow-x: hidden;
 	
 	
 }

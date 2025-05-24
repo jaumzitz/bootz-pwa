@@ -55,7 +55,7 @@ export function Register() {
 
             {step === 1 ?
                 <>
-                    <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
+                    <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/assets/icons/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
 
 
                         <FormStyled onSubmit={handleRegister}>
@@ -82,7 +82,7 @@ export function Register() {
                 :
 
                 <>
-                    <Layout leftButtonAction={() => setStep(1)} leftButtonIcon="/arrow-back.svg" title="Foto de perfil" subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo.">
+                    <Layout leftButtonAction={() => setStep(1)} leftButtonIcon="/assets/icons/arrow-back.svg" title="Foto de perfil" subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo.">
 
                         <ProfilePicture />
 

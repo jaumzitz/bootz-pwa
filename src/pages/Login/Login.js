@@ -46,7 +46,7 @@ export function Login() {
     return (
         <>
         
-            <img src="/app-icon.png" alt="Logo" style={{ width: '64px', height: '64px', marginLeft: '4vw', marginTop: '8vh'}} />
+            <img src="/assets/icons/app-icon.png" alt="Logo" style={{ width: '64px', height: '64px', marginLeft: '4vw', marginTop: '8vh'}} />
             <Layout /*leftButtonIcon={{img: "/app-icon.png", size: "200px"}}*/  title={"Boas vindas ao Bootz!"} subtitle={"Faça login com sua conta"}>
                 <FormStyled>
 

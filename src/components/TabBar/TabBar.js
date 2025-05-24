@@ -29,28 +29,28 @@ export function TabBar() {
 
             <ul style={{ display: 'flex', listStyleType: 'none', margin: 0, padding: 0, width: '100%', height: '100%', justifyContent: 'space-around', alignItems: 'center' }}>
                 <TabBarItem>
-                    <img src="/home-active.svg" alt="home" style={{ width: '24px', height: '24px' }} />
+                    <img src="/assets/icons/home-active.svg" alt="home" style={{ width: '24px', height: '24px' }} />
                 
                     Início
 
                 </TabBarItem>
                 <TabBarItem>
-                <img src="/calendar-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
+                <img src="/assets/icons/calendar-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
 
                     Eventos
                 </TabBarItem>
                 <TabBarItem>
-                <img src="/add.svg" alt="home" style={{ width: '24px', height: '24px' }} />
+                <img src="/assets/icons/add.svg" alt="home" style={{ width: '24px', height: '24px' }} />
 
                     Nova trilha
                 </TabBarItem>
                 <TabBarItem>
-                <img src="/favorite-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
+                <img src="/assets/icons/favorite-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
 
                     Favoritos
                 </TabBarItem>
                 <TabBarItem>
-                <img src="/account-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
+                <img src="/assets/icons/account-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
 
                     Perfil
                 </TabBarItem>

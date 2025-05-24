@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Title } from "../TextContent/Title/Title"
 import { Span } from "../TextContent/Span/Span"
+import { useNavigate } from "react-router-dom"
 
 const CardContainer = styled.div`
     margin-top: 16px;
@@ -34,9 +35,10 @@ const CardDetails = styled.div`
 
 export function TrailCard({trail}) {
     console.log(trail)
+    const navigate = useNavigate()
 
     return (
-        <CardContainer>
+        <CardContainer onClick={() => navigate(`/trail/${trail.id}`)}>
             <ImageCard src={trail.imageUrl} alt={trail.name} />
             <CardInfo>
                 <Title size="small">{trail.name}</Title>

@@ -25,7 +25,7 @@ const SelectedPhotoPreview = styled.img`
   object-fit: cover;
 `;
 
-const defaultIcon = "/add-photo.svg"
+const defaultIcon = "/assets/icons/add-photo.svg"
 
 export default function ProfilePicture({ imgUrl }) {
 

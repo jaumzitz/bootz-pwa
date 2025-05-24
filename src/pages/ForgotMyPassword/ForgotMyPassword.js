@@ -11,7 +11,7 @@ export function ForgotMyPassword() {
     return (
         <>
             <Layout 
-                    leftButtonIcon="/arrow-back.svg"
+                    leftButtonIcon="/assets/icons/arrow-back.svg"
                     leftButtonAction={() => {navigate('/login')}}
                     title={"Esqueci minha senha"} 
                     subtitle={"Digite seu e-mail para receber um link de recuperação"}>

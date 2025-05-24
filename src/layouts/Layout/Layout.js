@@ -18,6 +18,7 @@ const HeaderTitle = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 2vh;
+    
 `
 
 

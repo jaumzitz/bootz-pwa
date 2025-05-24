@@ -3,8 +3,9 @@ import { Login } from "./pages/Login/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Register } from "./pages/Register/Register";
 import { ForgotMyPassword } from "./pages/ForgotMyPassword/ForgotMyPassword";
-import { Trail } from "./pages/Trail/Trail"
+import { Trail, TrailDetail } from "./pages/Trail/TrailDetail"
 import Onboarding from "./pages/Onboarding/Onboarding";
+import { NewTrail } from "./pages/Trail/NewTrail";
 
 export function AppRoutes() {
     return (
@@ -16,7 +17,8 @@ export function AppRoutes() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgotMyPassword" element={<ForgotMyPassword />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/trail" element={<Trail />} />
+                <Route path="/trail" element={<NewTrail />} />
+                <Route path="/trail/:id" element={<TrailDetail />} />
 
             </Routes>
         </BrowserRouter>
