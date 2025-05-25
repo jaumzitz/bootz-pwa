@@ -16,7 +16,7 @@ const ChipNavigatorStyled = styled.nav`
     }
 `
 
-const chipOptions = [
+const enviromentsOptions = [
     {
         id: 'beach',
         label: 'Praia',
@@ -54,13 +54,17 @@ const chipOptions = [
     }
 ]
 
-export function ChipNavigator() {
+export function ChipNavigator({ chipOptions }) {
+
+    
+    const options = !chipOptions ? enviromentsOptions : chipOptions
+
     return (
 
 
         <ChipNavigatorStyled>
             <HorizontalScroll>
-                {chipOptions.map((option) => { return <Chip key={option.id} chip={option}></Chip> })}
+                { options.map((option) => { return <Chip key={option.id} chip={option}></Chip> })}
             </HorizontalScroll>
         </ChipNavigatorStyled>
 

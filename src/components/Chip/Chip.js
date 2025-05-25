@@ -25,7 +25,7 @@ export function Chip({ chip }) {
 
     const platform = window.navigator.userAgent.includes("iPhone") ? "iPhone" : "Android";
 
-
+    
 
     return (
         <>
