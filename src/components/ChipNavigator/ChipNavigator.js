@@ -54,17 +54,18 @@ const enviromentsOptions = [
     }
 ]
 
-export function ChipNavigator({ chipOptions }) {
+export function ChipNavigator({ chipOptions, showIcon = false }) {
 
     
     const options = !chipOptions ? enviromentsOptions : chipOptions
+    
 
     return (
 
 
         <ChipNavigatorStyled>
             <HorizontalScroll>
-                { options.map((option) => { return <Chip key={option.id} chip={option}></Chip> })}
+                { options.map((option) => { return <Chip key={option.id} chip={option} showIcon={showIcon}></Chip> })}
             </HorizontalScroll>
         </ChipNavigatorStyled>
 

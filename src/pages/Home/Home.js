@@ -101,7 +101,7 @@ export function Home() {
                 <SearchInput type="search" placeholder="Busque por uma localização" />
             </HeaderStyled>
 
-            <ChipNavigator />
+            <ChipNavigator showIcon={true}/>
             <Spacer height={'2vh'} width={0}></Spacer>
 
             <RecommendedSection id="for-you" label="Para você" trails={trailsForYou}></RecommendedSection>

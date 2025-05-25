@@ -21,29 +21,45 @@ align-items: center;
 
 
 
-export function Chip({ chip }) {
+export function Chip({ chip, showIcon = false }) {
 
     const platform = window.navigator.userAgent.includes("iPhone") ? "iPhone" : "Android";
 
-    
+
 
     return (
         <>
             <ChipLabel htmlFor={chip.id}>
-            
+
+
+
                 {
-                 (!chip.emoji && platform === "iPhone") &&
-                    <img src={chip.customiOSEmoji} alt={chip.label} width="24px" max-height="24px" style={{ marginRight: "8px" }} />
+                    showIcon && (!chip.emoji && chip.customiOSEmoji && platform === "iPhone") &&
+                    <img
+                        src={chip.customiOSEmoji}
+                        alt={chip.label}
+                        width="24px"
+                        max-height="24px"
+                        style={{ marginRight: "8px" }} />
                 }
 
                 {
-                    (!chip.emoji && platform !== "iPhone") &&
-                    <img src={chip.customAndroidEmoji} alt={chip.label} width="24px" max-height="24px" style={{ marginRight: "8px" }} />
+                    showIcon && (!chip.emoji && chip.customAndroidEmoji && platform !== "iPhone") &&
+                    <img
+                        src={chip.customAndroidEmoji}
+                        alt={chip.label}
+                        width="24px"
+                        max-height="24px"
+                        style={{ marginRight: "8px" }} />
                 }
 
-                {chip.emoji && <span style={{ marginRight: "8px" }}>{chip.emoji}</span>}
 
-       
+
+                {
+                    showIcon && chip.emoji && <span style={{ marginRight: "8px" }}>{chip.emoji}</span>
+                }
+
+
 
 
                 {chip.label}

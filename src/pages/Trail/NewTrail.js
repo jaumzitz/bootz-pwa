@@ -79,6 +79,10 @@ export function NewTrail() {
                         <Input type="text" label="Localização"></Input>
                         <Input type="text" label="Comprimento"></Input>
 
+                        <Title>Ambiente</Title>
+                        <ChipNavigator/>
+
+                        <Title>Como foi chegar na trilha?</Title>
                         <ChipNavigator chipOptions={
                             [
                                 {
@@ -88,9 +92,72 @@ export function NewTrail() {
                                     label: 'Díficil acesso' 
                                 }
                             ]
-                        }>
+                        }/>
 
-                        </ChipNavigator>
+                        <Title>A trilha possui sinalização?</Title>
+                        <ChipNavigator chipOptions={
+                            [
+                                {
+                                    label: 'Bem sinalizado'
+                                },
+                                { 
+                                    label: 'Pouco sinalizado' 
+                                },
+                                {
+                                    label: 'Sem sinalização' 
+                                }
+                            ]
+                        }/>
+
+                        <Title>Nível de esforço físico</Title>
+                        <ChipNavigator chipOptions={
+                            [
+                                {
+                                    label: 'Leve'
+                                },
+                                { 
+                                    label: 'Moderado' 
+                                },
+                                {
+                                    label: 'Difícil' 
+                                },
+                                {
+                                    label: 'Extreaordinário' 
+                                }
+                            ]
+                        }/>
+
+                        <Title>Como foi chegar na trilha?</Title>
+                        <ChipNavigator chipOptions={
+                            [
+                                {
+                                    label: 'Fácil acesso'
+                                },
+                                { 
+                                    label: 'Díficil acesso' 
+                                }
+                            ]
+                        }/>
+
+                        <Title>Habitação</Title>
+                        <nav>
+
+                        <ChipNavigator chipOptions={
+                            [
+                                {
+                                    label: 'Há pessoas morando lá'
+                                },
+                                { 
+                                    label: 'Apenas poucos visitantes' 
+                                },
+                                {
+                                    label: 'Vários visitantes' 
+                                }
+                            ]
+                        }/>
+
+                        </nav>
+                        
                         <Title>Conte como foi sua experiência</Title>
                         <Input type="text-area"></Input>
                     </div>
