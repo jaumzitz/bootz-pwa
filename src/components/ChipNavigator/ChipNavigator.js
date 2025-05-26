@@ -72,7 +72,7 @@ export function ChipNavigator({ title, chipOptions, showIcon = false }) {
 
 
         <ChipNavigatorStyled>
-            {title && <TitleContainer><Title style={{paddingLeft: '4vw'}}>{title}</Title></TitleContainer>}
+            {title && <TitleContainer><Title size="medium" style={{paddingLeft: '4vw'}}>{title}</Title></TitleContainer>}
             <HorizontalScroll>
                 { options.map((option) => { return <Chip key={option.id} chip={option} showIcon={showIcon}></Chip> })}
             </HorizontalScroll>

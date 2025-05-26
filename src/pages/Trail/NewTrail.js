@@ -44,8 +44,18 @@ const FormContainer = styled.main`
 `
 
 const FormSection = styled.section`
-    
+    display: flex
+;
+    flex-direction: column;
+    gap: 2vh;
     padding: 4vh 4vw 0 4vw;
+`
+
+
+const LocalData = styled.div`
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 4vw;
 `
 
 
@@ -63,12 +73,12 @@ export function NewTrail() {
                 <CloseButton>
                     <IconButton icon="/assets/icons/close.svg" onClick={() => navigate(-1)}> </IconButton>
                 </CloseButton>
-                
+
                 <UploadFile id="trailPhotos">
-                    
+
                 </UploadFile>
 
-             
+
             </header>
 
 
@@ -77,14 +87,16 @@ export function NewTrail() {
                 <form>
                     <FormSection>
                         <Title>Enviar nova trilha</Title>
-                        <Span>Compartilhe sua experiência nesse local</Span>
+                        <Span style={{marginTop: '4vh'}}>Compartilhe sua experiência nesse local</Span>
                     </FormSection>
                     <FormSection>
 
                         <Input type="text" label="Nome da trilha"></Input>
+                        <LocalData>
 
-                        <Input type="text" label="Localização"></Input>
-                        <Input type="text" label="Comprimento"></Input>
+                            <Input type="text" label="Localização"></Input>
+                            <Input type="text" label="Comprimento"></Input>
+                        </LocalData>
 
                     </FormSection>
 
@@ -170,11 +182,11 @@ export function NewTrail() {
                 </form>
 
 
-            <Spacer height={'20vh'}></Spacer>
-            <FixedFooter primaryButton={{width: '90%', text: 'Publicar'}}/>
+                <Spacer height={'20vh'}></Spacer>
+                <FixedFooter primaryButton={{ width: '90%', text: 'Publicar' }} />
             </FormContainer>
 
-            
+
         </>
     )
 }
