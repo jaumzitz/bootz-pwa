@@ -14,8 +14,10 @@ background-color: var(--gray-color);
 color: var(--default-font-color);
 font-family: var(--default-label-font);
 font-size: var(--default-font-size);
+display: flex;
 align-items: center;
 min-inline-size: max-content;
+
 
 
 `
