@@ -14,6 +14,12 @@ border: 1px solid #D7DBE0;
 border-radius: 0.5rem;
 box-sizing: border-box;
 box-shadow: 0px 1px 2px 0px rgba(228, 229, 231, 0.24);
+  ${({ type }) => type === 'text-area' && `
+      height: 14vh;
+      vertical-align: top;
+      resize: vertical;
+  `}
+
 `
 
 const LabelStyled = styled.label`
@@ -49,6 +55,7 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
         }
     }
 
+ 
 
     return (
         <InputContainerStyled>

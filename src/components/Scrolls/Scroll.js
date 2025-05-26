@@ -21,6 +21,7 @@ const HorizontalScrollDiv = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+        
 
     /* Esconde a barra de rolagem no Chrome, Safari e Opera */
     &::-webkit-scrollbar {

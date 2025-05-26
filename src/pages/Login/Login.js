@@ -18,9 +18,8 @@ export const FormStyled = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: left;
+
 `
-
-
 
 export function Login() {
 
@@ -45,9 +44,9 @@ export function Login() {
 
     return (
         <>
-        
-            <img src="/assets/icons/app-icon.png" alt="Logo" style={{ width: '64px', height: '64px', marginLeft: '4vw', marginTop: '8vh'}} />
-            <Layout /*leftButtonIcon={{img: "/app-icon.png", size: "200px"}}*/  title={"Boas vindas ao Bootz!"} subtitle={"Faça login com sua conta"}>
+
+            <img src="/assets/icons/app-icon.png" alt="Logo" style={{ width: '64px', height: '64px', marginLeft: '4vw', marginTop: '8vh' }} />
+            <Layout /*leftButtonIcon={{img: "/app-icon.png", size: "200px"}}*/ title={"Boas vindas ao Bootz!"} subtitle={"Faça login com sua conta"}>
                 <FormStyled>
 
                     <Input onChangeValue={setEmail} type={"email"} id={"email"} name={"email"} required={true} label={"E-mail"} />
@@ -64,15 +63,16 @@ export function Login() {
                 </FormStyled>
 
             </Layout>
+    
 
-            <FixedFooter primaryButton={{ text: 'Entrar', onClick: handleLogin, isLoading: isLoading, width: '90%' }}>
-                <div>
+                <FixedFooter primaryButton={{ text: 'Entrar', onClick: handleLogin, isLoading: isLoading, width: '90%' }}>
+                    <div>
 
-                    <Span>Não tem uma conta?</Span>
-                    <LinkButton to='/register'>Cadastre-se grátis</LinkButton>
-                </div>
+                        <Span>Não tem uma conta?</Span>
+                        <LinkButton to='/register'>Cadastre-se grátis</LinkButton>
+                    </div>
 
-            </FixedFooter>
+                </FixedFooter>
 
 
 

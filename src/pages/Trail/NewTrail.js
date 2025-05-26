@@ -5,9 +5,12 @@ import { Span } from "../../components/TextContent/Span/Span";
 import { TabBar } from "../../components/TabBar/TabBar";
 import { Input } from "../../components/Input/Input";
 import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator"
-import { Chip } from "../../components/Chip/Chip"
 import styled from "styled-components";
 import IconButton from "../../components/IconButton/IconButton";
+import Spacer from "../../components/Spacer/Spacer";
+import FixedFooter from "../../layouts/Layout/FixedFooter";
+import { UploadFile } from "../../components/UploadFile/UploadFile";
+
 
 
 
@@ -37,7 +40,12 @@ const UploadPhotos = styled.div`
 const FormContainer = styled.main`
     display: flex;
     flex-direction: column;
-    margin: 4vh 4vw;
+    //padding: 4vh 4vw;
+`
+
+const FormSection = styled.section`
+    
+    padding: 4vh 4vw 0 4vw;
 `
 
 
@@ -55,117 +63,118 @@ export function NewTrail() {
                 <CloseButton>
                     <IconButton icon="/assets/icons/close.svg" onClick={() => navigate(-1)}> </IconButton>
                 </CloseButton>
+                
+                <UploadFile id="trailPhotos">
+                    
+                </UploadFile>
 
-                <UploadPhotos>
-                    <img src={addPhotoIcon} height="80px"></img>
-
-                    <Span bgcolor="#d9d9d9">Toque para enviar fotos</Span>
-
-                </UploadPhotos>
+             
             </header>
 
 
             <FormContainer>
 
-
-                <Title>Enviar nova trilha</Title>
-                <Span>Compartilhe sua experiência nesse local</Span>
-
                 <form>
+                    <FormSection>
+                        <Title>Enviar nova trilha</Title>
+                        <Span>Compartilhe sua experiência nesse local</Span>
+                    </FormSection>
+                    <FormSection>
 
-                    <Input type="text" label="Nome da trilha"></Input>
-                    <div>
+                        <Input type="text" label="Nome da trilha"></Input>
 
                         <Input type="text" label="Localização"></Input>
                         <Input type="text" label="Comprimento"></Input>
 
-                        <Title>Ambiente</Title>
-                        <ChipNavigator/>
+                    </FormSection>
 
-                        <Title>Como foi chegar na trilha?</Title>
-                        <ChipNavigator chipOptions={
+                    <div>
+                        <ChipNavigator title="Ambiente" />
+
+
+                        <ChipNavigator title="Como foi chegar na trilha?" chipOptions={
                             [
                                 {
                                     label: 'Fácil acesso'
                                 },
-                                { 
-                                    label: 'Díficil acesso' 
+                                {
+                                    label: 'Díficil acesso'
                                 }
                             ]
-                        }/>
+                        } />
 
-                        <Title>A trilha possui sinalização?</Title>
-                        <ChipNavigator chipOptions={
+
+                        <ChipNavigator title="A trilha possui sinalização?" chipOptions={
                             [
                                 {
                                     label: 'Bem sinalizado'
                                 },
-                                { 
-                                    label: 'Pouco sinalizado' 
+                                {
+                                    label: 'Pouco sinalizado'
                                 },
                                 {
-                                    label: 'Sem sinalização' 
+                                    label: 'Sem sinalização'
                                 }
                             ]
-                        }/>
+                        } />
 
-                        <Title>Nível de esforço físico</Title>
-                        <ChipNavigator chipOptions={
+                        <ChipNavigator title="Nível de esforço físico" chipOptions={
                             [
                                 {
                                     label: 'Leve'
                                 },
-                                { 
-                                    label: 'Moderado' 
+                                {
+                                    label: 'Moderado'
                                 },
                                 {
-                                    label: 'Difícil' 
+                                    label: 'Difícil'
                                 },
                                 {
-                                    label: 'Extreaordinário' 
+                                    label: 'Extreaordinário'
                                 }
                             ]
-                        }/>
+                        } />
 
-                        <Title>Como foi chegar na trilha?</Title>
-                        <ChipNavigator chipOptions={
+                        <ChipNavigator title="Como foi chegar na trilha?" chipOptions={
                             [
                                 {
                                     label: 'Fácil acesso'
                                 },
-                                { 
-                                    label: 'Díficil acesso' 
+                                {
+                                    label: 'Díficil acesso'
                                 }
                             ]
-                        }/>
+                        } />
 
-                        <Title>Habitação</Title>
-                        <nav>
-
-                        <ChipNavigator chipOptions={
+                        <ChipNavigator title="Habitação" chipOptions={
                             [
                                 {
                                     label: 'Há pessoas morando lá'
                                 },
-                                { 
-                                    label: 'Apenas poucos visitantes' 
+                                {
+                                    label: 'Apenas poucos visitantes'
                                 },
                                 {
-                                    label: 'Vários visitantes' 
+                                    label: 'Vários visitantes'
                                 }
                             ]
-                        }/>
+                        } />
 
-                        </nav>
-                        
+                    </div>
+
+                    <FormSection>
+
                         <Title>Conte como foi sua experiência</Title>
                         <Input type="text-area"></Input>
-                    </div>
+                    </FormSection>
                 </form>
 
 
+            <Spacer height={'20vh'}></Spacer>
+            <FixedFooter primaryButton={{width: '90%', text: 'Publicar'}}/>
             </FormContainer>
-            <TabBar></TabBar>
+
+            
         </>
     )
 }

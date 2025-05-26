@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Chip } from "../Chip/Chip";
 import { HorizontalScroll } from "../Scrolls/Scroll"
+import { Title } from "../TextContent/Title/Title";
 
 const ChipNavigatorStyled = styled.nav`
+    
     &::-webkit-scrollbar {
         height: 6px; /* Altura da barra de rolagem */
     }
@@ -15,6 +17,12 @@ const ChipNavigatorStyled = styled.nav`
         background: transparent; /* Fundo da barra de rolagem */
     }
 `
+
+const TitleContainer = styled.div`
+margin: 4vw 0 2vh 4vw;
+    
+`
+
 
 const enviromentsOptions = [
     {
@@ -54,7 +62,7 @@ const enviromentsOptions = [
     }
 ]
 
-export function ChipNavigator({ chipOptions, showIcon = false }) {
+export function ChipNavigator({ title, chipOptions, showIcon = false }) {
 
     
     const options = !chipOptions ? enviromentsOptions : chipOptions
@@ -64,6 +72,7 @@ export function ChipNavigator({ chipOptions, showIcon = false }) {
 
 
         <ChipNavigatorStyled>
+            {title && <TitleContainer><Title style={{paddingLeft: '4vw'}}>{title}</Title></TitleContainer>}
             <HorizontalScroll>
                 { options.map((option) => { return <Chip key={option.id} chip={option} showIcon={showIcon}></Chip> })}
             </HorizontalScroll>
