@@ -6,6 +6,8 @@ import { ForgotMyPassword } from "./pages/ForgotMyPassword/ForgotMyPassword";
 import { Trail, TrailDetail } from "./pages/Trail/TrailDetail"
 import Onboarding from "./pages/Onboarding/Onboarding";
 import { NewTrail } from "./pages/Trail/NewTrail";
+import { Profile } from "./pages/Profile/Profile";
+import Events from "./pages/Events/Events";
 
 export function AppRoutes() {
     return (
@@ -19,6 +21,8 @@ export function AppRoutes() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/trail" element={<NewTrail />} />
                 <Route path="/trail/:id" element={<TrailDetail />} />
+                <Route path="/profile" element={<Profile></Profile>}/>
+                <Route path="/events" element={<Events/>}/>
 
             </Routes>
         </BrowserRouter>

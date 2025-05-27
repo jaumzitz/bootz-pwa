@@ -4,6 +4,7 @@ import { RecommendedSection } from "../../components/RecommendedSection/Recommen
 import { TabBar } from "../../components/TabBar/TabBar";
 import Spacer from "../../components/Spacer/Spacer";
 import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator";
+import SearchBar from "../../components/SearhcBar/SearchBar";
 
 
 const HeaderStyled = styled.header`
@@ -12,20 +13,7 @@ const HeaderStyled = styled.header`
     padding: 0 4vw 4vw 4vw;
 `
 
-const SearchInput = styled.input`
-    margin-top: 4vh;
-    display: flex;
-    width: 100%;
-    padding: 18px 18px;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    border-radius: 50px;
-    background: var(--gray-color);
-    border: none;
-    font-family: var(--default-label-font);
-    font-size: var(--default-font-size);
-`
+
 
 export function Home() {
 
@@ -98,10 +86,10 @@ export function Home() {
 
             <HeaderStyled>
 
-                <SearchInput type="search" placeholder="Busque por uma localização" />
+                <SearchBar/>
             </HeaderStyled>
 
-            <ChipNavigator />
+            <ChipNavigator showIcon={true}/>
             <Spacer height={'2vh'} width={0}></Spacer>
 
             <RecommendedSection id="for-you" label="Para você" trails={trailsForYou}></RecommendedSection>

@@ -7,21 +7,24 @@ appearance: none;
 `
 
 const ChipLabel = styled.label`
-display: flex;
+
 padding: 12px 18px;
 border-radius: 60px;
 background-color: var(--gray-color);
 color: var(--default-font-color);
 font-family: var(--default-label-font);
 font-size: var(--default-font-size);
+display: flex;
 align-items: center;
+min-inline-size: max-content;
+
 
 
 `
 
 
 
-export function Chip({ chip }) {
+export function Chip({ chip, showIcon = false }) {
 
     const platform = window.navigator.userAgent.includes("iPhone") ? "iPhone" : "Android";
 
@@ -29,26 +32,45 @@ export function Chip({ chip }) {
 
     return (
         <>
-            <ChipLabel htmlFor={chip.id}>
-            
-                {
-                 (!chip.emoji && platform === "iPhone") &&
-                    <img src={chip.customiOSEmoji} alt={chip.label} width="24px" max-height="24px" style={{ marginRight: "8px" }} />
-                }
+          
 
-                {
-                    (!chip.emoji && platform !== "iPhone") &&
-                    <img src={chip.customAndroidEmoji} alt={chip.label} width="24px" max-height="24px" style={{ marginRight: "8px" }} />
-                }
-
-                {chip.emoji && <span style={{ marginRight: "8px" }}>{chip.emoji}</span>}
-
-       
+                <ChipLabel htmlFor={chip.id}>
 
 
-                {chip.label}
-            </ChipLabel>
-            <ChipInput type="checkbox" id={chip.id} name={chip.label} value={chip.id} />
+
+                    {
+                        showIcon && (!chip.emoji && chip.customiOSEmoji && platform === "iPhone") &&
+                        <img
+                            src={chip.customiOSEmoji}
+                            alt={chip.label}
+                            width="24px"
+                            max-height="24px"
+                            style={{ marginRight: "8px" }} />
+                    }
+
+                    {
+                        showIcon && (!chip.emoji && chip.customAndroidEmoji && platform !== "iPhone") &&
+                        <img
+                            src={chip.customAndroidEmoji}
+                            alt={chip.label}
+                            width="24px"
+                            max-height="24px"
+                            style={{ marginRight: "8px" }} />
+                    }
+
+
+
+                    {
+                        showIcon && chip.emoji && <span style={{ marginRight: "8px" }}>{chip.emoji}</span>
+                    }
+
+
+
+
+                    {chip.label}
+                </ChipLabel>
+                <ChipInput type="checkbox" id={chip.id} name={chip.label} value={chip.id} />
+        
         </>
     )
 }

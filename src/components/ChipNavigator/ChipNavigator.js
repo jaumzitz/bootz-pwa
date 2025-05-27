@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Chip } from "../Chip/Chip";
 import { HorizontalScroll } from "../Scrolls/Scroll"
+import { Title } from "../TextContent/Title/Title";
 
 const ChipNavigatorStyled = styled.nav`
+    
     &::-webkit-scrollbar {
         height: 6px; /* Altura da barra de rolagem */
     }
@@ -16,7 +18,13 @@ const ChipNavigatorStyled = styled.nav`
     }
 `
 
-const chipOptions = [
+const TitleContainer = styled.div`
+margin: 4vw 0 2vh 4vw;
+    
+`
+
+
+const enviromentsOptions = [
     {
         id: 'beach',
         label: 'Praia',
@@ -54,13 +62,19 @@ const chipOptions = [
     }
 ]
 
-export function ChipNavigator() {
+export function ChipNavigator({ title, chipOptions, showIcon = false }) {
+
+    
+    const options = !chipOptions ? enviromentsOptions : chipOptions
+    
+
     return (
 
 
         <ChipNavigatorStyled>
+            {title && <TitleContainer><Title size="medium" style={{paddingLeft: '4vw'}}>{title}</Title></TitleContainer>}
             <HorizontalScroll>
-                {chipOptions.map((option) => { return <Chip key={option.id} chip={option}></Chip> })}
+                { options.map((option) => { return <Chip key={option.id} chip={option} showIcon={showIcon}></Chip> })}
             </HorizontalScroll>
         </ChipNavigatorStyled>
 
