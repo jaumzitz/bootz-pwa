@@ -22,6 +22,7 @@ const TabBarItem = styled.li`
     font-family: var(--default-label-font);
     font-size: 12px;
     color: var(--default-font-color);
+    gap: 4px;
 `
 
 export function TabBar() {
@@ -31,14 +32,14 @@ export function TabBar() {
         <TabBarContainer className="tab-bar">
 
             <ul style={{ display: 'flex', listStyleType: 'none', margin: 0, padding: 0, width: '100%', height: '100%', justifyContent: 'space-around', alignItems: 'center' }}>
-                <TabBarItem onClick={() => navigate('/trail')}>
+                <TabBarItem onClick={() => navigate('/home')}>
                         <img src="/assets/icons/home-active.svg" alt="home" style={{ width: '24px', height: '24px' }} />
 
                         Início
                     
 
                 </TabBarItem>
-                <TabBarItem>
+                <TabBarItem onClick={() => navigate('/events')}>
                     <img src="/assets/icons/calendar-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
 
                     Eventos
@@ -53,7 +54,7 @@ export function TabBar() {
 
                     Favoritos
                 </TabBarItem>
-                <TabBarItem>
+                <TabBarItem onClick={() => navigate('/profile')}>
                     <img src="/assets/icons/account-inative.svg" alt="home" style={{ width: '24px', height: '24px' }} />
 
                     Perfil

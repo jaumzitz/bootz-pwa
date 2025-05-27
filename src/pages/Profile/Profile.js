@@ -35,11 +35,11 @@ width: 100%;
 `
 
 const Biography = styled.section`
-    margin: 0 4vh;
+    margin: 0 4vw;
 `
 
 const UserData = styled.section`
-    margin: 4vh;
+    margin: 4vw;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 3vw;
@@ -55,7 +55,7 @@ const KPI = styled.div`
 `
 
 const HistoryGrid = styled.section`
-    margin: 4vh;
+    margin: 4vh 4vw;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem; /* Espaçamento entre os itens */
@@ -143,11 +143,11 @@ export function Profile() {
                     <Span>Trilhas</Span>
                 </KPI>
                 <KPI>
-                    <Title size={"small"}>23</Title>
+                    <Title size={"small"}>125</Title>
                     <Span>Seguidores</Span>
                 </KPI>
                 <KPI>
-                    <Title size={"small"}>23</Title>
+                    <Title size={"small"}>68</Title>
                     <Span>Seguindo</Span>
                 </KPI>
             </UserData>
