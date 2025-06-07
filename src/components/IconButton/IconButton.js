@@ -4,7 +4,7 @@ const FilledContainerButton = styled.button`
     width: 24px;
     height: 24px;
     padding: 24px;
-    background-color: #d9d9d9;
+    background-color:rgba(217, 217, 217, 0.24);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -14,19 +14,37 @@ const FilledContainerButton = styled.button`
   `;
 
 
+const OverlayedButton = styled.div`
+    max-width: 30px;
+    max-height: 30px;
+    padding: 10px;
+    margin: 2vh 2vh;
+    background-color: #f0f8ffba;
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 60px;
+    justify-content: center;
+`
 
-export default function IconButton({ icon, onClick, fill }) {
+export default function IconButton({ icon, onClick, fill, overlay }) {
 
 
 
     return (
         <>
-            {fill && (
-                <FilledContainerButton onClick={onClick}>
-                    <img src={icon} alt="Icon" style={{ width: "24px", height: "24px" }} />
-                </FilledContainerButton>
+            {fill && overlay && (
+                <OverlayedButton>
+                    <FilledContainerButton onClick={onClick}>
+                        <img src={icon} alt="Icon" style={{ width: "24px", height: "24px" }} />
+                    </FilledContainerButton>
+                </OverlayedButton>
             )}
-            {!fill && (
+
+
+
+            {!fill && !overlay && (
                 <button
                     onClick={onClick}
                     style={{
@@ -39,6 +57,8 @@ export default function IconButton({ icon, onClick, fill }) {
                     <img src={icon} alt="Icon" style={{ width: "24px", height: "24px" }} />
                 </button>
             )}
+
+           
         </>
     );
 }

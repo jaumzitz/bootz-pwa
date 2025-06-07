@@ -12,8 +12,6 @@ import FixedFooter from "../../layouts/Layout/FixedFooter";
 import { UploadFile } from "../../components/UploadFile/UploadFile";
 
 
-
-
 const CloseButton = styled.div`
     max-width: 30px;
     max-height: 30px;
@@ -44,8 +42,7 @@ const FormContainer = styled.main`
 `
 
 const FormSection = styled.section`
-    display: flex
-;
+    display: flex;
     flex-direction: column;
     gap: 2vh;
     padding: 4vh 4vw 0 4vw;
@@ -70,13 +67,13 @@ export function NewTrail() {
         <>
             <header>
 
-                <CloseButton>
-                    <IconButton icon="/assets/icons/close.svg" onClick={() => navigate(-1)}> </IconButton>
-                </CloseButton>
+                <IconButton icon="/assets/icons/close.svg" onClick={() => navigate(-1)} fill overlay> </IconButton>
+
 
                 <UploadFile id="trailPhotos">
 
                 </UploadFile>
+                <Span bgcolor={"#d9d9d9"} alignment={"center"}>Toque para enviar fotos</Span>
 
 
             </header>
@@ -87,7 +84,7 @@ export function NewTrail() {
                 <form>
                     <FormSection>
                         <Title>Enviar nova trilha</Title>
-                        <Span style={{marginTop: '4vh'}}>Compartilhe sua experiência nesse local</Span>
+                        <Span style={{ marginTop: '4vh' }}>Compartilhe sua experiência nesse local</Span>
                     </FormSection>
                     <FormSection>
 

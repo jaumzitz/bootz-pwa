@@ -120,7 +120,7 @@ export function Profile() {
                 </HeaderImage>
                 <AvatarContainer>
 
-                    <Avatar username="jaumzitz"></Avatar>
+                    <Avatar username="jaumzitz" size="big"></Avatar>
                 </AvatarContainer>
 
             </>

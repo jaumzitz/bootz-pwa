@@ -23,20 +23,50 @@ const CirclePlaceholder = styled.div`
   justify-content: center;
 `
 
+const SmallAvatar = styled.img`
+    width: 2.5rem;
+    height: 2.5%;
+    border-radius: 60px;
+    
+`
+
+const MiniAvatar = styled.img`
+    width: 2rem;
+    height: 2.5%;
+    border-radius: 60px;
+    
+`
+
+
 const defaultAvatar = 'assets/icons/add-photo.svg'
 
-export default function Avatar({ username }) {
+export default function Avatar({ username, size }) {
 
 
     const imgUrl = !username ? defaultAvatar : 'https://github.com/jaumzitz.png';
 
+
+
     return (
         <>
+            {username && size === 'mini' && (
+                <MiniAvatar src={imgUrl}>
 
-            {!!username &&
+                </MiniAvatar>
+            )}
+
+            {username && size === 'small' && (
+                <SmallAvatar src={imgUrl}>
+
+                </SmallAvatar>
+            )}
+
+            {username && size === 'big' &&
                 <UserImage src={imgUrl} ></UserImage>
-            
+
             }
+
+
 
 
 

@@ -10,10 +10,11 @@ const RoundedBg = styled.div`
     background-color: ${({ bgcolor }) => bgcolor || '#d9d9d9'}; 
     padding: 10px 18px;
     border-radius: 60px;;
+    text-align: ${({ alignment }) => alignment || 'left'};
 `
 
 
-export function Span({ children, color, bgcolor }) {
+export function Span({ children, color, bgcolor, alignment }) {
 
 
 
@@ -23,7 +24,7 @@ export function Span({ children, color, bgcolor }) {
                 <>
             {
                 !!bgcolor ? 
-                    <RoundedBg bgcolor={bgcolor}>
+                    <RoundedBg bgcolor={bgcolor} alignment={alignment}>
                         <DefaultSpan color={color}>{children}</DefaultSpan>
                     </RoundedBg> 
                 : 

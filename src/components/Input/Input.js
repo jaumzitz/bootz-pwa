@@ -34,7 +34,7 @@ flex-direction: column;
 width: 100%;
 `
 
-export function Input({ type, id, name, required, label, onChangeValue, validator }) {
+export function Input({ type, id, name, required, label, placeholder, onChangeValue, validator }) {
 
 
     const [isFieldValid, setIsFieldValid] = useState(true);
@@ -67,6 +67,7 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
                 required={required}
                 onChange={handleChange}
                 onBlur={validateInput}
+                placeholder={placeholder}
 
             />
             {!isFieldValid && <Span color={`var(--alert-color)`}>E-mail inválido.</Span>}
