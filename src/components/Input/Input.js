@@ -7,7 +7,7 @@ font-family: var(--default-title-font);
 font-size: var(--default-font-size);
 width: 100%;
 margin-bottom: 10px;
-padding: 0.5rem 1rem;
+padding: 0.8rem 1rem;
 color: var(--default-font-color);
 background-color: #fff;
 border: 1px solid #D7DBE0;

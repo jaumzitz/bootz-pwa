@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Title } from "../../components/TextContent/Title/Title"
 import { OneRowHeader } from "../../layouts/Layout/Layout"
 import { TrailHeader } from "../../components/TrailHeader/TrailHeader"
@@ -13,6 +13,8 @@ import { Input } from "../../components/Input/Input"
 import Description from "../../components/Description/Description"
 import CommentCard from "../../components/CommentCard/CommentCard"
 import Spacer from "../../components/Spacer/Spacer"
+import IconButton from "../../components/IconButton/IconButton"
+import TrailCommentsSection from "../../components/TrailCommentsSection/TrailCommentsSection"
 
 
 const TitleRow = styled.div`
@@ -44,26 +46,32 @@ const TrailDescription = styled.div`
     padding: 2vh 4vw;
 `
 
-const CommentsSection = styled.section`
-    padding: 2vh 4vw;
-    
-`
+
 
 
 export function TrailDetail({ id }) {
 
     const location = useLocation()
+    const navigate = useNavigate()
 
 
     return (
         <>
-            <TrailGallery readOnly={true} />
+            <IconButton
+                onClick={() => navigate(-1)}
+                fill="#d9d9d9"
+                icon='/assets/icons/close.svg'
+                overlay={true} />
+
+            <TrailGallery photos={["/assets/images/praia-vermelha-penha.jpg",
+                "/assets/images/parque-atalaia.jpg",
+                "/assets/images/praia-solidao.jpg",]} />
 
 
 
-            {/* <TrailHeader trailId="1" readOnly>
+            {/* <TrailHeader trailId="1" readOnly> 
 
-            </TrailHeader> */}
+            </TrailHeader>*/}
 
             <TrailIdSection>
 
@@ -99,17 +107,9 @@ export function TrailDetail({ id }) {
                 <Description>As classificações dessa trilha são baseadas na opinião do usuário que a enviou.</Description>
             </TrailDescription>
 
-            <CommentsSection>
-                <div style={{padding: '2vh 0', display: 'flex', justifyContent: 'space-between'}}>
+            <TrailCommentsSection></TrailCommentsSection>
 
-                    <Title>Comentários</Title>
-                    <LinkButton>Ver tudo</LinkButton>
-                </div>
 
-                <CommentCard></CommentCard>
-                <Spacer height={'2vh'}></Spacer>
-                <Input placeholder="Deixe um comentário..."></Input>
-            </CommentsSection>
         </>
     )
 }

@@ -26,6 +26,7 @@ const OverlayedButton = styled.div`
     align-items: center;
     border-radius: 60px;
     justify-content: center;
+    z-index: 1;
 `
 
 export default function IconButton({ icon, onClick, fill, overlay }) {

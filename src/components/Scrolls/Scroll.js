@@ -15,7 +15,7 @@ const VerticalScrollDiv = styled.div`
 const HorizontalScrollDiv = styled.div`
     display: flex;
     flex-direction: row;
-    gap: 4px;
+    gap: 8px;
     padding-left: 4vw;
     padding-right: 4vw;
     overflow-x: auto;
