@@ -18,7 +18,7 @@ const TabBarItem = styled.li`
     font-family: var(--default-label-font);
     font-size: 12px;
     color: var(--default-font-color);
-    gap: 4px;
+    gap: 6px;
     cursor: pointer;
 `;
 
@@ -52,6 +52,15 @@ export function TabBar() {
                     />
                     Início
                 </TabBarItem>
+                  <TabBarItem onClick={() => navigate("/trail")}>
+                    <img
+                        src="/assets/icons/add.svg"
+                        alt="nova trilha"
+                        style={{ width: "24px", height: "24px" }}
+                    />
+                    Nova trilha
+                </TabBarItem>
+               
                 <TabBarItem onClick={() => navigate("/events")}>
                     <img
                         src={
@@ -64,26 +73,7 @@ export function TabBar() {
                     />
                     Eventos
                 </TabBarItem>
-                <TabBarItem onClick={() => navigate("/trail")}>
-                    <img
-                        src="/assets/icons/add.svg"
-                        alt="nova trilha"
-                        style={{ width: "24px", height: "24px" }}
-                    />
-                    Nova trilha
-                </TabBarItem>
-                <TabBarItem onClick={() => navigate("/favorites")}>
-                    <img
-                        src={
-                            location.pathname === "/favorites"
-                                ? "/assets/icons/favorite-active.svg"
-                                : "/assets/icons/favorite-inative.svg"
-                        }
-                        alt="favoritos"
-                        style={{ width: "24px", height: "24px" }}
-                    />
-                    Favoritos
-                </TabBarItem>
+              
                 <TabBarItem onClick={() => navigate("/profile")}>
                     <img
                         src={
