@@ -9,6 +9,7 @@ const CardContainer = styled.div`
 `
 
 const ImageCard = styled.img`
+
     max-height: 180px;
     max-width: 400px;
     border-radius: 16px;

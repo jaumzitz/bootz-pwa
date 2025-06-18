@@ -34,7 +34,7 @@ flex-direction: column;
 width: 100%;
 `
 
-export function Input({ type, id, name, required, label, placeholder, onChangeValue, validator }) {
+export function Input({ type, id, name, required, label, placeholder, onChangeValue, validator, children }) {
 
 
     const [isFieldValid, setIsFieldValid] = useState(true);
@@ -59,7 +59,7 @@ export function Input({ type, id, name, required, label, placeholder, onChangeVa
 
     return (
         <InputContainerStyled>
-            {label && <LabelStyled htmlFor={id}>{label}</LabelStyled>}
+            {label && <LabelStyled htmlFor={id}>{label}<p>{children}</p></LabelStyled>}
             <InputStyled
                 type={type}
                 id={id}

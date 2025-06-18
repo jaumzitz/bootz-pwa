@@ -6,6 +6,8 @@ import CommentCard from "../CommentCard/CommentCard"
 import Spacer from "../Spacer/Spacer"
 import { Input } from "../Input/Input"
 import { Span } from "../TextContent/Span/Span"
+import { Link } from "react-router-dom"
+import { PrimaryButton } from "../PrimaryButton/PrimaryButton"
 
 
 const SectionPadding = styled.section`
@@ -49,7 +51,7 @@ export default function TrailCommentsSection() {
                         </Title>
                         <CommentCount>6</CommentCount>
                     </div>
-
+                    
                     <LinkButton>Ver tudo</LinkButton>
                 </div>
             </SectionPadding>
@@ -66,9 +68,12 @@ export default function TrailCommentsSection() {
 
             </HorizontalScroll>
             <Spacer height={'2vh'}></Spacer>
+
             <SectionPadding>
 
-                <Input placeholder="Deixe um comentário..."></Input>
+                <Input id="new-comment" placeholder="Deixe um comentário..."></Input>
+                <LinkButton>Enviar</LinkButton>
+                
             </SectionPadding>
         </>
     )

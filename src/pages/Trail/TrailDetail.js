@@ -1,20 +1,14 @@
+import styled from "styled-components"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Title } from "../../components/TextContent/Title/Title"
-import { OneRowHeader } from "../../layouts/Layout/Layout"
-import { TrailHeader } from "../../components/TrailHeader/TrailHeader"
-import styled from "styled-components"
 import { Span } from "../../components/TextContent/Span/Span"
 import Avatar from "../../components/Profile/Avatar/Avatar"
 import TrailGallery from "../../components/TrailGallery/TrailGallery"
-import { Chip } from "../../components/Chip/Chip"
-import { HorizontalScroll } from "../../components/Scrolls/Scroll"
-import { LinkButton } from "../../components/LinkButton/LinkButton"
-import { Input } from "../../components/Input/Input"
 import Description from "../../components/Description/Description"
-import CommentCard from "../../components/CommentCard/CommentCard"
-import Spacer from "../../components/Spacer/Spacer"
 import IconButton from "../../components/IconButton/IconButton"
 import TrailCommentsSection from "../../components/TrailCommentsSection/TrailCommentsSection"
+import Banner from "../../components/Banner/Banner"
+import TrailCategoryChips from "../../components/TrailCategoryChips/TrailCategoryChips"
 
 
 const TitleRow = styled.div`
@@ -42,18 +36,14 @@ const UserData = styled.div`
     gap: 8px;
     padding-left: 4vw;
 `
+
 const TrailDescription = styled.div`
     padding: 2vh 4vw;
 `
 
-
-
-
 export function TrailDetail({ id }) {
-
     const location = useLocation()
     const navigate = useNavigate()
-
 
     return (
         <>
@@ -63,15 +53,13 @@ export function TrailDetail({ id }) {
                 icon='/assets/icons/close.svg'
                 overlay={true} />
 
-            <TrailGallery photos={["/assets/images/praia-vermelha-penha.jpg",
-                "/assets/images/parque-atalaia.jpg",
-                "/assets/images/praia-solidao.jpg",]} />
+            <TrailGallery
+                photos={[
+                    "/assets/images/praia-vermelha-penha.jpg",
+                    "/assets/images/parque-atalaia.jpg",
+                    "/assets/images/praia-solidao.jpg"
+                ]} />
 
-
-
-            {/* <TrailHeader trailId="1" readOnly> 
-
-            </TrailHeader>*/}
 
             <TrailIdSection>
 
@@ -81,34 +69,27 @@ export function TrailDetail({ id }) {
                 </TitleRow>
 
                 <Span style={{ marginTop: '4vh' }}>Itajaí, Santa Catarina</Span>
+
             </TrailIdSection>
 
             <UserData>
                 <Avatar username={"jaumzitz"} size="mini"></Avatar>
                 <Span>Enviado por Joao Fiorini</Span>
-                <Span></Span>
             </UserData>
 
             <TrailDescription>
-
                 <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Description>
             </TrailDescription>
 
-            <HorizontalScroll>
-
-                <Chip key="1" chip={{ label: 'Fácil acesso' }} showIcon={true}></Chip>
-                <Chip key="2" chip={{ label: 'Bem sinalizado' }} showIcon={true}></Chip>
-                <Chip key="3" chip={{ label: 'Pouco esforço físico' }} showIcon={true}></Chip>
-
-            </HorizontalScroll>
+            <TrailCategoryChips />
 
             <TrailDescription>
-
                 <Description>As classificações dessa trilha são baseadas na opinião do usuário que a enviou.</Description>
             </TrailDescription>
 
-            <TrailCommentsSection></TrailCommentsSection>
+            <TrailCommentsSection />
 
+            <Banner icon="/assets/icons/3d-arrow.png" title="Em breve você poderá ver essa trilha no mapa!" />
 
         </>
     )
