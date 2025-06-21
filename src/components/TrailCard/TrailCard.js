@@ -11,6 +11,8 @@ const CardContainer = styled.div`
 
 const ImageCard = styled.img`
     width: ${({ size }) => (size === "big" ? "100%" : "auto")};
+    min-width: 300px;
+    object-fit: cover;
     max-width: ${({ size }) => (size === "big" ? "none" : "400px")};
     max-height: ${({ size }) => (size === "big" ? "380px" : "180px")};
     border-radius: 16px;
@@ -39,12 +41,12 @@ export function TrailCard({ trail, size = "default" }) {
 
     return (
         <CardContainer size={size} onClick={() => navigate(`/trail/${trail.id}`)}>
-            <ImageCard size={size} src={trail.imageUrl} alt={trail.name} />
+            <ImageCard size={size} src={trail.images[0].url} alt={trail.name} />
             <CardInfo>
                 <Title size="small">{trail.name}</Title>
                 <CardDetails>
-                    <Span>{trail.location}</Span>
-                    <Span>{trail.distance} km</Span>
+                    <Span>{trail.city}</Span>
+                    <Span>{trail.length} km</Span>
                 </CardDetails>
             </CardInfo>
         </CardContainer>

@@ -49,7 +49,7 @@ export default function CommentCard({ id }) {
             .map((comment) => {
                 return (
 
-                    <CardContainer>
+                    <CardContainer key={comment.id}>
                         <CardHeader>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
 

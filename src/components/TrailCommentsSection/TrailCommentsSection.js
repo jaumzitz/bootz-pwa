@@ -59,7 +59,7 @@ export default function TrailCommentsSection() {
             <HorizontalScroll>
 
                 {comments.map((comment) => {
-                    return <CommentCard id={comment.id}></CommentCard>
+                    return <CommentCard id={comment.id} key={comment.id}></CommentCard>
 
                 })}
 
