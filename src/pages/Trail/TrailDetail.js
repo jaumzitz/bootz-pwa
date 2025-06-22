@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { Title } from "../../components/TextContent/Title/Title"
 import { Span } from "../../components/TextContent/Span/Span"
 import Avatar from "../../components/Profile/Avatar/Avatar"
@@ -9,7 +9,8 @@ import IconButton from "../../components/IconButton/IconButton"
 import TrailCommentsSection from "../../components/TrailCommentsSection/TrailCommentsSection"
 import Banner from "../../components/Banner/Banner"
 import TrailCategoryChips from "../../components/TrailCategoryChips/TrailCategoryChips"
-
+import { useFetchTrails } from "../../hooks/useFetchTrails"
+import { useQueryClient } from "@tanstack/react-query"
 
 const TitleRow = styled.div`
     display: flex;
@@ -41,9 +42,20 @@ const TrailDescription = styled.div`
     padding: 2vh 4vw;
 `
 
-export function TrailDetail({ id }) {
-    const location = useLocation()
+export function TrailDetail() {
+    const { id } = useParams();
+    const queryClient = useQueryClient();
+    
     const navigate = useNavigate()
+
+    // Busca os dados já cacheados na queryKey 'trails'
+    const trails = queryClient.getQueryData(['trails', {range: {min: 0, max: 2}}]) || [];
+
+    // Busca a trilha pelo id
+    const trail = trails.find(trail => String(trail.id) === String(id));
+    console.log(trail)
+
+    if (!trail) return <div>Trilha não encontrada ou ainda não carregada.</div>;
 
     return (
         <>
@@ -54,31 +66,27 @@ export function TrailDetail({ id }) {
                 overlay={true} />
 
             <TrailGallery
-                photos={[
-                    "/assets/images/praia-vermelha-penha.jpg",
-                    "/assets/images/parque-atalaia.jpg",
-                    "/assets/images/praia-solidao.jpg"
-                ]} />
+                photos={trail.images} />
 
 
             <TrailIdSection>
 
                 <TitleRow>
-                    <Title>Parque do Atalaia</Title>
-                    <Span bgcolor="#d9d9d9">2,3km</Span>
+                    <Title>{trail.name}</Title>
+                    <Span bgcolor="#d9d9d9">{trail.length}</Span>
                 </TitleRow>
 
-                <Span style={{ marginTop: '4vh' }}>Itajaí, Santa Catarina</Span>
+                <Span style={{ marginTop: '4vh' }}>{trail.city}, {trail.state_or_province}</Span>
 
             </TrailIdSection>
 
             <UserData>
                 <Avatar username={"jaumzitz"} size="mini"></Avatar>
-                <Span>Enviado por Joao Fiorini</Span>
+                <Span>Enviado por {trail.uploaded_by}</Span>
             </UserData>
 
             <TrailDescription>
-                <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </Description>
+                <Description>{trail.description}</Description>
             </TrailDescription>
 
             <TrailCategoryChips />

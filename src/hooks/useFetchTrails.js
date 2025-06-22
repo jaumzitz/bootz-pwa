@@ -1,44 +1,45 @@
 // src/hooks/useFetchTrails.js
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { supabase } from "../services/supabaseClient"; // ajuste o caminho conforme seu projeto
 
-export function useFetchTrails(filter = {}) {
-  const [trails, setTrails] = useState([]);
-  const [loading, setLoading] = useState(true);
+// Função para buscar trilhas do Supabase
+async function fetchTrails(filters) {
+  const { data, error } = await supabase
+    .from("trail")
+    .select(`
+      id,
+      name,
+      uploaded_by,
+      length,
+      state_or_province,
+      city,
+      description,
+      images: trail_images (
+        url
+      )
+    `)
+    .range(filters?.range.min, filters?.range.max);
 
-  useEffect(() => {
-    async function fetchTrails() {
-      setLoading(true);
-      let query = supabase
-        .from("trail")
-        .select(`
-          id,
-          name,
-          uploaded_by,
-          length,
-          state_or_province,
-          city,
-          description,
-          images: trail_images (
-            url
-          )
-        `)
-        .range(filter.range.min, filter.range.max)
-      ;
-      // Adicione filtros se necessário
-      const { data, error } = await query;
-      if (!error && data) {
-        // Pega apenas a primeira imagem (ou null) para cada trilha
-        const trailsWithImage = data.map(trail => ({
-          ...trail,
-          imageUrl: trail.trail_image?.[0]?.url || null
-        }));
-        setTrails(trailsWithImage);
-      }
-      setLoading(false);
-    }
-    fetchTrails();
-  }, [JSON.stringify(filter)]);
 
-  return { trails, loading };
+    if (error) throw error;
+    
+  return data
+
+  // Adapta para trazer apenas a primeira imagem (ou null)
+  // return data.map(trail => ({
+  //   ...trail,
+  //   imageUrl: trail.trail_images?.[0]?.url || null
+  // }));
+}
+
+// Hook customizado usando React Query
+export function useFetchTrails( filters ) {
+
+  return useQuery({
+    queryKey: ['trails', filters],
+    queryFn: () => fetchTrails(filters),
+    staleTime: 1000 * 60 * 5, // cache por 5 minutos
+  });
+
+  
 }

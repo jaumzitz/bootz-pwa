@@ -80,7 +80,7 @@ export default function TrailGallery({ photos = defaultPhotos }) {
     <GalleryContainer>
       <HorizontalScrollContainer ref={scrollRef} onScroll={handleScroll}>
         {photos.map((photo, index) => (
-          <GalleryImage key={index} src={photo} alt={`Imagem ${index + 1}`} />
+          <GalleryImage key={index} src={photo.url} alt={`Imagem ${index + 1}`} />
         ))}
       </HorizontalScrollContainer>
       {photos.length > 0 && (
