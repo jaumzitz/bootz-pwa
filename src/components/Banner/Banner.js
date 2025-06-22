@@ -1,22 +1,33 @@
 import styled from "styled-components";
 import { Title } from "../TextContent/Title/Title";
+import Description from "../Description/Description";
 
 const BannerContainer = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: 'column';
     align-items: center;
-    background-color: #d9d9d9;
-    padding: 2vh;
-    margin: 2vh 4vw;
+    background-color: var(--gray-color);
+    padding:  2vh;
+    
+    width: 100%;
     border-radius: 14px;
         gap: 4vw;
 `
 
-export default function Banner({ icon, title }) {
+const TextContainer = styled.div`
+    display: flex;
+    
+`
+
+export default function Banner({ icon, title, description }) {
     return (
         <BannerContainer>
-            <img src={icon} style={{ height: '8vh' }} />
-            <Title size="small">{title}</Title>
+            {icon && <img src={icon} style={{ height: '8vh' }} />}
+         
+
+                <Title size="small">{title}</Title>
+                <Description>{description}</Description>
+        
         </BannerContainer>
     )
 }

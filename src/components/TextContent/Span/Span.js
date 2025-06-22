@@ -10,6 +10,7 @@ const RoundedBg = styled.div`
     background-color: ${({ bgcolor }) => bgcolor || '#d9d9d9'}; 
     padding: 10px 18px;
     border-radius: 60px;;
+    white-space: nowrap;
     text-align: ${({ alignment }) => alignment || 'left'};
 `
 

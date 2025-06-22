@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 const UserImage = styled.img`
-    max-height: 20vh;
-    height: 20vh;
+    max-height: 180px;
+    max-width: 180px;
+    height: 180px;
+    width: 180px;
+    object-fit: cover;
     background-color: #d9d9d9;
     border-radius: 60%;
     border: 4px solid #dedede;
@@ -25,15 +28,17 @@ const CirclePlaceholder = styled.div`
 
 const SmallAvatar = styled.img`
     width: 2.5rem;
-    height: 2.5%;
+    height: 2.5rem;
     border-radius: 60px;
+    object-fit: cover;
     
 `
 
 const MiniAvatar = styled.img`
     width: 2rem;
-    height: 2.5%;
+    height: 2rem;
     border-radius: 60px;
+    object-fit: cover;
     
 `
 
@@ -43,7 +48,9 @@ const defaultAvatar = 'assets/icons/add-photo.svg'
 export default function Avatar({ username, size }) {
 
 
-    const imgUrl = !username ? defaultAvatar : 'https://github.com/jaumzitz.png';
+    //const imgUrl = !username ? defaultAvatar : 'https://github.com/jaumzitz.png';
+
+    const imgUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}`
 
 
 

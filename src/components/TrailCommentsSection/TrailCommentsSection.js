@@ -5,9 +5,9 @@ import { HorizontalScroll } from "../Scrolls/Scroll"
 import CommentCard from "../CommentCard/CommentCard"
 import Spacer from "../Spacer/Spacer"
 import { Input } from "../Input/Input"
-import { Span } from "../TextContent/Span/Span"
-import { Link } from "react-router-dom"
-import { PrimaryButton } from "../PrimaryButton/PrimaryButton"
+
+import { useFetchComments } from "../../hooks/useFetchComments"
+import Banner from "../Banner/Banner"
 
 
 const SectionPadding = styled.section`
@@ -15,16 +15,7 @@ const SectionPadding = styled.section`
     
 `
 
-const comments = [
-    {
-        id: 0
 
-    },
-    {
-        id: 1
-    },
-
-]
 
 const CommentCount = styled.span`
     background-color: #d9d9d9;
@@ -39,7 +30,12 @@ const CommentCount = styled.span`
 `
 
 
-export default function TrailCommentsSection() {
+export default function TrailCommentsSection({trailId, totalComments}) {
+
+    
+    const {data: comments = [], isLoading, error} = useFetchComments(trailId)
+    console.log(comments, isLoading, error)
+
     return (
         <>
             <SectionPadding>
@@ -49,7 +45,7 @@ export default function TrailCommentsSection() {
                         <Title>Comentários
 
                         </Title>
-                        <CommentCount>6</CommentCount>
+                        <CommentCount>{totalComments}</CommentCount>
                     </div>
                     
                     <LinkButton>Ver tudo</LinkButton>
@@ -57,11 +53,9 @@ export default function TrailCommentsSection() {
             </SectionPadding>
 
             <HorizontalScroll>
-
-                {comments.map((comment) => {
-                    return <CommentCard id={comment.id} key={comment.id}></CommentCard>
-
-                })}
+            
+                 {comments.length == 0 ? <Banner title="O que você achou desse lugar?" description="Seja o primeiro a comentar!"/> :
+                 comments.map(comment => <CommentCard key={comment.id} comment={comment}/>) }
 
 
 

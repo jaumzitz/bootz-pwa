@@ -24,46 +24,29 @@ const CardHeader = styled.div`
 
 `
 
-const commentData = [{
-    id: 0,
-    fullName: 'Joao Fiorini',
-    username: 'jaumzitz',
-    commentDate: '22/02/2025 às 12:34',
-    commentText: 'Muuito top!! Amei...'
-},
-{
-    id: 1,
-    fullName: 'Cesar Junior',
-    username: 'cesarwruck',
-    commentDate: '20/02/2025 às 20:09',
-    commentText: 'Um dos lugares mais incríveis na região!'
-}]
 
 
 
-export default function CommentCard({ id }) {
+export default function CommentCard({ comment }) {
 
 
-    return commentData
-            .filter((data) => data.id === id)
-            .map((comment) => {
-                return (
+    return (
 
-                    <CardContainer key={comment.id}>
-                        <CardHeader>
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
+        < CardContainer>
+            <CardHeader>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
 
-                                <Avatar size='mini' username={comment.username} />
-                                <Span>{comment.fullName}</Span>
-                            </div>
-                            <Description>{comment.commentDate}</Description>
-                        </CardHeader>
-                        <Description>
-                            {comment.commentText}
-                        </Description>
-                    </CardContainer>
-                )
-            })
-    
+                    <Avatar size='mini' username={comment.created_by} />
+                    <Span>{comment.created_by}</Span>
+                </div>
+                <Description>{comment.formatted_date}</Description>
+            </CardHeader>
+            <Description>
+                {comment.content}
+            </Description>
+        </CardContainer >
+    )
+
+
 
 }

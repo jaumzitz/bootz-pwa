@@ -116,11 +116,10 @@ export function Profile() {
                     {/* <IconButton icon={"assets/icons/arrow-back.svg"} fill></IconButton> */}
 
                 </HeaderButtons>
-                <HeaderImage>
+                
+                <HeaderImage></HeaderImage>
 
-                </HeaderImage>
                 <AvatarContainer>
-
                     <Avatar username="jaumzitz" size="big"></Avatar>
                 </AvatarContainer>
 
@@ -154,9 +153,9 @@ export function Profile() {
             </UserData>
             <HistorySection>
 
-                <TrailCard trail={trailsTrendingNearby[0]} size="big"></TrailCard>
+                {/* <TrailCard trail={trailsTrendingNearby[0]} size="big"></TrailCard>
                 <TrailCard trail={trailsTrendingNearby[1]} size="big"></TrailCard>
-                <TrailCard trail={trailsTrendingNearby[1]} size="big"></TrailCard>
+                <TrailCard trail={trailsTrendingNearby[1]} size="big"></TrailCard> */}
             </HistorySection>
 
 

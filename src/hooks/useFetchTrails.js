@@ -5,41 +5,52 @@ import { supabase } from "../services/supabaseClient"; // ajuste o caminho confo
 // Função para buscar trilhas do Supabase
 async function fetchTrails(filters) {
   const { data, error } = await supabase
-    .from("trail")
+    .from('trail')
     .select(`
-      id,
-      name,
-      uploaded_by,
-      length,
-      state_or_province,
-      city,
-      description,
-      images: trail_images (
-        url
+    id,
+    name,
+    uploaded_by,
+    length,
+    state_or_province,
+    city,
+    images: trail_image (
+      url
+    ),
+    categories: trail_category (
+      category_option (
+        category_id,
+        fullDescription,
+        category (
+          icon_path
+        )
       )
-    `)
+    )
+  `)
     .range(filters?.range.min, filters?.range.max);
 
+  if (error) throw error;
 
-    if (error) throw error;
-    
-  return data
+  return data.map(trail => ({
+    ...trail,
+    categories: (trail.categories ?? [])
+      .map(tc => ({
+        'id': tc.category_option?.category_id,
+        'description': tc.category_option?.fullDescription,
+        'icon_path': tc.category_option?.category?.icon_path
+      }))
+  }))
 
-  // Adapta para trazer apenas a primeira imagem (ou null)
-  // return data.map(trail => ({
-  //   ...trail,
-  //   imageUrl: trail.trail_images?.[0]?.url || null
-  // }));
+
 }
 
 // Hook customizado usando React Query
-export function useFetchTrails( filters ) {
+export function useFetchTrails(queryKey, filters) {
 
   return useQuery({
-    queryKey: ['trails', filters],
+    queryKey: [queryKey],
     queryFn: () => fetchTrails(filters),
     staleTime: 1000 * 60 * 5, // cache por 5 minutos
   });
 
-  
+
 }
