@@ -32,7 +32,7 @@ const PreviewImage = styled.img`
 
 const defaultIcon = "/assets/icons/add-photo.svg"
 
-export function UploadFile({ type, accept, id, imgUrl }) {
+export function UploadFile({ type, accept, id, imgUrl, radOnly }) {
 
     const [selectedPhoto, setSelectedPhoto] = useState(imgUrl)
 

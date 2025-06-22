@@ -7,7 +7,7 @@ font-family: var(--default-title-font);
 font-size: var(--default-font-size);
 width: 100%;
 margin-bottom: 10px;
-padding: 0.5rem 1rem;
+padding: 0.8rem 1rem;
 color: var(--default-font-color);
 background-color: #fff;
 border: 1px solid #D7DBE0;
@@ -34,7 +34,7 @@ flex-direction: column;
 width: 100%;
 `
 
-export function Input({ type, id, name, required, label, onChangeValue, validator }) {
+export function Input({ type, id, name, required, label, placeholder, onChangeValue, validator, children }) {
 
 
     const [isFieldValid, setIsFieldValid] = useState(true);
@@ -59,7 +59,7 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
 
     return (
         <InputContainerStyled>
-            {label && <LabelStyled htmlFor={id}>{label}</LabelStyled>}
+            {label && <LabelStyled htmlFor={id}>{label}<p>{children}</p></LabelStyled>}
             <InputStyled
                 type={type}
                 id={id}
@@ -67,6 +67,7 @@ export function Input({ type, id, name, required, label, onChangeValue, validato
                 required={required}
                 onChange={handleChange}
                 onBlur={validateInput}
+                placeholder={placeholder}
 
             />
             {!isFieldValid && <Span color={`var(--alert-color)`}>E-mail inválido.</Span>}

@@ -6,6 +6,8 @@ import Spacer from "../../components/Spacer/Spacer";
 import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator";
 import SearchBar from "../../components/SearhcBar/SearchBar";
 
+import { useFetchTrails } from "../../hooks/useFetchTrails";
+
 
 const HeaderStyled = styled.header`
         
@@ -17,83 +19,34 @@ const HeaderStyled = styled.header`
 
 export function Home() {
 
-    const trailsForYou = [
-        {
-            id: 1,
-            name: 'Trilha da Praia Vermelha',
-            location: 'Penha - SC',
-            distance: 1.3,
-            enviroment: 'Praia',
-            difficulty: 'Fácil',
-            imageUrl: '/assets/images/praia-vermelha-penha.jpg'
-        },
-        {
-            id: 2,
-            name: 'Pico da Pedra',
-            location: 'Camboriú - SC',
-            distance: 3.3,
-            enviroment: 'Montanha',
-            difficulty: 'Médio',
-            imageUrl: '/assets/images/pico-da-pedra-camboriu.png'
-        },
-        {
-            id: 3,
-            name: 'Piscinas Naturais da Barra da Lagoa',
-            location: 'Florianópolis - SC',
-            distance: 1.3,
-            enviroment: 'Praia',
-            difficulty: 'Fácil',
-            imageUrl: '/assets/images/piscinas-naturais-floripa.png'
-        }
-    ]
+     const { data: trailsForYou, isLoading: loadingForYou } = useFetchTrails('forYou', {range: {min: 0, max: 2}});
+     const { data: trailsTrendingNearby = [], loading: loadingTrending } = useFetchTrails('trendingNearby',{range: {min: 3, max: 5}});
 
-    const trailsTrendingNearby = [
-        {
-            id: 4,
-            name: 'Cachoeira Seca',
-            location: 'Balneário Camboriú - SC',
-            distance: 1.3,
-            enviroment: 'Cachoeira',
-            difficulty: 'Fácil',
-            imageUrl: '/assets/images/cachoeira-seca.jpg'
-        },
-        {
-            id: 5,
-            name: 'Parque do Atalaia',
-            location: 'Itajaí - SC',
-            distance: 3.3,
-            enviroment: 'Montanha',
-            difficulty: 'Médio',
-            imageUrl: '/assets/images/parque-atalaia.jpg'
-        },
-        {
-            id: 6,
-            name: 'Trilha da Praia da Solidão',
-            location: 'Itajaí - SC',
-            distance: 1.3,
-            enviroment: 'Praia',
-            difficulty: 'Fácil',
-            imageUrl: '/assets/images/praia-solidao.jpg'
-        }
-    ]
 
 
 
     return (
 
-        
+
         <>
 
             <HeaderStyled>
 
-                <SearchBar/>
+                <SearchBar />
             </HeaderStyled>
 
-            <ChipNavigator showIcon={true}/>
+            <ChipNavigator showIcon={true} />
             <Spacer height={'2vh'} width={0}></Spacer>
 
-            <RecommendedSection id="for-you" label="Para você" trails={trailsForYou}></RecommendedSection>
-            <RecommendedSection id="trending-nearby" label="Em alta nas proximidades" trails={trailsTrendingNearby}></RecommendedSection>
+            <RecommendedSection
+                id="for-you"
+                label="Para você"
+                trails={trailsForYou || []} />
+
+            <RecommendedSection
+                id="trending-nearby"
+                label="Em alta nas proximidades"
+                trails={trailsTrendingNearby || []} />
 
             <Spacer height={'12vh'} width={0}></Spacer>
             <TabBar></TabBar>

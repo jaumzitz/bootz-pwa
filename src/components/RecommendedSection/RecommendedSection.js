@@ -20,6 +20,7 @@ const TitleContainer = styled.div`
 
 
 export function RecommendedSection({ id, label, trails }) {
+
     return (
         <>
             <TitleContainer>

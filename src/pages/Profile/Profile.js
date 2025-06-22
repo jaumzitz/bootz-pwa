@@ -54,11 +54,12 @@ const KPI = styled.div`
     border-radius: 14px;
 `
 
-const HistoryGrid = styled.section`
+const HistorySection = styled.section`
     margin: 4vh 4vw;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem; /* Espaçamento entre os itens */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
 `
 
 const HeaderButtons = styled.div`
@@ -115,12 +116,11 @@ export function Profile() {
                     {/* <IconButton icon={"assets/icons/arrow-back.svg"} fill></IconButton> */}
 
                 </HeaderButtons>
-                <HeaderImage>
+                
+                <HeaderImage></HeaderImage>
 
-                </HeaderImage>
                 <AvatarContainer>
-
-                    <Avatar username="jaumzitz"></Avatar>
+                    <Avatar username="jaumzitz" size="big"></Avatar>
                 </AvatarContainer>
 
             </>
@@ -151,13 +151,14 @@ export function Profile() {
                     <Span>Seguindo</Span>
                 </KPI>
             </UserData>
+            <HistorySection>
 
-            <HistoryGrid>
-                <TrailCard trail={trailsTrendingNearby[0]}></TrailCard>
-                <TrailCard trail={trailsTrendingNearby[1]}></TrailCard>
-                <TrailCard trail={trailsTrendingNearby[1]}></TrailCard>
+                {/* <TrailCard trail={trailsTrendingNearby[0]} size="big"></TrailCard>
+                <TrailCard trail={trailsTrendingNearby[1]} size="big"></TrailCard>
+                <TrailCard trail={trailsTrendingNearby[1]} size="big"></TrailCard> */}
+            </HistorySection>
 
-            </HistoryGrid>
+
             <TabBar></TabBar>
         </>
     )

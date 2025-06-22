@@ -1,5 +1,8 @@
 import React from "react";
 import { AppRoutes } from "./routes.js";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const registerServiceWorker = async () => {
   if ("serviceWorker" in navigator) {
@@ -24,10 +27,12 @@ registerServiceWorker()
 
 function App() {
 
-  
+
 
   return (
-    <AppRoutes />
+    <QueryClientProvider client={queryClient}>
+      <AppRoutes />
+    </QueryClientProvider>
   )
 }
 
