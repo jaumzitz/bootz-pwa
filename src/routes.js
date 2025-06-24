@@ -22,6 +22,7 @@ export function AppRoutes() {
                 <Route path="/trail" element={<NewTrail />} />
                 <Route path="/trail/:id" element={<TrailDetail />} />
                 <Route path="/profile" element={<Profile></Profile>}/>
+                <Route path="/profile/:username" element={<Profile></Profile>}/>
                 <Route path="/events" element={<Events/>}/>
 
             </Routes>

@@ -25,6 +25,7 @@ const OverlayedButton = styled.div`
     flex-direction: row;
     align-items: center;
     border-radius: 60px;
+    left: 0;
     justify-content: center;
     z-index: 1;
 `
@@ -36,7 +37,7 @@ export default function IconButton({ icon, onClick, fill, overlay }) {
     return (
         <>
             {fill && overlay && (
-                <OverlayedButton>
+                <OverlayedButton >
                     <FilledContainerButton onClick={onClick}>
                         <img src={icon} alt="Icon" style={{ width: "24px", height: "24px" }} />
                     </FilledContainerButton>
