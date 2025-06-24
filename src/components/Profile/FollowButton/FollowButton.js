@@ -13,7 +13,7 @@ export function FollowButton({currentUser, destinyUser}) {
     
     async function handleClick() {
         isFollowing ? unfollowUser(currentUser, destinyUser) : followUser(currentUser, destinyUser)
-        console.log(refetch())
+        console.log(await refetch())
     }
     if (currentUser === destinyUser) return null //se estiver vendo o próprio perfil, não mostra o botão seguir
     
