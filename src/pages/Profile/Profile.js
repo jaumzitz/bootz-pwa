@@ -9,7 +9,7 @@ import { ProfileHistory } from "../../components/Profile/ProfileHistory/ProfileH
 import { useFetchProfileData } from "../../hooks/useFetchProfileData";
 import { useNavigate, useParams } from "react-router-dom";
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
-import { logout } from "../../services/authentication";
+import { logout } from "../../services/authService";
 import { AuthContext, useAuth } from "../../context/AuthContext";
 
 const HeaderImage = styled.header`
