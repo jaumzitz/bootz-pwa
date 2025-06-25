@@ -1,12 +1,16 @@
 import styled from "styled-components";
-import { UploadFile } from "../../components/UploadFile/UploadFile";
-import { Title } from "../../components/TextContent/Title/Title";
-import { Span } from "../../components/TextContent/Span/Span";
-import { TrailCard } from "../../components/TrailCard/TrailCard";
 import IconButton from "../../components/IconButton/IconButton";
-import { Layout } from "../../layouts/Layout/Layout";
 import { TabBar } from "../../components/TabBar/TabBar";
 import Avatar from "../../components/Profile/Avatar/Avatar";
+import Spacer from "../../components/Spacer/Spacer";
+import { ProfileBiography } from "../../components/Profile/ProfileBiography/ProfileBiography";
+import { ProfileUserData } from "../../components/Profile/ProfileUserData.js/ProfileUserData";
+import { ProfileHistory } from "../../components/Profile/ProfileHistory/ProfileHistory";
+import { useFetchProfileData } from "../../hooks/useFetchProfileData";
+import { useNavigate, useParams } from "react-router-dom";
+import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
+import { logout } from "../../services/authService";
+import { AuthContext, useAuth } from "../../context/AuthContext";
 
 const HeaderImage = styled.header`
     background-color: #aaaaaa;
@@ -19,146 +23,74 @@ const HeaderImage = styled.header`
     position: relative; /* Torna este elemento referência para posicionamento absoluto */
 `
 
-// const Avatar = styled.img`
-//     max-height: 20vh;
-//     border-radius: 60%;
-//     border: 4px solid #dedede;
-//     position: absolute;
-//     top: 30vh;
-//     left: 50vw; /* 50% da largura da viewport */
-//     transform: translateX(-50%);
-// `;
-
 const AvatarContainer = styled.div`
 width: 100%;
     height: 14vh;
 `
 
-const Biography = styled.section`
-    margin: 0 4vw;
-`
-
-const UserData = styled.section`
-    margin: 4vw;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 3vw;
-`
-const KPI = styled.div`
-    background-color: var(--gray-color);
-    padding: 1.5vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    border-radius: 14px;
-`
-
-const HistorySection = styled.section`
-    margin: 4vh 4vw;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    
-`
 
 const HeaderButtons = styled.div`
-    position: absolute; /* Posiciona sobre o HeaderImage */
-    top: 4vh;          /* Define a distância do topo */
-    left: 4vw;         /* Define a distância da esquerda */
-    right: 4vw;        /* Garante que o elemento se estenda até a direita */
+    position: absolute; 
+    top: 4vh;          
+    //left: 4vw;         
+    right: 0;        
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
     z-index: 1;
 `;
 
-const trailsTrendingNearby = [
-    {
-        id: 4,
-        name: 'Cachoeira Seca',
-        location: 'Balneário Camboriú - SC',
-        distance: 1.3,
-        enviroment: 'Cachoeira',
-        difficulty: 'Fácil',
-        imageUrl: '/assets/images/cachoeira-seca.jpg'
-    },
-    {
-        id: 5,
-        name: 'Parque do Atalaia',
-        location: 'Itajaí - SC',
-        distance: 3.3,
-        enviroment: 'Montanha',
-        difficulty: 'Médio',
-        imageUrl: '/assets/images/parque-atalaia.jpg'
-    },
-    {
-        id: 6,
-        name: 'Trilha da Praia da Solidão',
-        location: 'Itajaí - SC',
-        distance: 1.3,
-        enviroment: 'Praia',
-        difficulty: 'Fácil',
-        imageUrl: '/assets/images/praia-solidao.jpg'
-    }
-]
+
 
 
 export function Profile() {
+    //const navigate = useNavigate()
+
+    const { username: paramUsername } = useParams()
+    const { username: authenticatedUser} = useAuth()
+
+    console.log('Usuário logado', authenticatedUser)
+
+    const user = paramUsername || authenticatedUser
+
+
+    const { data: profileData, isLoading, error } = useFetchProfileData(user)
+
+    if (isLoading) {
+        console.log('Carregando dados do perfil...')
+    }
+
+    if (!profileData) {
+        
+        return
+    }
+
+
+
+
+
     return (
         <>
 
             <>
-
                 <HeaderButtons>
-
-                    <IconButton icon={"assets/icons/settings.svg"} fill></IconButton>
-                    {/* <IconButton icon={"assets/icons/arrow-back.svg"} fill></IconButton> */}
-
+                    {authenticatedUser === profileData.username && <IconButton icon={"/assets/icons/settings.svg"} onClick={() => logout()} fill overlay ></IconButton>}
                 </HeaderButtons>
-                
-                <HeaderImage></HeaderImage>
+
+                <HeaderImage/>
 
                 <AvatarContainer>
-                    <Avatar username="jaumzitz" size="big"></Avatar>
+                    <Avatar username={profileData.username} size="big" />
                 </AvatarContainer>
-
             </>
-            <Biography>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4em' }}>
-                    <div style={{ display: 'flex', flexDirection: 'row', gap: '1vh' }}>
-
-                        <Title>Joao Fiorini</Title>
-                        <img src="assets/icons/confirmed-identity.svg"></img>
-                    </div>
-                    <Span>@jaumzitz</Span>
-                    <Title size={"small"}>Itajaí, Santa Catarina</Title>
-
-                </div>
-            </Biography>
-
-            <UserData>
-                <KPI>
-                    <Title size={"small"}>23</Title>
-                    <Span>Trilhas</Span>
-                </KPI>
-                <KPI>
-                    <Title size={"small"}>125</Title>
-                    <Span>Seguidores</Span>
-                </KPI>
-                <KPI>
-                    <Title size={"small"}>68</Title>
-                    <Span>Seguindo</Span>
-                </KPI>
-            </UserData>
-            <HistorySection>
-
-                {/* <TrailCard trail={trailsTrendingNearby[0]} size="big"></TrailCard>
-                <TrailCard trail={trailsTrendingNearby[1]} size="big"></TrailCard>
-                <TrailCard trail={trailsTrendingNearby[1]} size="big"></TrailCard> */}
-            </HistorySection>
 
 
+
+            <ProfileBiography data={profileData} />
+            <ProfileUserData data={profileData} />
+            <ProfileHistory/>
+
+            <Spacer height='10vh' />
             <TabBar></TabBar>
         </>
     )

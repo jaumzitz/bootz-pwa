@@ -4,7 +4,8 @@ import { Span } from "../../components/TextContent/Span/Span";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { signUpWithEmail } from "../../services/User";
+import { useForm } from "react-hook-form";
+import { signUpWithEmail } from "../../services/registerUser";
 import { Layout } from "../../layouts/Layout/Layout";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
 import ProfilePicture from "../../components/Profile/ProfilePicture/ProfilePicutre";
@@ -13,103 +14,208 @@ const FormStyled = styled.form`
     display: flex;
     flex-direction: column;
     gap: 2vh;
-    
-`
+`;
+
+const UsernameInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+ // background: #f5f5f5;
+ font-family: var(--default-title-font);
+  border-radius: 8px;
+  padding: 0 0 0 16px;
+  border: 1px solid #ccc;
+
+`;
+
+const UsernamePrefix = styled.span`
+  color: #888;
+  font-size: 1rem;
+  user-select: none;
+`;
+
+
 export function Register() {
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate();
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+    trigger,
+  } = useForm({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+  });
 
-    // const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    // const [confirmPassword, setConfirmPassword] = useState('');
+  // Máscara para telefone
+  function handlePhoneChange(e) {
+    let value = e.target.value.replace(/\D/g, "");
+    if (value.length > 11) value = value.slice(0, 11);
+    if (value.length > 2) value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    if (value.length > 10) value = value.replace(/(\(\d{2}\)) (\d{5})(\d{4})/, "$1 $2-$3");
+    else if (value.length > 6) value = value.replace(/(\(\d{2}\)) (\d{4})(\d{0,4})/, "$1 $2-$3");
+    setValue("phone", value);
+  }
 
-    const [isLoading, setIsLoading] = useState(false);
+  // Registro do usuário
+  const onSubmit = async (data) => {
 
-    const [step, setStep] = useState(1);
-
-
-
-    const handleRegister = async (event) => {
-        event.preventDefault(); // Previne o comportamento padrão do formulário
-        setIsLoading(true)
-
-        signUpWithEmail(email, password)
-            .then((response) => {
-                console.log('Usuário registrado com sucesso:', response);
-                alert('Usuário registrado com sucesso!');
-                navigate('/home');
-            }).catch((error) => {
-                setIsLoading(false)
-                console.error('Erro ao registrar usuário:', error);
-                alert('Erro ao registrar usuário. Verifique suas credenciais.');
-            }
-
-            )
+    //Etapa 1: dados de login
+    if (step === 1) {
+      // Valida todos os campos da etapa 1
+      const valid = await trigger(["username", "email", "password"]);
+      if (valid) setStep(2);
+      return;
     }
 
 
+    // Etapa 2: dados da pessoa
+    setIsLoading(true);
 
-    return (
+    try {
+      await signUpWithEmail(data.email, data.password, data.username, '', '', data.fullName, data.profilePicture);
+      alert('Usuário registrado com sucesso!');
+      navigate('/home');
+    } catch (error) {
+      setIsLoading(false);
+      console.error('Erro ao registrar usuário:', error);
+      alert('Erro ao registrar usuário. Verifique suas credenciais.');
+    }
+  };
+
+  return (
+    <>
+      {step === 1 ? (
         <>
+          <Layout
+            leftButtonAction={() => navigate('/login')}
+            leftButtonIcon="/assets/icons/arrow-back.svg"
+            title="Criar uma conta"
+            subtitle="Crie sua conta grátis e comece a explorar lugares incríveis."
+          >
+            <FormStyled onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="username" style={{fontFamily: 'var(--default-label-font)', color: '#6C7278'}}>Escolha seu nome de usuário:</label>
+              <UsernameInputWrapper>
+                <UsernamePrefix>@</UsernamePrefix>
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="nomedeusuario"
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    outline: "none",
+                    margin: 0,
+                    flex: 1,
+                    fontSize: "1rem"
+                  }}
+                  {...register("username", {
+                    required: "Preencha o nome de usuário",
+                    pattern: {
+                      value: /^[a-zA-Z0-9_]+$/,
+                      message: "Use apenas letras, números e _"
+                    }
+                  })}
+                  onBlur={() => trigger("username")}
+                />
+              </UsernameInputWrapper>
+              {errors.username && <Span color="red">{errors.username.message}</Span>}
 
-            {step === 1 ?
-                <>
-                    <Layout leftButtonAction={() => navigate('/login')} leftButtonIcon="/assets/icons/arrow-back.svg" title="Criar uma conta" subtitle="Crie sua conta grátis e comece a explorar lugares incríveis.">
+              {/* E-mail */}
+              <Input
+                label="Seu e-mail:"
+                type="email"
+                id="email"
+                name="email"
+                required
+                {...register("email", {
+                  required: "Não esqueça de informar seu e-mail",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "E-mail inválido"
+                  }
+                })}
+              />
+              {errors.email && <Span color="red">{errors.email.message}</Span>}
 
-
-                        <FormStyled onSubmit={handleRegister}>
-
-                            {/* <Input onChangeValue={setFullName} label="Nome completo" type="text" id="fullName" name="fullName" required /> */}
-                            <Input label="Nome de usuário" type="text" id="username" name="username" required />
-                            <Input onChangeValue={setEmail} label="Seu e-mail:" type="email" id="email" name="email" validator={verifyEmail} required />
-                            <Input onChangeValue={setPassword} label="Cadastre sua senha:" type="password" id="password" name="password" required />
-                            {/* <Input onChangeValue={setConfirmPassword} label="Confirme sua senha:" type="password" id="passwordCheck" name="passwordCheck" required /> */}
-
-                        </FormStyled>
-
-                    </Layout>
-                    <FixedFooter primaryButton={{ text: 'Continuar', onClick: () => setStep(2), isLoading: isLoading, width: '90%' }}>
-                        <div>
-
-                            <Span>Já tem uma conta?</Span>
-                            <LinkButton to='/login'>Fazer login</LinkButton>
-                        </div>
-
-                    </FixedFooter>
-                </>
-
-                :
-
-                <>
-                    <Layout leftButtonAction={() => setStep(1)} leftButtonIcon="/assets/icons/arrow-back.svg" title="Foto de perfil" subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo.">
-
-                        <ProfilePicture />
-
-                        <Input type="text" id="fullName" label="Nome público"></Input>
-                        <Input type="date" id="birthday" label="Data de Nascimento"></Input>
-                        <Input type="text" id="phoneNumber" label="Telefone"></Input>
-
-
-                    </Layout>
-                    <FixedFooter primaryButton={{ text: 'Concluir', width: '90%', onClick: handleRegister }}>
-                        <Span></Span>
-                    </FixedFooter>
-
-
-                </>
-            }
-
+              {/* Senha */}
+              <Input
+                label="Cadastre sua senha:"
+                type="password"
+                id="password"
+                name="password"
+                required
+                {...register("password", {
+                  required: "Senha é obrigatória",
+                  minLength: { value: 6, message: "Mínimo 6 caracteres" }
+                })}
+              />
+              {errors.password && <Span color="red">{errors.password.message}</Span>}
+            </FormStyled>
+          </Layout>
+          <FixedFooter
+            primaryButton={{
+              text: 'Próximo',
+              onClick: handleSubmit(onSubmit),
+              isLoading: isLoading,
+              width: '90%'
+            }}
+          >
+            <div>
+              <Span>Já tem uma conta?</Span>
+              <LinkButton to='/login'>Fazer login</LinkButton>
+            </div>
+          </FixedFooter>
         </>
+      ) : (
+        <>
+          <Layout
+            leftButtonAction={() => setStep(1)}
+            leftButtonIcon="/assets/icons/arrow-back.svg"
+            title="Foto de perfil"
+            subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo."
+          >
+            <ProfilePicture onChangePicture={file => setValue("profilePicture", file, { shouldValidate: true})}/>
 
-    );
-}
-
-
-function verifyEmail(email) {
-    // Verifica se o email é válido
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const status = re.test(String(email).toLowerCase());
-    console.log('Email status:', status);
-    return re.test(String(email).toLowerCase());
+            <Input
+              type="text"
+              id="fullName"
+              label="Nome público"
+              {...register("fullName")}
+            />
+            <Input
+              type="date"
+              id="birthday"
+              label="Data de Nascimento"
+              {...register("birthday")}
+            />
+            <Input
+              type="text"
+              id="phone"
+              label="Telefone"
+              maxLength={15}
+              {...register("phone")}
+              onChange={handlePhoneChange}
+              placeholder="(99) 99999-9999"
+            />
+            {errors.phone && <Span style={{ color: "red" }}>{errors.phone.message}</Span>}
+          </Layout>
+          <FixedFooter
+            primaryButton={{
+              text: 'Concluir',
+              width: '90%',
+              onClick: handleSubmit(onSubmit),
+              isLoading: isLoading
+            }}
+          >
+            <Span></Span>
+          </FixedFooter>
+        </>
+      )}
+    </>
+  );
 }
