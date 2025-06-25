@@ -7,6 +7,9 @@ import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator";
 import SearchBar from "../../components/SearhcBar/SearchBar";
 
 import { useFetchTrails } from "../../hooks/useFetchTrails";
+import { Title } from "../../components/TextContent/Title/Title";
+import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
+import { FeedbackBox } from "../../components/FeedbackBox/FeedbackBox";
 
 
 const HeaderStyled = styled.header`
@@ -47,6 +50,9 @@ export function Home() {
                 id="trending-nearby"
                 label="Em alta nas proximidades"
                 trails={trailsTrendingNearby || []} />
+
+
+            <FeedbackBox></FeedbackBox>
 
             <Spacer height={'12vh'} width={0}></Spacer>
             <TabBar></TabBar>
