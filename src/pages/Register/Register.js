@@ -9,6 +9,7 @@ import { signUpWithEmail } from "../../services/registerUser";
 import { Layout } from "../../layouts/Layout/Layout";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
 import ProfilePicture from "../../components/Profile/ProfilePicture/ProfilePicutre";
+import { useAuth } from "../../context/AuthContext";
 
 const FormStyled = styled.form`
     display: flex;
@@ -78,8 +79,10 @@ export function Register() {
 
     try {
       await signUpWithEmail(data.email, data.password, data.username, '', '', data.fullName, data.profilePicture);
+      
       alert('Usuário registrado com sucesso!');
       navigate('/home');
+      
     } catch (error) {
       setIsLoading(false);
       console.error('Erro ao registrar usuário:', error);

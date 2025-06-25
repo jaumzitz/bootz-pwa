@@ -47,21 +47,26 @@ export function Profile() {
     //const navigate = useNavigate()
 
     const { username: paramUsername } = useParams()
-    const { username: authenticatedUser} = useAuth()
+    const { username: authenticatedUser, loading} = useAuth()
 
+    if (loading) {
+        console.log('Obtendo contexto do usuário....')
+    }
+    if (!authenticatedUser) {
+        window.location.reload(); //Esse reload está sendo usado para corrigir o problema de não atualizar o contexto do usuário após o registro. requer melhoria depois.
+    }
     console.log('Usuário logado', authenticatedUser)
 
     const user = paramUsername || authenticatedUser
 
 
-    const { data: profileData, isLoading, error } = useFetchProfileData(user)
+    const { data: profileData, isLoading, error } =  useFetchProfileData(user)
 
     if (isLoading) {
         console.log('Carregando dados do perfil...')
     }
 
     if (!profileData) {
-        
         return
     }
 

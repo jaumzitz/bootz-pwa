@@ -1,6 +1,7 @@
 import { supabase } from './supabaseClient.js';
 
 export async function signUpWithEmail(email, password, username, city, state_or_province, fullName, profilePicture) {
+
     const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -10,26 +11,28 @@ export async function signUpWithEmail(email, password, username, city, state_or_
         throw new Error(signUpError.message);
     }
 
-    try {
-        const createdProfile = await createProfile(
-            data.session.user.id,
-            username,
-            city,
-            state_or_province,
-            fullName,
-            profilePicture)
+    if (data.session) {
+        try {
+            const createdProfile = await createProfile(
+                data.session.user.id,
+                username,
+                city,
+                state_or_province,
+                fullName,
+                profilePicture)
+
+            return { data }
+
+
+        } catch (e) {
+            throw new Error(e)
+        }
 
 
 
-    } catch (e) {
-        throw new Error(e)
     }
 
 
-
-
-
-    return { data };
 }
 
 

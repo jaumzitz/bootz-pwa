@@ -50,7 +50,7 @@ export default function Avatar({ username, size }) {
 
     //const imgUrl = !username ? defaultAvatar : 'https://github.com/jaumzitz.png';
 
-    const imgUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}`
+    const imgUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}.jpg`
 
 
 
