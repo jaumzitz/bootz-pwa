@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { Title } from "../../TextContent/Title/Title"
 import { Span } from "../../TextContent/Span/Span"
-import { PrimaryButton } from "../../PrimaryButton/PrimaryButton"
 import { FollowButton } from "../FollowButton/FollowButton"
+import { useAuth } from "../../../context/AuthContext"
 
 const Biography = styled.section`
     margin: 0 4vw;
@@ -12,6 +12,9 @@ const Biography = styled.section`
 `
 
 export function ProfileBiography({data}) {
+
+    const {username: authenticatedUser} = useAuth()
+
     return (
         <>
             <Biography>
@@ -25,7 +28,7 @@ export function ProfileBiography({data}) {
                     <Title size={"small"}>{data.city}, {data.state_or_province}</Title>
 
                 </div>
-                <FollowButton currentUser="venus" destinyUser="jaumzitz"></FollowButton>
+                <FollowButton currentUser={authenticatedUser} destinyUser={data.username}></FollowButton>
             </Biography>
         </>
     )

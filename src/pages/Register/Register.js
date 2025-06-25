@@ -4,7 +4,7 @@ import { Span } from "../../components/TextContent/Span/Span";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { signUpWithEmail } from "../../services/User";
+import { signUpWithEmail } from "../../services/registerUser";
 import { Layout } from "../../layouts/Layout/Layout";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
 import ProfilePicture from "../../components/Profile/ProfilePicture/ProfilePicutre";

@@ -7,8 +7,10 @@ import { ProfileBiography } from "../../components/Profile/ProfileBiography/Prof
 import { ProfileUserData } from "../../components/Profile/ProfileUserData.js/ProfileUserData";
 import { ProfileHistory } from "../../components/Profile/ProfileHistory/ProfileHistory";
 import { useFetchProfileData } from "../../hooks/useFetchProfileData";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
+import { logout } from "../../services/authentication";
+import { AuthContext, useAuth } from "../../context/AuthContext";
 
 const HeaderImage = styled.header`
     background-color: #aaaaaa;
@@ -42,55 +44,51 @@ const HeaderButtons = styled.div`
 
 
 export function Profile() {
+    //const navigate = useNavigate()
 
-    const { username } = useParams()
+    const { username: paramUsername } = useParams()
+    const { username: authenticatedUser} = useAuth()
 
-    const user = username || 'jaumzitz'
-    console.log(user)
+    console.log('Usuário logado', authenticatedUser)
 
-    const { data: userData, isLoading, error } = useFetchProfileData(user)
+    const user = paramUsername || authenticatedUser
 
-    if (!userData) {
-        console.log('Nao encontrado dados do usuário...')
-        return
-    }
+
+    const { data: profileData, isLoading, error } = useFetchProfileData(user)
 
     if (isLoading) {
         console.log('Carregando dados do perfil...')
     }
 
-    console.log(userData)
+    if (!profileData) {
+        
+        return
+    }
+
+
+
+
+
     return (
         <>
 
             <>
-
                 <HeaderButtons>
-
-                    <IconButton icon={"assets/icons/settings.svg"} fill overlay ></IconButton>
-
-
+                    {authenticatedUser === profileData.username && <IconButton icon={"/assets/icons/settings.svg"} onClick={() => logout()} fill overlay ></IconButton>}
                 </HeaderButtons>
 
-                <HeaderImage></HeaderImage>
+                <HeaderImage/>
 
                 <AvatarContainer>
-                    <Avatar username={userData.username} size="big" />
+                    <Avatar username={profileData.username} size="big" />
                 </AvatarContainer>
-
             </>
 
 
 
-            <ProfileBiography data={userData} />
-
-
-
-
-            <ProfileUserData data={userData} />
-        
-            <ProfileHistory></ProfileHistory>
-
+            <ProfileBiography data={profileData} />
+            <ProfileUserData data={profileData} />
+            <ProfileHistory/>
 
             <Spacer height='10vh' />
             <TabBar></TabBar>

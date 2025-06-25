@@ -25,7 +25,7 @@ const OverlayedButton = styled.div`
     flex-direction: row;
     align-items: center;
     border-radius: 60px;
-    left: 0;
+    //left: 0;
     justify-content: center;
     z-index: 1;
 `

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Input } from "../../components/Input/Input";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 
-import { signInWithEmail } from "../../services/Authentication.js";
+import { signInWithEmail } from "../../services/authentication.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

@@ -33,7 +33,7 @@ export async function isFollowing(followerUsername, followingUsername) {
 
         if (error) throw error; // PGRST116 = no rows found
         
-        console.log(data)
+
         
         return !!data
 

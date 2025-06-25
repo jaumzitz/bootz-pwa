@@ -1,6 +1,7 @@
 import React from "react";
-import { AppRoutes } from "./routes.js";
+import { AppRoutes } from "./routes/AppRoutes.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "./context/AuthContext.js";
 
 const queryClient = new QueryClient();
 
@@ -30,9 +31,11 @@ function App() {
 
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppRoutes />
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <AppRoutes />
+      </QueryClientProvider>
+    </AuthProvider>
   )
 }
 
