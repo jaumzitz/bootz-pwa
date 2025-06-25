@@ -1,16 +1,15 @@
 
 import styled from "styled-components";
-import { Input } from "../../components/Input/Input";
-import { LinkButton } from "../../components/LinkButton/LinkButton";
-
-import { signInWithEmail } from "../../services/authentication.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import { Input } from "../../components/Input/Input";
+import { LinkButton } from "../../components/LinkButton/LinkButton";
+import { signInWithEmail } from "../../services/authentication.js";
 import { Span } from "../../components/TextContent/Span/Span.js";
+import { Layout } from "../../layouts/Layout/Layout.js";
 import Spacer from "../../components/Spacer/Spacer.js";
 import FixedFooter from "../../layouts/Layout/FixedFooter.js";
-import { Layout } from "../../layouts/Layout/Layout.js";
 
 
 export const FormStyled = styled.form`
