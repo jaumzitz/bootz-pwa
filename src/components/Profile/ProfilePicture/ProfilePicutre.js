@@ -27,15 +27,17 @@ const SelectedPhotoPreview = styled.img`
 
 const defaultIcon = "/assets/icons/add-photo.svg"
 
-export default function ProfilePicture({ imgUrl }) {
+export default function ProfilePicture({ onChangePicture }) {
 
 
-    const [selectedPhoto, setSelectedPhoto] = useState(imgUrl)
+    const [selectedPhoto, setSelectedPhoto] = useState(null)
 
     function handleSelectedPhoto(e) {
 
         try {
             const file = e.target.files[0]
+            onChangePicture(file)
+            
             setSelectedPhoto(URL.createObjectURL(file))
 
         } catch (error) {
