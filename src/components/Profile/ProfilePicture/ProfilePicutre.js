@@ -39,6 +39,7 @@ export default function ProfilePicture({ onChangePicture }) {
             onChangePicture(file)
             
             setSelectedPhoto(URL.createObjectURL(file))
+         
 
         } catch (error) {
 

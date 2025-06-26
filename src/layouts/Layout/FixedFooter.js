@@ -27,7 +27,7 @@ export default function FixedFooter({ primaryButton, children }) {
     return (
         <FooterContainer>
             <Line />
-            <PrimaryButton type={primaryButton.type} width={primaryButton.width} onClick={primaryButton.onClick} isLoading={primaryButton.isLoading}>{primaryButton.text}</PrimaryButton>
+            <PrimaryButton  width={primaryButton.width} onClick={primaryButton.onClick} isLoading={primaryButton.isLoading}>{primaryButton.text}</PrimaryButton>
             {children}
         </FooterContainer>
     )

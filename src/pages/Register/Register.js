@@ -3,7 +3,7 @@ import { Input } from "../../components/Input/Input";
 import { Span } from "../../components/TextContent/Span/Span";
 import { LinkButton } from "../../components/LinkButton/LinkButton";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { signUpWithEmail } from "../../services/registerUser";
 import { Layout } from "../../layouts/Layout/Layout";
@@ -39,6 +39,8 @@ export function Register() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
+
 
   // React Hook Form
   const {
@@ -51,6 +53,8 @@ export function Register() {
     mode: "onBlur",
     reValidateMode: "onBlur",
   });
+
+
 
   // Máscara para telefone
   function handlePhoneChange(e) {
@@ -80,7 +84,15 @@ export function Register() {
     setIsLoading(true);
 
     try {
-      await signUpWithEmail(data.email, data.password, data.username, data.city, data.uf, data.fullName, data.profilePicture);
+      await signUpWithEmail(
+        data.email,
+        data.password,
+        data.username,
+        data.city,
+        data.uf,
+        data.fullName,
+        data.phone,
+        data.profilePicture);
 
       alert('Usuário registrado com sucesso!');
       navigate('/home');
@@ -184,13 +196,14 @@ export function Register() {
             title="Foto de perfil"
             subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo."
           >
-            <ProfilePicture onChangePicture={file => setValue("profilePicture", file)} />
+            {/* <ProfilePicture onChangePicture={file => setProfilePicture(file)} /> */}
+            <ProfilePicture onChangePicture={file => setValue("profilePicture", file, { shouldValidate: true })} />
 
             <Input
               type="text"
               id="fullName"
               label="Nome público"
-              {...register("fullName", {required: "Seu nome é obrigatório"})}
+              {...register("fullName", { required: "Seu nome é obrigatório" })}
             />
             <div style={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
 
@@ -201,7 +214,7 @@ export function Register() {
                 placeholder="DD/MM/AAAA"
                 {...register("birthday", {
                   required: "Data de nascimento é obrigatória"
-                  
+
                 })}
               />
               <Input

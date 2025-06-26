@@ -42,22 +42,24 @@ async function createProfile(user_id, username, city, stateOrProvince, fullName,
     const { data, error } = await supabase
         .from("user_profile")
         .insert(
-            {
+            [{
                 user_id: user_id,
                 username: username,
                 full_name: fullName,
                 city: city,
                 state_or_province: stateOrProvince,
                 phone_number: phone
-                
-            }
+
+            }]
         )
-        .select()
+    .select()
 
 
     if (error) {
         throw new Error(error.message);
     }
+
+
 
     if (profilePicture) {
 
@@ -69,14 +71,13 @@ async function createProfile(user_id, username, city, stateOrProvince, fullName,
 
     }
 
-
-
     console.log('Perfil criado com sucesso', data)
 
     return data
 }
 
 async function uploadProfilePicture(file, username) {
+    console.log('fazendo upload da foto de perfil')
 
     const newFileName = `${username}.jpg`
     const renamedFile = new File([file], newFileName, { type: file.type })
