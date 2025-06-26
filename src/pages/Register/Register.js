@@ -182,7 +182,7 @@ export function Register() {
             title="Foto de perfil"
             subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo."
           >
-            <ProfilePicture onChangePicture={file => setValue("profilePicture", file, { shouldValidate: true})}/>
+            <ProfilePicture onChangePicture={file => setValue("profilePicture", file)}/>
 
             <Input
               type="text"
