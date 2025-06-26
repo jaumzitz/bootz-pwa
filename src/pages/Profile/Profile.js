@@ -52,9 +52,7 @@ export function Profile() {
     if (loading) {
         console.log('Obtendo contexto do usuário....')
     }
-    if (!authenticatedUser) {
-        window.location.reload(); //Esse reload está sendo usado para corrigir o problema de não atualizar o contexto do usuário após o registro. requer melhoria depois.
-    }
+
     console.log('Usuário logado', authenticatedUser)
 
     const user = paramUsername || authenticatedUser
@@ -71,15 +69,12 @@ export function Profile() {
     }
 
 
-
-
-
     return (
         <>
 
             <>
                 <HeaderButtons>
-                    {authenticatedUser === profileData.username && <IconButton icon={"/assets/icons/settings.svg"} onClick={() => logout()} fill overlay ></IconButton>}
+                    {authenticatedUser === profileData.username && <IconButton icon={"/assets/icons/logout.svg"} onClick={() => logout()} fill overlay ></IconButton>}
                 </HeaderButtons>
 
                 <HeaderImage/>
@@ -93,7 +88,7 @@ export function Profile() {
 
             <ProfileBiography data={profileData} />
             <ProfileUserData data={profileData} />
-            <ProfileHistory/>
+            <ProfileHistory data={profileData}/>
 
             <Spacer height='10vh' />
             <TabBar></TabBar>

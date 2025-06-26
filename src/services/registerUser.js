@@ -1,6 +1,7 @@
+import { useAuth } from '../context/AuthContext.js';
 import { supabase } from './supabaseClient.js';
 
-export async function signUpWithEmail(email, password, username, city, state_or_province, fullName, profilePicture) {
+export async function signUpWithEmail(email, password, username, city, stateOrProvince, fullName, phone, profilePicture) {
 
     const { data, error: signUpError } = await supabase.auth.signUp({
         email,
@@ -13,56 +14,70 @@ export async function signUpWithEmail(email, password, username, city, state_or_
 
     if (data.session) {
         try {
-            const createdProfile = await createProfile(
+            console.log('Criando perfil. User_id', data.session.user.id)
+            const { data: createProfileData } = await createProfile(
                 data.session.user.id,
                 username,
                 city,
-                state_or_province,
+                stateOrProvince,
                 fullName,
+                phone,
                 profilePicture)
 
-            return { data }
+
 
 
         } catch (e) {
             throw new Error(e)
         }
-
-
-
     }
 
 
 }
 
 
-async function createProfile(user_id, username, city, state_or_province, fullName, profilePicture) {
+async function createProfile(user_id, username, city, stateOrProvince, fullName, phone, profilePicture) {
 
 
     const { data, error } = await supabase
         .from("user_profile")
-        .insert([
-            {
+        .insert(
+            [{
                 user_id: user_id,
                 username: username,
-                full_name: fullName
-            }
-        ]);
+                full_name: fullName,
+                city: city,
+                state_or_province: stateOrProvince,
+                phone_number: phone
+
+            }]
+        )
+    .select()
+
 
     if (error) {
         throw new Error(error.message);
     }
 
-    try {
-        await uploadProfilePicture(profilePicture, username)
-    } catch (e) {
-        throw new Error(e)
+
+
+    if (profilePicture) {
+
+        try {
+            await uploadProfilePicture(profilePicture, username)
+        } catch (e) {
+            throw new Error(e)
+        }
+
     }
 
-    return data;
+    console.log('Perfil criado com sucesso', data)
+
+    return data
 }
 
 async function uploadProfilePicture(file, username) {
+    console.log('fazendo upload da foto de perfil')
 
     const newFileName = `${username}.jpg`
     const renamedFile = new File([file], newFileName, { type: file.type })

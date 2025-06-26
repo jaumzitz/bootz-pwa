@@ -41,11 +41,11 @@ const trailsTrendingNearby = [
     }
 ]
 
-export function ProfileHistory() {
+export function ProfileHistory({data}) {
     return (
         <>
             <HistorySection>
-                <Title size="medium">Lugares que Venus visitou</Title>
+                <Title size="medium">Lugares que {data.full_name} visitou</Title>
                 <TrailCard size="big" trail={trailsTrendingNearby[0]}></TrailCard>
 
                 {/* <TrailCard trail={trailsTrendingNearby[0]} size="big"></TrailCard>

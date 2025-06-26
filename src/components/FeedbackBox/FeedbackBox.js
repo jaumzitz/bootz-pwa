@@ -65,7 +65,7 @@ export function FeedbackBox() {
             )}
             {status && <><Span color={"#888888"}>{status}</Span><Spacer height={'12px'} /></>}
 
-            <PrimaryButton width={'180px'} type="submit" disabled={isSubmitting}>
+            <PrimaryButton  type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Enviando..." : "Enviar feedback"}
             </PrimaryButton>
 
