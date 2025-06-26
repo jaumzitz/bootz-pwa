@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { Title } from "../../components/TextContent/Title/Title"
 import { Span } from "../../components/TextContent/Span/Span"
 import Avatar from "../../components/Profile/Avatar/Avatar"
@@ -81,7 +81,7 @@ export function TrailDetail() {
 
             <UserData>
                 <Avatar username={trail.uploaded_by} size="mini"></Avatar>
-                <Span>Enviado por {trail.uploaded_by}</Span>
+                <Link to={`/profile/${trail.uploaded_by}`} style={{ textDecoration: "none" }}><Span>Enviado por {trail.uploaded_by}</Span></Link>
             </UserData>
 
             <TrailDescription>
