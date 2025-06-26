@@ -62,6 +62,8 @@ export function Register() {
     setValue("phone", value);
   }
 
+
+
   // Registro do usuário
   const onSubmit = async (data) => {
 
@@ -78,11 +80,11 @@ export function Register() {
     setIsLoading(true);
 
     try {
-      await signUpWithEmail(data.email, data.password, data.username, '', '', data.fullName, data.profilePicture);
-      
+      await signUpWithEmail(data.email, data.password, data.username, data.city, data.uf, data.fullName, data.profilePicture);
+
       alert('Usuário registrado com sucesso!');
       navigate('/home');
-      
+
     } catch (error) {
       setIsLoading(false);
       console.error('Erro ao registrar usuário:', error);
@@ -101,7 +103,7 @@ export function Register() {
             subtitle="Crie sua conta grátis e comece a explorar lugares incríveis."
           >
             <FormStyled onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="username" style={{fontFamily: 'var(--default-label-font)', color: '#6C7278'}}>Escolha seu nome de usuário:</label>
+              <label htmlFor="username" style={{ fontFamily: 'var(--default-label-font)', color: '#6C7278' }}>Escolha seu nome de usuário:</label>
               <UsernameInputWrapper>
                 <UsernamePrefix>@</UsernamePrefix>
                 <Input
@@ -182,29 +184,58 @@ export function Register() {
             title="Foto de perfil"
             subtitle="Tire uma selfie ou escolha uma foto do seu dispositivo."
           >
-            <ProfilePicture onChangePicture={file => setValue("profilePicture", file)}/>
+            <ProfilePicture onChangePicture={file => setValue("profilePicture", file)} />
 
             <Input
               type="text"
               id="fullName"
               label="Nome público"
-              {...register("fullName")}
+              {...register("fullName", {required: "Seu nome é obrigatório"})}
             />
-            <Input
-              type="date"
-              id="birthday"
-              label="Data de Nascimento"
-              {...register("birthday")}
-            />
-            <Input
-              type="text"
-              id="phone"
-              label="Telefone"
-              maxLength={15}
-              {...register("phone")}
-              onChange={handlePhoneChange}
-              placeholder="(99) 99999-9999"
-            />
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
+
+              <Input
+                type="date"
+                id="birthday"
+                label="Data de Nascimento"
+                placeholder="DD/MM/AAAA"
+                {...register("birthday", {
+                  required: "Data de nascimento é obrigatória"
+                  
+                })}
+              />
+              <Input
+                type="text"
+                id="phone"
+                label="Telefone"
+                maxLength={15}
+                {...register("phone")}
+                onChange={handlePhoneChange}
+                placeholder="(99) 99999-9999"
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
+
+              <Input
+                type="text"
+                id="city"
+                label="Cidade"
+                {...register("city", {
+                  required: "Informe sua cidade"
+                })}
+              />
+              <Input
+                type="text"
+                id="uf"
+                label="Estado"
+                minLength={2}
+                maxLength={2}
+                {...register("uf", {
+                  required: "Informe seu estado"
+                })}
+              />
+            </div>
             {errors.phone && <Span style={{ color: "red" }}>{errors.phone.message}</Span>}
           </Layout>
           <FixedFooter

@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext.js';
 import { supabase } from './supabaseClient.js';
 
-export async function signUpWithEmail(email, password, username, city, state_or_province, fullName, profilePicture) {
+export async function signUpWithEmail(email, password, username, city, stateOrProvince, fullName, phone, profilePicture) {
 
     const { data, error: signUpError } = await supabase.auth.signUp({
         email,
@@ -19,8 +19,9 @@ export async function signUpWithEmail(email, password, username, city, state_or_
                 data.session.user.id,
                 username,
                 city,
-                state_or_province,
+                stateOrProvince,
                 fullName,
+                phone,
                 profilePicture)
 
 
@@ -35,7 +36,7 @@ export async function signUpWithEmail(email, password, username, city, state_or_
 }
 
 
-async function createProfile(user_id, username, city, state_or_province, fullName, profilePicture) {
+async function createProfile(user_id, username, city, stateOrProvince, fullName, phone, profilePicture) {
 
 
     const { data, error } = await supabase
@@ -44,7 +45,11 @@ async function createProfile(user_id, username, city, state_or_province, fullNam
             {
                 user_id: user_id,
                 username: username,
-                full_name: fullName
+                full_name: fullName,
+                city: city,
+                state_or_province: stateOrProvince,
+                phone_number: phone
+                
             }
         )
         .select()

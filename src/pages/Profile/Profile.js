@@ -88,7 +88,7 @@ export function Profile() {
 
             <ProfileBiography data={profileData} />
             <ProfileUserData data={profileData} />
-            <ProfileHistory/>
+            <ProfileHistory data={profileData}/>
 
             <Spacer height='10vh' />
             <TabBar></TabBar>
