@@ -69,11 +69,11 @@ const ButtonStyled = styled.button`
     }
 `;
 
-export function PrimaryButton({ children, onClick, isLoading, width, variant ="default", ...props }) {
+export function PrimaryButton({ children, onClick, isLoading, width, variant ="default", type="button", ...props }) {
 
 
     return (
-        <ButtonStyled type="button" onClick={onClick} width={width} variant={variant} disabled={isLoading} {...props}>
+        <ButtonStyled type={type} onClick={onClick} width={width} variant={variant} disabled={isLoading} {...props}>
                   {isLoading ? <Spinner /> : children}
         </ButtonStyled>
     );

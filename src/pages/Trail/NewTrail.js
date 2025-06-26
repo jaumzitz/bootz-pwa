@@ -2,38 +2,15 @@ import { useNavigate } from "react-router-dom";
 
 import { Title } from "../../components/TextContent/Title/Title";
 import { Span } from "../../components/TextContent/Span/Span";
-import { TabBar } from "../../components/TabBar/TabBar";
 import { Input } from "../../components/Input/Input";
-import { ChipNavigator } from "../../components/ChipNavigator/ChipNavigator"
 import styled from "styled-components";
 import IconButton from "../../components/IconButton/IconButton";
 import Spacer from "../../components/Spacer/Spacer";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
 import { UploadFile } from "../../components/UploadFile/UploadFile";
+import { ChipSelector } from "../../components/ChipSelector/ChipSelector";
+import { TextArea } from "../../components/TextArea/TextArea";
 
-
-const CloseButton = styled.div`
-    max-width: 30px;
-    max-height: 30px;
-    padding: 10px;
-    margin: 2vh 2vh;
-    background-color: #f0f8ffba;
-    display: flex;
-    position: absolute;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 60px;
-    justify-content: center;
-`
-
-const UploadPhotos = styled.div`
-    background-color: #aaaaaa;
-    height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-`
 
 const FormContainer = styled.main`
     display: flex;
@@ -55,10 +32,85 @@ const LocalData = styled.div`
     gap: 4vw;
 `
 
-
-
 const addPhotoIcon = "/assets/icons/add-photo.svg"
 
+const enviromentGroupOptions = [
+    { label: 'Praia', id: "beach" },
+    { label: 'Montanha', id: "mountain" },
+    { label: 'Camping', id: "camping" },
+    { label: 'Cachoeira', id: "waterfall" },
+    { label: 'Hiking', id: "hiking" }
+
+]
+
+const accessGroupOption = [
+    {
+        label: 'Fácil acesso',
+        id: 'easy_access'
+
+    },
+    {
+        label: 'Díficil acesso',
+        id: 'hard_access'
+    }
+]
+
+const signingGroupOption = [
+    {
+        label: 'Bem sinalizado',
+        id: 'well_signed'
+    },
+    {
+        label: 'Pouco sinalizado',
+        id: 'poorly_signed'
+    },
+    {
+        label: 'Sem sinalização',
+        id: 'no_signing'
+    }
+]
+
+const effortGroupOption = [
+    {
+        label: 'Leve',
+        id: 'light_effort'
+
+    },
+    {
+        label: 'Moderado',
+        id: 'moderate_effort'
+
+
+    },
+    {
+        label: 'Intenso',
+        id: 'intense_effort'
+
+    },
+    {
+        label: 'Extraordinário',
+        id: 'extraordinary_effort'
+    }
+]
+
+const accidentRiskGroupOption = [
+    {
+        label: 'Baixo',
+        id: 'low_risk'
+
+    },
+    {
+        label: 'Moderado',
+        id: 'moderate_risk'
+
+
+    },
+    {
+        label: 'Alto',
+        id: 'high_risk'
+
+    },
+]
 export function NewTrail() {
 
     const navigate = useNavigate();
@@ -98,83 +150,16 @@ export function NewTrail() {
                     </FormSection>
 
                     <div>
-                        <ChipNavigator title="Ambiente" />
-
-
-                        <ChipNavigator title="Como foi chegar na trilha?" chipOptions={
-                            [
-                                {
-                                    label: 'Fácil acesso'
-                                },
-                                {
-                                    label: 'Díficil acesso'
-                                }
-                            ]
-                        } />
-
-
-                        <ChipNavigator title="A trilha possui sinalização?" chipOptions={
-                            [
-                                {
-                                    label: 'Bem sinalizado'
-                                },
-                                {
-                                    label: 'Pouco sinalizado'
-                                },
-                                {
-                                    label: 'Sem sinalização'
-                                }
-                            ]
-                        } />
-
-                        <ChipNavigator title="Nível de esforço físico" chipOptions={
-                            [
-                                {
-                                    label: 'Leve'
-                                },
-                                {
-                                    label: 'Moderado'
-                                },
-                                {
-                                    label: 'Difícil'
-                                },
-                                {
-                                    label: 'Extreaordinário'
-                                }
-                            ]
-                        } />
-
-                        <ChipNavigator title="Como foi chegar na trilha?" chipOptions={
-                            [
-                                {
-                                    label: 'Fácil acesso'
-                                },
-                                {
-                                    label: 'Díficil acesso'
-                                }
-                            ]
-                        } />
-
-                        <ChipNavigator title="Habitação" chipOptions={
-                            [
-                                {
-                                    label: 'Há pessoas morando lá'
-                                },
-                                {
-                                    label: 'Apenas poucos visitantes'
-                                },
-                                {
-                                    label: 'Vários visitantes'
-                                }
-                            ]
-                        } />
-
+                        <ChipSelector title="Ambiente" options={enviromentGroupOptions}></ChipSelector>
+                        <ChipSelector title="Como foi chegar na trilha?" options={accessGroupOption}></ChipSelector>
+                        <ChipSelector title="A trilha possui sinalização?" options={signingGroupOption}></ChipSelector>
+                        <ChipSelector title="Nível de esforço físico" options={effortGroupOption}></ChipSelector>
+                        <ChipSelector title="Risco de acidentes" options={accidentRiskGroupOption}></ChipSelector>
                     </div>
 
                     <FormSection>
-
                         <Title>Conte como foi sua experiência</Title>
-                        <Input type="text-area"></Input>
+                        <TextArea/>
                     </FormSection>
                 </form>
 
