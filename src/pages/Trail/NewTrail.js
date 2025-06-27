@@ -13,7 +13,7 @@ import { TextArea } from "../../components/TextArea/TextArea";
 import { supabase } from "../../services/supabaseClient";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { sendTrail } from "../../services/sendTrail";
+import { sendTrail, sendTrailCategory } from "../../services/sendTrail";
 
 const FormContainer = styled.main`
     display: flex;
@@ -92,7 +92,8 @@ const accidentRiskGroupOption = [{
 export function NewTrail() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const { username: authenticatedUser } = useAuth()
+    const { username: authenticatedUser } = useAuth();
+    const [radioError, setRadioError] = useState(""); // Novo estado para mensagem de erro
 
     // React Hook Form
     const {
@@ -113,8 +114,35 @@ export function NewTrail() {
     const effort = watch("effort");
     const accidentRisk = watch("accidentRisk");
 
+    // Validação dos radio-groups antes do envio
+    function validateRadioGroups() {
+        const missing = [];
+        if (!enviroment) missing.push("Ambiente");
+        if (!access) missing.push("Como foi chegar na trilha");
+        if (!signing) missing.push("Sinalização");
+        if (!effort) missing.push("Esforço físico");
+        if (!accidentRisk) missing.push("Risco de acidentes");
+        return missing;
+    }
+
     // Envio do formulário
     const onSubmit = async (data) => {
+        setRadioError(""); // Limpa erro anterior
+
+        const missing = validateRadioGroups();
+
+        if (missing.length == 1) {
+            setRadioError(`Ops... 😣 Parece que você esqueceu de informar essa categoria: ${missing.join(", ")}`);
+            setIsLoading(false);
+            return;
+        }
+
+        else if (missing.length > 1) {
+            setRadioError(` Ops... 😣 Parece que você esqueceu de informar essas categorias: ${missing.join(", ")}`);
+
+            setIsLoading(false);
+            return;
+        }
 
         setIsLoading(true);
 
@@ -127,12 +155,10 @@ export function NewTrail() {
                 city: data.location
             };
 
-
-
-            const sentTrailReturnedData = await sendTrail(trailData)
+            const sentTrailReturnedData = await sendTrail(trailData);
 
             if (sentTrailReturnedData) {
-           
+
                 const trailCategoryData = [
                     {
                         trail_id: sentTrailReturnedData[0].id,
@@ -159,20 +185,15 @@ export function NewTrail() {
                         category_id: 'accident_risk',
                         category_option_id: data.accidentRisk
                     }
-                ]
+                ];
 
-                const { data: trailCategoryReturnedData } = await supabase
-                    .from('trail_category')
-                    .insert(trailCategoryData)
-                    .select()
+                const trailCategoryReturnedData = await sendTrailCategory(trailCategoryData)
 
-
-                alert("Trilha enviada com sucesso!");
-                console.log(sentTrailReturnedData)
-                navigate('/home');
- 
+                if (trailCategoryReturnedData) {
+                    alert("Trilha enviada com sucesso!");
+                    navigate(`/trail/${sentTrailReturnedData[0].id}`);
+                }
             }
-
         } catch (e) {
             alert("Erro ao enviar trilha: " + e.message);
         }
@@ -188,7 +209,7 @@ export function NewTrail() {
             </header>
 
             <FormContainer>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={e => e.preventDefault()}>
                     <FormSection>
                         <Title>Enviar nova trilha</Title>
                         <Span style={{ marginTop: '4vh' }}>Compartilhe sua experiência nesse local</Span>
@@ -249,15 +270,25 @@ export function NewTrail() {
                             value={accidentRisk}
                             onChange={id => setValue("accidentRisk", id, { shouldValidate: true })}
                         />
+
                     </div>
 
                     <FormSection>
+                        <Span color={'#333'}>{radioError}</Span>
                         <Title>Conte como foi sua experiência</Title>
                         <TextArea
-                            {...register("description", { required: "Conte sua experiência" })}
+                            {...register("description")}
                         />
                     </FormSection>
                     <Spacer height={'20vh'} />
+
+                    {/* Mensagem de erro dos radio-groups */}
+                    {radioError && (
+                        <div style={{ color: "red", margin: "0 0 16px 0", textAlign: "center" }}>
+                            {radioError}
+                        </div>
+                    )}
+
                     <FixedFooter
                         primaryButton={{
                             width: '90%',

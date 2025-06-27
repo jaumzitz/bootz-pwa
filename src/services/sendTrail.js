@@ -17,3 +17,17 @@ export async function sendTrail(trailData) {
 
 }
 
+
+export async function sendTrailCategory(categoryData) {
+
+    const { data, error } = await supabase
+        .from('trail_category')
+        .insert(categoryData)
+        .select();
+
+    if (error) throw Error
+    if (data) return data
+    
+
+
+}
