@@ -41,7 +41,7 @@ export function TrailCard({ trail, size = "default" }) {
 
     return (
         <CardContainer size={size} onClick={() => navigate(`/trail/${trail.id}`)}>
-            <ImageCard size={size} src={trail.images[0].url} alt={trail.name} />
+            <ImageCard size={size} src={trail.images[0]?.url} alt={trail.name} />
             <CardInfo>
                 <Title size="small">{trail.name}</Title>
                 <CardDetails>

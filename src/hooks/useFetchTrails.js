@@ -9,7 +9,7 @@ async function fetchTrails(filters) {
     .select(`
     id,
     name,
-    uploaded_by,
+    created_by,
     length,
     state_or_province,
     city,

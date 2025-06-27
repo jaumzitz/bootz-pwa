@@ -80,8 +80,8 @@ export function TrailDetail() {
             </TrailIdSection>
 
             <UserData>
-                <Avatar username={trail.uploaded_by} size="mini"></Avatar>
-                <Link to={`/profile/${trail.uploaded_by}`} style={{ textDecoration: "none" }}><Span>Enviado por {trail.uploaded_by}</Span></Link>
+                <Avatar username={trail.created_by} size="mini"></Avatar>
+                <Link to={`/profile/${trail.created_by}`} style={{ textDecoration: "none" }}><Span>Enviado por {trail.created_by}</Span></Link>
             </UserData>
 
             <TrailDescription>

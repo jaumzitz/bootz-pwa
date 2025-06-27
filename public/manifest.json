@@ -1,7 +1,7 @@
 {
-    "name": "Bootz PWA",
+    "name": "Bootz",
     "short_name": "Bootz",
-    "description": "A progressive web application for Bootz.",
+    "description": "Comunidade para encontrar lugares incríveis e se conectar com pessoas ao redor do mundo.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#44A05B",
