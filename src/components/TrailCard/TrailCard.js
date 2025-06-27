@@ -38,10 +38,17 @@ const CardDetails = styled.div`
 
 export function TrailCard({ trail, size = "default" }) {
     const navigate = useNavigate();
+    
+    const cardImageUrl = trail.images?.length > 0 ? trail.images[0].url : '/assets/images/bootz-featured-image.jpg'
 
     return (
+        
+        
         <CardContainer size={size} onClick={() => navigate(`/trail/${trail.id}`)}>
-            <ImageCard size={size} src={trail.images[0]?.url} alt={trail.name} />
+            
+            
+            <ImageCard size={size} src={cardImageUrl} alt={trail.name}/> 
+
             <CardInfo>
                 <Title size="small">{trail.name}</Title>
                 <CardDetails>

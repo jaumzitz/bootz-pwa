@@ -4,13 +4,13 @@ import { TabBar } from "../../components/TabBar/TabBar";
 import Avatar from "../../components/Profile/Avatar/Avatar";
 import Spacer from "../../components/Spacer/Spacer";
 import { ProfileBiography } from "../../components/Profile/ProfileBiography/ProfileBiography";
-import { ProfileUserData } from "../../components/Profile/ProfileUserData.js/ProfileUserData";
+import { ProfileUserData } from "../../components/Profile/ProfileUserData/ProfileUserData";
 import { ProfileHistory } from "../../components/Profile/ProfileHistory/ProfileHistory";
 import { useFetchProfileData } from "../../hooks/useFetchProfileData";
 import { useNavigate, useParams } from "react-router-dom";
 import { PrimaryButton } from "../../components/PrimaryButton/PrimaryButton";
 import { logout } from "../../services/authService";
-import { AuthContext, useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const HeaderImage = styled.header`
     background-color: #aaaaaa;

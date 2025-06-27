@@ -1,4 +1,4 @@
-import { supabase } from "@supabase/auth-ui-shared";
+import { supabase } from "../services/supabaseClient";
 import { useQuery } from "@tanstack/react-query";
 
 
@@ -12,6 +12,9 @@ async function fetchProfileHistory(username) {
         city,
         length,
         created_at,
+        images: trail_image (
+            url
+        )
         
         
         `)
@@ -30,12 +33,12 @@ async function fetchProfileHistory(username) {
     // Hook customizado usando React Query
     export function useFetchProfileHistory(username) {
         
-        // return useQuery({
-            //     queryKey: ['profileHistory', username],
-            //     queryFn: () => fetchProfileHistory(username),
-            //     staleTime: 1000 * 60 * 5, // cache por 5 minutos
-            // });
-            console.log('fetchingProfileHistory...', username)
-            return fetchProfileHistory(username)
+        return useQuery({
+                queryKey: ['profileHistory', username],
+                queryFn: () => fetchProfileHistory(username),
+                staleTime: 1000 * 60 * 0.1, // cache por 5 minutos
+            });
+            
+
             
         }
