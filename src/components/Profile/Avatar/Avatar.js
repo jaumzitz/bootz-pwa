@@ -25,6 +25,13 @@ const CirclePlaceholder = styled.div`
   align-items: center;
   justify-content: center;
 `
+const MediumAvatar = styled.img`
+    width: 3rem;
+    height: 3rem;
+    border-radius: 60px;
+    object-fit: cover;
+    
+`
 
 const SmallAvatar = styled.img`
     width: 2.5rem;
@@ -33,6 +40,7 @@ const SmallAvatar = styled.img`
     object-fit: cover;
     
 `
+
 
 const MiniAvatar = styled.img`
     width: 2rem;
@@ -50,10 +58,10 @@ export default function Avatar({ username, size }) {
 
     //const imgUrl = !username ? defaultAvatar : 'https://github.com/jaumzitz.png';
 
-const imgUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}.jpg`
+    const imgUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}.jpg`
 
     // const avatarBucketUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}.jpg`
-    
+
 
     // const imgUrl = fetch(avatarBucketUrl)
     //     .then(r => {
@@ -75,6 +83,12 @@ const imgUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/publi
                 <SmallAvatar src={imgUrl}>
 
                 </SmallAvatar>
+            )}
+
+            {username && size === 'medium' && (
+                <MediumAvatar src={imgUrl}>
+
+                </MediumAvatar>
             )}
 
             {username && size === 'big' &&

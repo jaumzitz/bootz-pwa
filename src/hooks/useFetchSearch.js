@@ -28,7 +28,6 @@ export async function fetchSearch(query) {
     )
   `)
   .ilike('normalized_name', `%${normalizeText(query)}%`, { useUnaccent: true })
-  console.log("Normalized query:", normalizeText(query));
 
 
   if (error) {

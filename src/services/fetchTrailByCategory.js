@@ -24,28 +24,27 @@ export async function fetchTrailByCategory(filters) {
       )
     )
   `)
-      .not('categories', 'is', null) // Só retorna trilhas que possuem pelo menos uma categoria
-
-  .eq('categories.category_option.category_id', filters?.category_id)
-  .eq('categories.category_option_id', filters?.category_option_id)
+    .not('categories', 'is', null) // Só retorna trilhas que possuem pelo menos uma categoria
+    .eq('categories.category_option.category_id', filters?.category_id)
+    .eq('categories.category_option_id', filters?.category_option_id)
   //.range(filters?.range?.min, filters?.range?.max);
 
- // return data
+  // return data
 
 
   if (error) throw error;
 
   return data
-  .filter(trail => trail.categories && trail.categories.length > 0)
-  .map(trail => ({
-    ...trail,
-    categories: (trail.categories ?? [])
-      .map(tc => ({
-        'id': tc.category_option?.category_id,
-        'description': tc.category_option?.fullDescription,
-        'icon_path': tc.category_option?.category?.icon_path
-      }))
-  }))
+    .filter(trail => trail.categories && trail.categories.length > 0)
+    .map(trail => ({
+      ...trail,
+      categories: (trail.categories ?? [])
+        .map(tc => ({
+          'id': tc.category_option?.category_id,
+          'description': tc.category_option?.fullDescription,
+          'icon_path': tc.category_option?.category?.icon_path
+        }))
+    }))
 
 
 }

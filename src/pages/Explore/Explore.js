@@ -12,6 +12,9 @@ import Banner from "../../components/Banner/Banner.js";
 import IconButton from "../../components/IconButton/IconButton.js";
 import { Spinner } from "../../components/Spinner/Spinner.js";
 import { fetchTrailByCategory } from "../../services/fetchTrailByCategory.js"; // ajuste o caminho conforme seu projeto
+import { PlacesResults } from "./PlacesResults.js";
+import { fetchUsers } from "../../services/fetchUsers.js";
+import { UsersResults } from "./UsersResults.js";
 
 
 const HeaderStyled = styled.header`
@@ -28,15 +31,9 @@ const ToggleContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin: 0vh 4vw 4vw 4vw;
+    margin: 0vh 4vw 0 4vw;
 `;
 
-const PlacesResultsSection = styled.section`
-    margin: 4vh 4vw;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-`;
 
 
 
@@ -75,7 +72,7 @@ export function Explore() {
 
         if (typeOfSearch === "places" && envParam) {
             setLoading(true);
-            fetchTrailByCategory({category_id: 'enviroment', category_option_id: envParam})
+            fetchTrailByCategory({ category_id: 'enviroment', category_option_id: envParam })
                 .then(data => setResults(data || []))
                 .finally(() => setLoading(false));
         }
@@ -84,11 +81,14 @@ export function Explore() {
 
     // Função chamada pelo SearchBar ao digitar
     const handleSearchInput = (value) => {
-const params = new URLSearchParams(location.search);
-params.delete("enviroment"); // Remove o parâmetro enviroment da URL
+        const params = new URLSearchParams(location.search);
+        params.delete("enviroment"); // Remove o parâmetro enviroment da URL
         navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+        
         setLoading(true);
+        
         setQuery(value);
+        
         if (debounceRef.current) clearTimeout(debounceRef.current);
         debounceRef.current = setTimeout(async () => {
             if (value.trim() === "") {
@@ -97,14 +97,27 @@ params.delete("enviroment"); // Remove o parâmetro enviroment da URL
                 return;
             }
             setLoading(true);
-            const data = await fetchSearch(value);
-            setResults(data || []);
+
+            if (typeOfSearch === "people") {
+                const data = await fetchUsers(value)
+                setResults(data || []);
+
+            }
+
+            if (typeOfSearch === "places") {
+
+                const data = await fetchSearch(value);
+                setResults(data || []);
+            }
+
+
             setLoading(false);
         }, 2000);
     };
 
     const handleToggleSearchType = (type) => {
         setTypeOfSearch(type);
+        console.log("Tipo de busca alterado para:", type);
         setQuery(""); // Limpa a busca ao trocar o tipo
         setResults([]); // Limpa os resultados ao trocar o tipo
         if (searchInputRef.current) {
@@ -128,29 +141,16 @@ params.delete("enviroment"); // Remove o parâmetro enviroment da URL
                 <PrimaryButton variant={typeOfSearch !== 'places' ? 'outlined' : ''} onClick={() => handleToggleSearchType('places')} > Lugares</PrimaryButton>
                 <PrimaryButton variant={typeOfSearch !== 'people' ? 'outlined' : ''} onClick={() => handleToggleSearchType('people')}>Pessoas</PrimaryButton>
             </ToggleContainer>
-            
+
             <Spacer height={'2vh'} width={0}></Spacer>
 
-            {typeOfSearch === "people" && (<>Buscar pessoas...</>)}
+            {
+                typeOfSearch === "people" && <UsersResults results={results} loading={loading}/>
+            }
 
-            {typeOfSearch === "places" && (<>
-                <ChipNavigator showIcon={true} />
-               
-
-                <PlacesResultsSection>
-                    {/* {!query && <Banner title="Onde você quer ir?"></Banner>} */}
-
-                    {(loading) && <Spinner />}
-                    {!loading && results.length === 0 && query && (
-
-                        <Banner width={null} title="Nenhuma trilha encontrada" description="Experimente usar algum dos filtros. 😉"></Banner>
-                    )}
-                    {results.length > 0 && <Title size="medium">Resultados de trilhas</Title>}
-                    {results.map((trail) => (
-                        <TrailCard key={trail.id} size="big" trail={trail} />
-                    ))}
-                </PlacesResultsSection>
-            </>)}
+            {
+                typeOfSearch === "places" && <PlacesResults query={query} results={results} loading={loading} />
+            }
         </>
     );
 }
