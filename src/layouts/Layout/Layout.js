@@ -64,13 +64,13 @@ export function OneRowHeader( { leftButtonIcon, leftButtonAction, title, childre
             <OneRowHeaderContainer>
                 {leftButtonIcon && <IconButton icon={leftButtonIcon} onClick={leftButtonAction}></IconButton>}
 
-                
                     <Title>{title}</Title>
                 
                 <Spacer height="0vh" />
             </OneRowHeaderContainer>
             <section>
-                {children}
+                 {children}
+               
             </section>
         </MainContainer>
 

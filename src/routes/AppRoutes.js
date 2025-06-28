@@ -12,6 +12,8 @@ import { useAuth } from "../context/AuthContext";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 
+import { Explore } from "../pages/Explore/Explore";
+
 export function AppRoutes() {
 
     const { session, loading } = useAuth()
@@ -85,6 +87,12 @@ export function AppRoutes() {
                 <Route path="/events" element={
                     <PrivateRoute>
                         <Events />
+                    </PrivateRoute>
+                } />
+
+                <Route path="/explore" element={
+                    <PrivateRoute>
+                        <Explore />
                     </PrivateRoute>
                 } />
 

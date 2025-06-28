@@ -1,9 +1,6 @@
-// src/hooks/useFetchTrails.js
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../services/supabaseClient"; // ajuste o caminho conforme seu projeto
+import { supabase } from "./supabaseClient";
 
-// Função para buscar trilhas do Supabase
-async function fetchTrails(filters) {
+export async function fetchTrailByCategory(filters) {
   const { data, error } = await supabase
     .from('trail')
     .select(`
@@ -18,20 +15,29 @@ async function fetchTrails(filters) {
     ),
     categories: trail_category (
       category_option (
-        category_id,
         fullDescription,
+        category_option_id: id,
+        category_id,
         category (
           icon_path
         )
       )
     )
   `)
-   
-    .range(filters?.range.min, filters?.range.max);
+      .not('categories', 'is', null) // Só retorna trilhas que possuem pelo menos uma categoria
+
+  .eq('categories.category_option.category_id', filters?.category_id)
+  .eq('categories.category_option_id', filters?.category_option_id)
+  //.range(filters?.range?.min, filters?.range?.max);
+
+ // return data
+
 
   if (error) throw error;
 
-  return data.map(trail => ({
+  return data
+  .filter(trail => trail.categories && trail.categories.length > 0)
+  .map(trail => ({
     ...trail,
     categories: (trail.categories ?? [])
       .map(tc => ({
@@ -40,18 +46,6 @@ async function fetchTrails(filters) {
         'icon_path': tc.category_option?.category?.icon_path
       }))
   }))
-
-
-}
-
-// Hook customizado usando React Query
-export function useFetchTrails(queryKey, filters) {
-
-  return useQuery({
-    queryKey: [queryKey],
-    queryFn: () => fetchTrails(filters),
-    staleTime: 1000 * 60 * 5, // cache por 5 minutos
-  });
 
 
 }

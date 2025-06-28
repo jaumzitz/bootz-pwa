@@ -9,7 +9,7 @@ const BannerContainer = styled.div`
     background-color: var(--gray-color);
     padding:  2vh;
     
-    width: ${({ width }) => width ? width : "100%"};
+    //width: ${({ width }) => width ? width : "100%"};
     border-radius: 14px;
         gap: 4vw;
 `
