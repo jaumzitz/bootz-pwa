@@ -19,7 +19,7 @@ export function UsersResults({ results, loading }) {
         <UsersResultsSection>
             {loading && <Spinner />}
             {!loading && results.length === 0 && (
-                <Banner title="Nenhum usuário encontrado" description="Tente usar outro termo de busca." />
+                <Banner width='auto' title="Nenhum usuário encontrado" description="Tente usar outro termo de busca." />
             )}
             {results.length > 0 && (
                 <div>

@@ -30,7 +30,7 @@ const FormSection = styled.section`
 
 const LocalData = styled.div`
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1.2fr 0.9fr ;
     gap: 4vw;
 `
 
@@ -223,13 +223,14 @@ export function NewTrail() {
                         <LocalData>
                             <Input
                                 type="text"
-                                label="Localização"
+                                label="Cidade"
                                 {...register("location", { required: "Informe a localização" })}
                             />
                             <Input
-                                type="text"
-                                label="Comprimento"
-                                {...register("length", { required: "Informe o comprimento" })}
+                                type="number"
+                                label="Comprimento (Km)"
+                                placeholder="Ex: 2,5"
+                                {...register("length", { required: "Informe o comprimento da trilha em Km" })}
                             />
                         </LocalData>
                     </FormSection>

@@ -6,6 +6,8 @@ export function normalizeText(text) {
   // Remove vírgulas
   normalized = normalized.replace(/,/g, "");
   // Deixa em minúsculo
+  normalized = normalized.replace(" ", "%");
+
   normalized = normalized.toLowerCase();
   return normalized;
 }

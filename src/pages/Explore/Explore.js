@@ -133,6 +133,7 @@ export function Explore() {
                 <SearchBar
                     onChange={handleSearchInput}
                     value={query}
+                    placeholder={typeOfSearch === 'places' ? 'Busque por um local' : 'Busque por um usuário'}
                     inputRef={searchInputRef}
                 />
             </HeaderStyled>

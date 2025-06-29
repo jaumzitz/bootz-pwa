@@ -72,10 +72,10 @@ export function TrailDetail() {
 
                 <TitleRow>
                     <Title>{trail.name}</Title>
-                    <Span bgcolor="#d9d9d9">{trail.length} km</Span>
+                    <Span bgcolor="#d9d9d9">{trail.length}km</Span>
                 </TitleRow>
 
-                <Span style={{ marginTop: '4vh' }}>📍 {trail.city}, {trail.state_or_province}</Span>
+                <Span style={{ marginTop: '4vh' }}>📍 {trail.city} {trail.state_or_province}</Span>
 
             </TrailIdSection>
 
@@ -97,9 +97,11 @@ export function TrailDetail() {
 
                 </>
             }
-            <TrailCommentsSection trailId={id} totalComments={trail.comments_count} />
 
-            <Banner icon="/assets/icons/3d-arrow.png" title="Em breve você poderá ver essa trilha no mapa!" />
+            <TrailCommentsSection trailId={id} totalComments={trail.comments_count} />
+            <div style={{margin: '4vh 4vw'}}>
+            <Banner width={'auto'} icon="/assets/icons/3d-arrow.png" title="Em breve você poderá ver essa trilha no mapa!" />
+                </div>
 
         </>
     )

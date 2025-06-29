@@ -9,7 +9,7 @@ const BannerContainer = styled.div`
     background-color: var(--gray-color);
     padding:  2vh;
     
-    //width: ${({ width }) => width ? width : "100%"};
+    width: ${({ width }) => width ? width : "100%"};
     border-radius: 14px;
         gap: 4vw;
 `
@@ -22,7 +22,7 @@ const TextContainer = styled.div`
 export default function Banner({ icon, title, description, width, direction}) {
     return (
         <BannerContainer width={width} direction={direction}>
-            {icon && <img src={icon} style={{ height: '8vh' }} />}
+            {icon && <img src={icon} style={{ maxHeight: '4vh', width: '4vh' }} />}
          
 
                 <Title size="small">{title}</Title>

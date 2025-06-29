@@ -4,31 +4,34 @@ import { normalizeText } from "../utils/normalizaText";
 
 
 export async function fetchSearch(query) {
-  const {data, error } = await supabase
-  .from('trail')
-  .select(`
-    id,
-    name,
-    normalized_name,
-    created_by,
-    length,
-    state_or_province,
-    city,
-    images: trail_image (
-      url
-    ),
-    categories: trail_category (
-      category_option (
-        category_id,
-        fullDescription,
-        category (
-          icon_path
+  const normalized = normalizeText(query);
+
+  const { data, error } = await supabase
+    .from('trail')
+    .select(`
+      id,
+      name,
+      normalized_name,
+      created_by,
+      length,
+      state_or_province,
+      city,
+      images: trail_image (
+        url
+      ),
+      categories: trail_category (
+        category_option (
+          category_id,
+          fullDescription,
+          category (
+            icon_path
+          )
         )
       )
-    )
-  `)
-  .ilike('normalized_name', `%${normalizeText(query)}%`, { useUnaccent: true })
-
+    `)
+    .or(
+      `normalized_name.ilike.%${normalized}%,normalized_city.ilike.%${query}%`
+    );
 
   if (error) {
     throw new Error(`Error fetching search results: ${error.message}`);
