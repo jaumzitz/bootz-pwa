@@ -41,15 +41,15 @@ export function Chip({ chip, showIcon = false, checked = false, onClick, onChang
 
   const handleClick = () => {
     const currentPage = location.pathname
-    console.log('currentPage', currentPage)
+   // console.log('currentPage', currentPage)
 
     if (currentPage === '/home') {
-      console.log('Navigating to /explore')
+    //  console.log('Navigating to /explore')
       navigate('/explore?enviroment=' + chip.id, { replace: true });
       return
       
     } else {
-      console.log('Already on /explore, executing onClick')
+  //    console.log('Already on /explore, executing onClick')
       if (onClick) {
         onClick(chip.id);
       }

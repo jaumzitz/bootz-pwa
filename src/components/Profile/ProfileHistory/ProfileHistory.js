@@ -20,7 +20,7 @@ export function ProfileHistory({ data }) {
     const navigate = useNavigate()
     const { username: authenticatedUser, loading } = useAuth()
     const profileUsername = data.username || authenticatedUser
-    console.log('ProfileHistory', profileUsername, authenticatedUser)
+  //  console.log('ProfileHistory', profileUsername, authenticatedUser)
 
     if (loading) {
         console.log('Obtendo contexto do usuário....')

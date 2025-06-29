@@ -23,7 +23,7 @@ export default function SearchBar({onChange, value, placeholder='Busque um local
 
     const handleClick = () => {
         const currentPage = location.pathname
-        console.log('currentPage', currentPage)
+//        console.log('currentPage', currentPage)
 
         if (currentPage !== '/explore') {
             navigate('/explore')

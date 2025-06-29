@@ -70,8 +70,7 @@ async function createProfile(user_id, username, city, stateOrProvince, fullName,
         }
 
     }
-
-    console.log('Perfil criado com sucesso', data)
+// console.log('Perfil criado com sucesso', data)
 
     return data
 }

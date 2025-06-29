@@ -117,7 +117,7 @@ export function Explore() {
 
     const handleToggleSearchType = (type) => {
         setTypeOfSearch(type);
-        console.log("Tipo de busca alterado para:", type);
+     //   console.log("Tipo de busca alterado para:", type);
         setQuery(""); // Limpa a busca ao trocar o tipo
         setResults([]); // Limpa os resultados ao trocar o tipo
         if (searchInputRef.current) {

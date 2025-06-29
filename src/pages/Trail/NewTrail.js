@@ -44,9 +44,7 @@ async function uploadTrailImages(images, trailId) {
             })
             .select()
 
-            if (data) {
-                console.log(data)
-            }
+       
 
         }
     }
@@ -440,6 +438,7 @@ export function NewTrail() {
                             {radioError}
                         </div>
                     )}
+                    
 
                     <FixedFooter
                         primaryButton={{
