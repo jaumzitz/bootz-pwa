@@ -72,10 +72,10 @@ export function TrailDetail() {
 
                 <TitleRow>
                     <Title>{trail.name}</Title>
-                    <Span bgcolor="#d9d9d9">{trail.length} km</Span>
+                    <Span bgcolor="#d9d9d9">{trail.length}km</Span>
                 </TitleRow>
 
-                <Span style={{ marginTop: '4vh' }}>📍 {trail.city}, {trail.state_or_province}</Span>
+                <Span style={{ marginTop: '4vh' }}>📍 {trail.city} {trail.state_or_province}</Span>
 
             </TrailIdSection>
 
