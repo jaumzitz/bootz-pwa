@@ -11,6 +11,7 @@ const FilledContainerButton = styled.button`
     justify-content: center;
     border: none;
     cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   `;
 
 
@@ -30,7 +31,7 @@ const OverlayedButton = styled.div`
     z-index: 1;
 `
 
-export default function IconButton({ icon, onClick, fill, overlay }) {
+export default function IconButton({ icon, onClick, fill, overlay, children}) {
 
 
 
@@ -39,6 +40,7 @@ export default function IconButton({ icon, onClick, fill, overlay }) {
             {fill && overlay && (
                 <OverlayedButton >
                     <FilledContainerButton onClick={onClick}>
+                       
                         <img src={icon} alt="Icon" style={{ width: "24px", height: "24px" }} />
                     </FilledContainerButton>
                 </OverlayedButton>

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import IconButton from "../IconButton/IconButton";
 
 // Container principal da galeria com altura fixa
 const GalleryContainer = styled.div`
@@ -19,6 +20,7 @@ const HorizontalScrollContainer = styled.div`
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  position: relative;
   -webkit-overflow-scrolling: touch;
   width: 100%;
   height: 100%;
@@ -63,7 +65,7 @@ const defaultPhotos = [
   "/assets/images/praia-solidao.jpg",
 ];
 
-export default function TrailGallery({ photos = defaultPhotos }) {
+export default function TrailGallery({ photos = defaultPhotos, children, readOnly = false, onRemoveImage }) {
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -80,7 +82,23 @@ export default function TrailGallery({ photos = defaultPhotos }) {
     <GalleryContainer>
       <HorizontalScrollContainer ref={scrollRef} onScroll={handleScroll}>
         {photos.map((photo, index) => (
-          <GalleryImage key={index} src={photo.url} alt={`Imagem ${index + 1}`} />
+          <div
+            key={index}
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "100%",
+              flexShrink: 0,
+            }}
+          >
+            <GalleryImage src={photo.url} alt={`Imagem ${index + 1}`} />
+            {readOnly && <IconButton
+              icon="/assets/icons/close.svg"
+              overlay
+              
+              onClick={() => onRemoveImage && onRemoveImage(index)}
+            />}
+          </div>
         ))}
       </HorizontalScrollContainer>
       {photos.length > 0 && (

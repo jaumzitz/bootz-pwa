@@ -4,6 +4,9 @@ const DefaultSpan = styled.span`
 	font-family: var(--default-label-font);
 	font-size: var(--default-font-size);
 	color: ${({ color }) => color || 'var(--default-font-color)'}; 
+        display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
 `
 
 const RoundedBg = styled.div`
@@ -12,6 +15,8 @@ const RoundedBg = styled.div`
     border-radius: 60px;;
     white-space: nowrap;
     text-align: ${({ alignment }) => alignment || 'left'};
+    
+
 `
 
 
