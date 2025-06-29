@@ -33,6 +33,7 @@ export default function TrailCommentsSection({ trailId, totalComments }) {
     const { data: comments = [], isLoading, error, refetch } = useFetchComments(trailId)
     const [comment, setComment] = useState("");
     const [isSending, setIsSending] = useState(false);
+    const [currentCommentCount, setCurrentCommentCount] = useState(totalComments)
     const { username } = useAuth();
 
     async function handleSendComment() {
@@ -45,6 +46,7 @@ export default function TrailCommentsSection({ trailId, totalComments }) {
                 created_by: username
             });
             setComment("");
+            setCurrentCommentCount(++totalComments)
             refetch()
             // Aqui você pode recarregar os comentários, se desejar
             // Exemplo: refetch() se usar react-query ou SWR
@@ -60,7 +62,7 @@ export default function TrailCommentsSection({ trailId, totalComments }) {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '8px' }}>
                         <Title>Comentários</Title>
-                        <CommentCount>{totalComments}</CommentCount>
+                        <CommentCount>{currentCommentCount}</CommentCount>
                     </div>
                     {/* <LinkButton>Ver tudo</LinkButton> */}
                 </div>

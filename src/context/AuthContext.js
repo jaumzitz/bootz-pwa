@@ -33,7 +33,7 @@ export function AuthProvider({ children }) {
         const username = await fetchUsername(session.user.id);
 
         if (username) {
-          console.log("Username obtido onAuthStateChange:", username);
+        //  console.log("Username obtido onAuthStateChange:", username);
 
           setUsername(username);
         }
