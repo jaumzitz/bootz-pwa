@@ -82,6 +82,7 @@ export function Profile() {
                 <AvatarContainer>
                     <Avatar username={profileData.username} size="big" />
                 </AvatarContainer>
+                <Spacer height={'2vh'}></Spacer>
             </>
 
 
