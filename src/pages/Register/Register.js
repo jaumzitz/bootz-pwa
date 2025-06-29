@@ -10,6 +10,7 @@ import { Layout } from "../../layouts/Layout/Layout";
 import FixedFooter from "../../layouts/Layout/FixedFooter";
 import ProfilePicture from "../../components/Profile/ProfilePicture/ProfilePicutre";
 import { useAuth } from "../../context/AuthContext";
+import Spacer from "../../components/Spacer/Spacer";
 
 const FormStyled = styled.form`
     display: flex;
@@ -251,6 +252,7 @@ export function Register() {
             </div>
             {errors.phone && <Span style={{ color: "red" }}>{errors.phone.message}</Span>}
           </Layout>
+         <Spacer height={'8vh'}></Spacer>
           <FixedFooter
             primaryButton={{
               text: 'Concluir',

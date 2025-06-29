@@ -10,6 +10,7 @@ async function fetchTrails(filters) {
     id,
     name,
     created_by,
+    created_at,
     length,
     state_or_province,
     city,
@@ -26,7 +27,7 @@ async function fetchTrails(filters) {
       )
     )
   `)
-   
+    .order('created_at', { ascending: false })
     .range(filters?.range.min, filters?.range.max);
 
   if (error) throw error;
