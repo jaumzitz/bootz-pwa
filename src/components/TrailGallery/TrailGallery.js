@@ -19,12 +19,13 @@ const GalleryContainer = styled.div`
 const HorizontalScrollContainer = styled.div`
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden; /* Impede rolagem vertical */
   scroll-snap-type: x mandatory;
   position: relative;
   -webkit-overflow-scrolling: touch;
   width: 100%;
   height: 100%;
-  /* Oculta a scrollbar no WebKit */
+  touch-action: pan-x; /* Impede rolagem vertical no iOS */
   &::-webkit-scrollbar {
     display: none;
   }
