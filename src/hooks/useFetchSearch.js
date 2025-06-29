@@ -1,14 +1,15 @@
-// src/hooks/useFetchTrails.js
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../services/supabaseClient"; // ajuste o caminho conforme seu projeto
+import { supabase } from "../services/supabaseClient";
+import { normalizeText } from "../utils/normalizaText";
 
-// Função para buscar trilhas do Supabase
-async function fetchTrails(filters) {
-  const { data, error } = await supabase
-    .from('trail')
-    .select(`
+
+export async function fetchSearch(query) {
+  const {data, error } = await supabase
+  .from('trail')
+  .select(`
     id,
     name,
+    normalized_name,
     created_by,
     length,
     state_or_province,
@@ -26,10 +27,12 @@ async function fetchTrails(filters) {
       )
     )
   `)
-   
-    .range(filters?.range.min, filters?.range.max);
+  .ilike('normalized_name', `%${normalizeText(query)}%`, { useUnaccent: true })
 
-  if (error) throw error;
+
+  if (error) {
+    throw new Error(`Error fetching search results: ${error.message}`);
+  }
 
   return data.map(trail => ({
     ...trail,
@@ -39,17 +42,15 @@ async function fetchTrails(filters) {
         'description': tc.category_option?.fullDescription,
         'icon_path': tc.category_option?.category?.icon_path
       }))
-  }))
-
-
+  }));
 }
 
 // Hook customizado usando React Query
-export function useFetchTrails(queryKey, filters) {
+export function useFetchSearch(queryKey, filters) {
 
   return useQuery({
     queryKey: [queryKey],
-    queryFn: () => fetchTrails(filters),
+    queryFn: () => fetchSearch(filters),
     staleTime: 1000 * 60 * 5, // cache por 5 minutos
   });
 

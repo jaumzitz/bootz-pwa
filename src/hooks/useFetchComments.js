@@ -9,13 +9,13 @@ async function fetchComments(trailId) {
         .select(`
             'id',
             'created_by',
-            'created_date',
+            'created_dte',
             'content',
-            'trail_id'    
+            'trail_id'
         `)
         .range(0, 4)
         .eq('trail_id', trailId)
-        .order('created_date', { ascending: false })
+        //.order('created_date', { ascending: false })
 
     if (error) throw error;
 

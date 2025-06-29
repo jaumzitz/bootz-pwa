@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ChipInput = styled.input`
   appearance: none;
@@ -26,12 +27,41 @@ const ChipLabel = styled.label`
   position: relative;
 `;
 
-export function Chip({ chip, showIcon = false, checked = false, onChange, type = "checkbox", name }) {
+export function Chip({ chip, showIcon = false, checked = false, onClick, onChange, type = "checkbox", name }) {
   const platform = window.navigator.userAgent.includes("iPhone") ? "iPhone" : "Android";
+
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
+    // Obtém o valor do parâmetro enviroment da URL
+  const params = new URLSearchParams(location.search);
+  const envParam = params.get("enviroment");
+
+
+  const handleClick = () => {
+    const currentPage = location.pathname
+    console.log('currentPage', currentPage)
+
+    if (currentPage === '/home') {
+      console.log('Navigating to /explore')
+      navigate('/explore?enviroment=' + chip.id, { replace: true });
+      return
+      
+    } else {
+      console.log('Already on /explore, executing onClick')
+      if (onClick) {
+        onClick(chip.id);
+      }
+    }
+      
+
+  }
 
   return (
     <>
-      <ChipLabel htmlFor={chip.id} checked={checked}>
+      <ChipLabel htmlFor={chip.id} checked={checked || envParam === chip.id } onClick={() => handleClick()} >
+
         {showIcon && (!chip.emoji && chip.customiOSEmoji && platform === "iPhone") &&
           <img
             src={chip.customiOSEmoji}

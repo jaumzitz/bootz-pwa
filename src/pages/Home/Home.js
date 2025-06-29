@@ -13,7 +13,10 @@ import { FeedbackBox } from "../../components/FeedbackBox/FeedbackBox";
 
 
 const HeaderStyled = styled.header`
-        
+    margin-top: 4vh;
+    display: flex;
+    width: 100%;
+    gap: 16px;
     flex-direction: column;   
     padding: 0 4vw 4vw 4vw;
 `
