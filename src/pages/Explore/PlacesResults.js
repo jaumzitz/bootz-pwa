@@ -22,7 +22,7 @@ export function PlacesResults({query, loading, results}) {
                     {(loading) && <Spinner />}
                     {!loading && results.length === 0 && query && (
 
-                        <Banner width={null} title="Nenhuma trilha encontrada" description="Experimente usar algum dos filtros. 😉"></Banner>
+                        <Banner width={'auto'} title="Nenhuma trilha encontrada" description="Experimente buscar pelo nome da cidade, ou toque em uma categoria. 😉"></Banner>
                     )}
                     {results.length > 0 && <Title size="medium">Olhe o que encontramos para você</Title>}
                     {results.map((trail) => (

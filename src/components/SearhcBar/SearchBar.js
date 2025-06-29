@@ -16,7 +16,7 @@ const SearchInput = styled.input`
     font-size: var(--default-font-size);
 `
 
-export default function SearchBar({onChange, value, inputRef}) {
+export default function SearchBar({onChange, value, placeholder='Busque um local ou usuário', inputRef}) {
 
     const navigate = useNavigate()  
     const location = useLocation()
@@ -33,7 +33,7 @@ export default function SearchBar({onChange, value, inputRef}) {
 
     return (
         <>
-            <SearchInput ref={inputRef} type="text" onClick={handleClick} onChange={e => onChange(e.target.value)} placeholder="Busque por uma localização"  ></SearchInput>
+            <SearchInput ref={inputRef} type="text" onClick={handleClick} onChange={e => onChange(e.target.value)} placeholder={placeholder}  ></SearchInput>
         </>
     )
 }

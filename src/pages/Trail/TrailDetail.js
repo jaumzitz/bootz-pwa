@@ -97,9 +97,11 @@ export function TrailDetail() {
 
                 </>
             }
-            <TrailCommentsSection trailId={id} totalComments={trail.comments_count} />
 
-            <Banner icon="/assets/icons/3d-arrow.png" title="Em breve você poderá ver essa trilha no mapa!" />
+            <TrailCommentsSection trailId={id} totalComments={trail.comments_count} />
+            <div style={{margin: '4vh 4vw'}}>
+            <Banner width={'auto'} icon="/assets/icons/3d-arrow.png" title="Em breve você poderá ver essa trilha no mapa!" />
+                </div>
 
         </>
     )
