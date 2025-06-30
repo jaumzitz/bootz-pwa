@@ -13,6 +13,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 
 import { Explore } from "../pages/Explore/Explore";
+import { ScrollToTop } from "../utils/ScrollToTop";
 
 export function AppRoutes() {
 
@@ -20,6 +21,7 @@ export function AppRoutes() {
 
     return (
         <BrowserRouter>
+                <ScrollToTop />
             <Routes>
                 {/* Rotas públicas */}
                 <Route path="/" element={

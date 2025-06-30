@@ -67,6 +67,15 @@ export function Register() {
     setValue("phone", value);
   }
 
+  function handleDateChange(e) {
+    let value = e.target.value;
+    if (value.length === 2) value = value + '/'
+    if (value.length === 5) value = value + '/'
+    if (value.length > 10) value = value.slice(0,10)
+    setValue("birthday", value)
+
+  }
+
 
 
   // Registro do usuário
@@ -215,10 +224,13 @@ export function Register() {
                 inputMode="numeric"
                 pattern="\d{2}/\d{2}/\d{4}"
                 placeholder="DD/MM/AAAA"
+
                 {...register("birthday", {
                   required: "Data de nascimento é obrigatória"
 
                 })}
+                onChange={handleDateChange}
+
               />
               <Input
                 type="text"
@@ -253,7 +265,7 @@ export function Register() {
               />
             </div>
             {errors.phone && <Span style={{ color: "red" }}>{errors.phone.message}</Span>}
-          <Spacer height={'20vh'}></Spacer>
+            <Spacer height={'20vh'}></Spacer>
           </Layout>
           <FixedFooter
             primaryButton={{

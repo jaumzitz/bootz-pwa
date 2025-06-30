@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const UserImage = styled.img`
@@ -69,34 +70,38 @@ export default function Avatar({ username, size }) {
     //         return !r.ok ?  avatarBucketUrl : 'https://static.vecteezy.com/ti/vetor-gratis/p1/9292244-default-avatar-icon-vector-of-social-media-user-vetor.jpg'
     //     })
 
+    const navigate  = useNavigate()
 
 
     return (
         <>
-            {username && size === 'mini' && (
-                <MiniAvatar src={imgUrl}>
+            <div onClick={() => navigate(`/profile/${username}`)}>
 
-                </MiniAvatar>
-            )}
+                {username && size === 'mini' && (
+                    <MiniAvatar src={imgUrl}>
 
-            {username && size === 'small' && (
-                <SmallAvatar src={imgUrl}>
+                    </MiniAvatar>
+                )}
 
-                </SmallAvatar>
-            )}
+                {username && size === 'small' && (
+                    <SmallAvatar src={imgUrl}>
 
-            {username && size === 'medium' && (
-                <MediumAvatar src={imgUrl}>
+                    </SmallAvatar>
+                )}
 
-                </MediumAvatar>
-            )}
+                {username && size === 'medium' && (
+                    <MediumAvatar src={imgUrl}>
 
-            {username && size === 'big' &&
-                <UserImage src={imgUrl} ></UserImage>
+                    </MediumAvatar>
+                )}
 
-            }
+                {username && size === 'big' &&
+                    <UserImage src={imgUrl} ></UserImage>
+
+                }
 
 
+            </div>
 
 
 
