@@ -209,9 +209,11 @@ export function Register() {
             <div style={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
 
               <Input
-                type="date"
+                type="text"
                 id="birthday"
                 label="Data de Nascimento"
+                inputMode="numeric"
+                pattern="\d{2}/\d{2}/\d{4}"
                 placeholder="DD/MM/AAAA"
                 {...register("birthday", {
                   required: "Data de nascimento é obrigatória"
@@ -251,8 +253,8 @@ export function Register() {
               />
             </div>
             {errors.phone && <Span style={{ color: "red" }}>{errors.phone.message}</Span>}
+          <Spacer height={'20vh'}></Spacer>
           </Layout>
-         <Spacer height={'8vh'}></Spacer>
           <FixedFooter
             primaryButton={{
               text: 'Concluir',
