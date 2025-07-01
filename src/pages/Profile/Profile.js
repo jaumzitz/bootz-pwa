@@ -80,7 +80,7 @@ export function Profile() {
                 <HeaderImage/>
 
                 <AvatarContainer>
-                    <Avatar username={profileData.username} size="big" />
+                    <Avatar username={profileData.username} size="big" allowUpdate={authenticatedUser === profileData.username}/>
                 </AvatarContainer>
                 <Spacer height={'2vh'}></Spacer>
             </>

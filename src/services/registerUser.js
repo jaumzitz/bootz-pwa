@@ -75,7 +75,7 @@ async function createProfile(user_id, username, city, stateOrProvince, fullName,
     return data
 }
 
-async function uploadProfilePicture(file, username) {
+export async function uploadProfilePicture(file, username) {
     console.log('fazendo upload da foto de perfil')
 
     const newFileName = `${username}.jpg`
@@ -84,7 +84,7 @@ async function uploadProfilePicture(file, username) {
     const { data, error } = await supabase
         .storage
         .from('avatar')
-        .upload(newFileName, renamedFile)
+        .upload(newFileName, renamedFile, {upsert: true })
 
     if (error) {
         throw new Error(error.message);
