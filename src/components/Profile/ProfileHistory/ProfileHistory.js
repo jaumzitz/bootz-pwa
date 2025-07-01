@@ -6,6 +6,7 @@ import { useFetchProfileHistory } from "../../../hooks/useFetchProfileHistory"
 import { PrimaryButton } from "../../PrimaryButton/PrimaryButton"
 import Banner from "../../Banner/Banner"
 import { useNavigate } from "react-router-dom"
+import { Spinner } from "../../Spinner/Spinner"
 
 const HistorySection = styled.section`
     margin: 4vh 4vw;
@@ -41,8 +42,9 @@ export function ProfileHistory({ data }) {
         return (
             <>
                 
-                <HistorySection> 
-                    <Banner
+                <HistorySection key="shareFirstTrail"> 
+                    {loading || isLoading ? <Spinner/> : <></>}
+                    <Banner 
                         width='90%'
                         direction={'column'}
                         title="Você ainda não enviou uma trilha"
@@ -59,8 +61,8 @@ export function ProfileHistory({ data }) {
         return (
             <>
                 
-                <HistorySection>
-                    <Banner
+                <HistorySection key="dontHaveTrails">
+                    <Banner 
                         width='90%'
                         direction={'column'}
                         title="Esse usuário ainda não compartilhou nenhuma trilha"
@@ -75,13 +77,13 @@ export function ProfileHistory({ data }) {
 
         <>
             
-            <HistorySection>
+            <HistorySection key="hasTrails">
                 <Title size="medium">Lugares que {data.full_name} visitou</Title>
 
                 {historyData.map((trail) => {
                     return (
                         <>
-                            <TrailCard size="big" trail={trail} ></TrailCard>
+                            <TrailCard key={trail.id} size="big" trail={trail} ></TrailCard>
                         </>
                     )
                 })}

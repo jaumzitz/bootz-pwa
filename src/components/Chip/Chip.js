@@ -27,7 +27,7 @@ const ChipLabel = styled.label`
   position: relative;
 `;
 
-export function Chip({ chip, showIcon = false, checked = false, onClick, onChange, type = "checkbox", name }) {
+export function Chip({ chip, showIcon = false, checked = false, onClick, onChange, type = "checkbox", name, readOnly}) {
   const platform = window.navigator.userAgent.includes("iPhone") ? "iPhone" : "Android";
 
 

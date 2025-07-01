@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
 
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        console.log("Estado de autenticação alterado", _event, session);
+        // console.log("Estado de autenticação alterado", _event, session);
         updateSessionAndUsername(session);
       }
     );

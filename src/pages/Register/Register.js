@@ -68,12 +68,18 @@ export function Register() {
   }
 
   function handleDateChange(e) {
-    let value = e.target.value;
-    if (value.length === 2) value = value + '/'
-    if (value.length === 5) value = value + '/'
-    if (value.length > 10) value = value.slice(0,10)
-    setValue("birthday", value)
+    let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
 
+    if (value.length > 8) value = value.slice(0, 8);
+
+    // Monta a máscara: DD/MM/AAAA
+    if (value.length > 4) {
+      value = value.replace(/(\d{2})(\d{2})(\d{1,4})/, "$1/$2/$3");
+    } else if (value.length > 2) {
+      value = value.replace(/(\d{2})(\d{1,2})/, "$1/$2");
+    }
+
+    setValue("birthday", value);
   }
 
 
@@ -244,15 +250,6 @@ export function Register() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'row', gap: '8px' }}>
-
-              <Input
-                type="text"
-                id="city"
-                label="Cidade"
-                {...register("city", {
-                  required: "Informe sua cidade"
-                })}
-              />
               <Input
                 type="text"
                 id="uf"
@@ -263,6 +260,16 @@ export function Register() {
                   required: "Informe seu estado"
                 })}
               />
+              <Input
+                type="text"
+                id="city"
+                label="Cidade"
+                {...register("city", {
+                  required: "Informe sua cidade"
+                })}
+              />
+
+
             </div>
             {errors.phone && <Span style={{ color: "red" }}>{errors.phone.message}</Span>}
             <Spacer height={'20vh'}></Spacer>
