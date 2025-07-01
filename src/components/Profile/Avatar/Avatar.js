@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { uploadProfilePicture } from "../../../services/registerUser";
 
 const UserImage = styled.img`
     max-height: 180px;
@@ -12,7 +14,7 @@ const UserImage = styled.img`
     border: 4px solid #dedede;
     position: absolute;
     top: 30vh;
-    left: 50vw; /* 50% da largura da viewport */
+    left: 50vw;
     transform: translateX(-50%);
 `;
 
@@ -51,61 +53,81 @@ const MiniAvatar = styled.img`
     
 `
 
+const ChangeAvatar = styled.label`
 
-const defaultAvatar = 'assets/icons/add-photo.svg'
-
-export default function Avatar({ username, size }) {
-
-
-    //const imgUrl = !username ? defaultAvatar : 'https://github.com/jaumzitz.png';
-
-    const imgUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}.jpg`
-
-    // const avatarBucketUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}.jpg`
+`
 
 
-    // const imgUrl = fetch(avatarBucketUrl)
-    //     .then(r => {
-    //         console.log(r)
-    //         return !r.ok ?  avatarBucketUrl : 'https://static.vecteezy.com/ti/vetor-gratis/p1/9292244-default-avatar-icon-vector-of-social-media-user-vetor.jpg'
-    //     })
 
-    const navigate  = useNavigate()
+const defaultAvatar = '/assets/images/avatar-default.svg';
 
+export default function Avatar({ username, size, allowUpdate }) {
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    return (
-        <>
-            <div onClick={() => navigate(`/profile/${username}`)}>
+    const [imgUrl, setImgUrl] = useState(defaultAvatar);
 
-                {username && size === 'mini' && (
-                    <MiniAvatar src={imgUrl}>
+    // Função para verificar se o avatar existe no bucket
+    async function checkAvatarExists(username) {
+        const publicUrl = `https://qckpgmmxnpyptwhjhiwd.supabase.co/storage/v1/object/public/avatar/${username}.jpg`;
+        try {
+            const res = await fetch(publicUrl, { method: "HEAD" });
+            if (res.ok) {
+                return publicUrl;
+            } else {
+                return defaultAvatar;
+            }
+        } catch {
+            return defaultAvatar;
+        }
+    }
 
-                    </MiniAvatar>
-                )}
+    useEffect(() => {
+        let isMounted = true;
+        checkAvatarExists(username).then(url => {
+            if (isMounted) setImgUrl(url);
+        });
+        return () => { isMounted = false; };
+    }, [username, allowUpdate]);
 
-                {username && size === 'small' && (
-                    <SmallAvatar src={imgUrl}>
+    function handleChangeAvatar(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const newFileUrl = URL.createObjectURL(file);
+            uploadProfilePicture(file, username);
+            setImgUrl(newFileUrl);
+        }
+    }
 
-                    </SmallAvatar>
-                )}
-
-                {username && size === 'medium' && (
-                    <MediumAvatar src={imgUrl}>
-
-                    </MediumAvatar>
-                )}
-
-                {username && size === 'big' &&
-                    <UserImage src={imgUrl} ></UserImage>
-
-                }
-
-
+    if (!allowUpdate) {
+        return (
+            <div
+                onClick={() => {
+                    const profilePath = `/profile/${username}`;
+                    if (location.pathname !== profilePath) {
+                        navigate(profilePath);
+                    }
+                }}
+            >
+                {username && size === 'mini' && <MiniAvatar src={imgUrl} />}
+                {username && size === 'small' && <SmallAvatar src={imgUrl} />}
+                {username && size === 'medium' && <MediumAvatar src={imgUrl} />}
+                {username && size === 'big' && <UserImage src={imgUrl} />}
             </div>
+        );
+    }
 
-
-
-
-        </>
-    )
+    if (allowUpdate) {
+        return (
+            <>
+                <ChangeAvatar htmlFor="changeAvatar">
+                    {username && size === 'mini' && <MiniAvatar src={imgUrl} />}
+                    {username && size === 'small' && <SmallAvatar src={imgUrl} />}
+                    {username && size === 'medium' && <MediumAvatar src={imgUrl} />}
+                    {username && size === 'big' && <UserImage src={imgUrl} />}
+                </ChangeAvatar>
+                <input type="file" accept="image/*" id="changeAvatar" onChange={handleChangeAvatar} hidden />
+            </>
+        );
+    }
 }

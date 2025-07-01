@@ -11,6 +11,7 @@ import Banner from "../../components/Banner/Banner"
 import TrailCategoryChips from "../../components/TrailCategoryChips/TrailCategoryChips"
 
 import { useFetchTrailDetail } from "../../hooks/useFetchTrailDetail"
+import { Spinner } from "../../components/Spinner/Spinner"
 
 const TitleRow = styled.div`
     display: flex;
@@ -57,7 +58,9 @@ export function TrailDetail() {
     //return <div>Trilha não encontrada ou ainda não carregada.</div>;
 
     return (
+
         <>
+        
 
             <IconButton
                 onClick={() => navigate(-1)}

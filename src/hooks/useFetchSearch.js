@@ -13,6 +13,7 @@ export async function fetchSearch(query) {
       name,
       normalized_name,
       created_by,
+      created_at,
       length,
       state_or_province,
       city,
@@ -31,7 +32,8 @@ export async function fetchSearch(query) {
     `)
     .or(
       `normalized_name.ilike.%${normalized}%,normalized_city.ilike.%${query}%`
-    );
+    )
+    .order('created_at', {ascending: false} )
 
   if (error) {
     throw new Error(`Error fetching search results: ${error.message}`);

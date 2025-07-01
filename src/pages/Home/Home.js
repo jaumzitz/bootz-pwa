@@ -25,8 +25,8 @@ const HeaderStyled = styled.header`
 
 export function Home() {
 
-     const { data: trailsForYou, isLoading: loadingForYou } = useFetchTrails('forYou', {range: {min: 0, max: 2}});
-     const { data: trailsTrendingNearby = [], loading: loadingTrending } = useFetchTrails('trendingNearby',{range: {min: 3, max: 5}});
+     const { data: trailsForYou, isLoading: loadingForYou } = useFetchTrails('forYou', {range: {min: 0, max: 4}});
+     const { data: trailsTrendingNearby = [], loading: loadingTrending } = useFetchTrails('trendingNearby',{range: {min: 5, max: 7}});
 
 
 
