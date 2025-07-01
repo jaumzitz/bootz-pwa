@@ -2,6 +2,7 @@ import React from "react";
 import { AppRoutes } from "./routes/AppRoutes.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./context/AuthContext.js";
+import { ScrollToTop } from "./utils/ScrollToTop.js";
 
 const queryClient = new QueryClient();
 
@@ -31,11 +32,14 @@ function App() {
 
 
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <AppRoutes />
-      </QueryClientProvider>
-    </AuthProvider>
+    <>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          
+          <AppRoutes />
+        </QueryClientProvider>
+      </AuthProvider>
+    </>
   )
 }
 
