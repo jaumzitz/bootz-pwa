@@ -26,13 +26,13 @@ async function uploadTrailImages(images, trailId) {
         const filePath = `${trailId}/${fileName}`;
 
         const { error } = await supabase.storage
-            .from(`trail/`)
-            .upload(fileName, file, { upsert: false })
+            .from(`trail`)
+            .upload(filePath, file, { upsert: false })
             
 
         if (!error) {
             // Obtenha a URL pública
-            const { data } = supabase.storage.from('trail/').getPublicUrl(fileName);
+            const { data } = supabase.storage.from('trail').getPublicUrl(filePath);
             uploadedUrls.push(data.publicUrl);
 
              const { data: trailImageData, error } = await supabase
